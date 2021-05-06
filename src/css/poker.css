@@ -1,0 +1,29 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+#main-table {
+    /*Shift table right*/
+    position: relative;
+    left: 136px;
+}
+
+.card {
+    /*Change size*/
+    width: 34px;
+    height: 53px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.row {
+    display: flex;
+}
+
+/* Clear floats after image containers */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}

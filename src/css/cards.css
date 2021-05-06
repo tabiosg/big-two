@@ -1,0 +1,212 @@
+﻿.card-3D {
+    background-image: url('../images/cards/3D.jpg');
+}
+
+.card-3C {
+    background-image: url('../images/cards/3C.jpg');
+}
+
+.card-3H {
+    background-image: url('../images/cards/3H.jpg');
+}
+
+.card-3S {
+    background-image: url('../images/cards/3S.jpg');
+}
+.card-4D {
+    background-image: url('../images/cards/4D.jpg');
+}
+
+.card-4C {
+    background-image: url('../images/cards/4C.jpg');
+}
+
+.card-4H {
+    background-image: url('../images/cards/4H.jpg');
+}
+
+.card-4S {
+    background-image: url('../images/cards/4S.jpg');
+}
+.card-5D {
+    background-image: url('../images/cards/5D.jpg');
+}
+
+.card-5C {
+    background-image: url('../images/cards/5C.jpg');
+}
+
+.card-5H {
+    background-image: url('../images/cards/5H.jpg');
+}
+
+.card-5S {
+    background-image: url('../images/cards/5S.jpg');
+}
+.card-6D {
+    background-image: url('../images/cards/6D.jpg');
+}
+
+.card-6C {
+    background-image: url('../images/cards/6C.jpg');
+}
+
+.card-6H {
+    background-image: url('../images/cards/6H.jpg');
+}
+
+.card-6S {
+    background-image: url('../images/cards/6S.jpg');
+}
+.card-7D {
+    background-image: url('../images/cards/7D.jpg');
+}
+
+.card-7C {
+    background-image: url('../images/cards/7C.jpg');
+}
+
+.card-7H {
+    background-image: url('../images/cards/7H.jpg');
+}
+
+.card-7S {
+    background-image: url('../images/cards/7S.jpg');
+}
+.card-8C {
+    background-image: url('../images/cards/8D.jpg');
+}
+
+.card-8C {
+    background-image: url('../images/cards/8C.jpg');
+}
+
+.card-8H {
+    background-image: url('../images/cards/8H.jpg');
+}
+
+.card-8S {
+    background-image: url('../images/cards/8S.jpg');
+}
+.card-9D {
+    background-image: url('../images/cards/9D.jpg');
+}
+
+.card-9C {
+    background-image: url('../images/cards/9C.jpg');
+}
+
+.card-9H {
+    background-image: url('../images/cards/9H.jpg');
+}
+
+.card-9S {
+    background-image: url('../images/cards/9S.jpg');
+}
+.card-10D {
+    background-image: url('../images/cards/10D.jpg');
+}
+
+.card-10C {
+    background-image: url('../images/cards/10C.jpg');
+}
+
+.card-10H {
+    background-image: url('../images/cards/10H.jpg');
+}
+
+.card-10S {
+    background-image: url('../images/cards/10S.jpg');
+}
+.card-JD {
+    background-image: url('../images/cards/JD.jpg');
+}
+
+.card-JC {
+    background-image: url('../images/cards/JC.jpg');
+}
+
+.card-JH {
+    background-image: url('../images/cards/JH.jpg');
+}
+
+.card-JS {
+    background-image: url('../images/cards/JS.jpg');
+}
+.card-QD {
+    background-image: url('../images/cards/QD.jpg');
+}
+
+.card-QC {
+    background-image: url('../images/cards/QC.jpg');
+}
+
+.card-QH {
+    background-image: url('../images/cards/QH.jpg');
+}
+
+.card-QS {
+    background-image: url('../images/cards/QS.jpg');
+}
+.card-KD {
+    background-image: url('../images/cards/KD.jpg');
+}
+
+.card-KC {
+    background-image: url('../images/cards/KC.jpg');
+}
+
+.card-KH {
+    background-image: url('../images/cards/KH.jpg');
+}
+
+.card-KS {
+    background-image: url('../images/cards/KS.jpg');
+}
+.card-AD {
+    background-image: url('../images/cards/AD.jpg');
+}
+
+.card-AC {
+    background-image: url('../images/cards/AC.jpg');
+}
+
+.card-AH {
+    background-image: url('../images/cards/AH.jpg');
+}
+
+.card-AS {
+    background-image: url('../images/cards/AS.jpg');
+}
+
+.card-2D {
+    background-image: url('../images/cards/2D.jpg');
+}
+
+.card-2C {
+    background-image: url('../images/cards/2C.jpg');
+}
+
+.card-2H {
+    background-image: url('../images/cards/2H.jpg');
+}
+
+.card-2S {
+    background-image: url('../images/cards/2S.jpg');
+}
+
+.card-back {
+    background-image: url('../images/cards/Red_back.jpg');
+}
+
+.card-empty {
+    background-image: url('../images/cards/Blue_back.jpg');
+}
+
+.card-start {
+    background-image: url('../images/cards/Yellow_back.jpg');
+}
+
+.card-highlighted {
+    border: red 5px dashed;
+}

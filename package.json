@@ -1,0 +1,19 @@
+{
+  "name": "big-two",
+  "version": "1.0.0",
+  "description": "Big Two is a playing card game popular in Asia as well as Guthrie's house.\r It's called Big 2 because 2 is the highest rank in the game.\r The goal of the game is to play all of one's cards before the other players.",
+  "main": "index.js",
+  "dependencies": {
+    "common-js": "^0.3.8"
+  },
+  "devDependencies": {
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production --entry ./src/js/Application.js --output-path ./dist/"
+  },
+  "author": "",
+  "license": "ISC"
+}
