@@ -18,19 +18,19 @@ enum RANK_STRING {
 // USAGE: used as a map to get a rank's strength
 let RANK_STRENGTHS = new Map<string, number>();
 
-RANK_STRENGTHS.set("3", 0);
-RANK_STRENGTHS.set("4", 1);
-RANK_STRENGTHS.set("5", 2);
-RANK_STRENGTHS.set("6", 3);
-RANK_STRENGTHS.set("7", 4);
-RANK_STRENGTHS.set("8", 5);
-RANK_STRENGTHS.set("9", 6);
-RANK_STRENGTHS.set("10", 7);
-RANK_STRENGTHS.set("J", 8);
-RANK_STRENGTHS.set("Q", 9);
-RANK_STRENGTHS.set("K", 10);
-RANK_STRENGTHS.set("A", 11);
-RANK_STRENGTHS.set("2", 12);
+RANK_STRENGTHS.set("Three", 0);
+RANK_STRENGTHS.set("Four", 1);
+RANK_STRENGTHS.set("Five", 2);
+RANK_STRENGTHS.set("Six", 3);
+RANK_STRENGTHS.set("Seven", 4);
+RANK_STRENGTHS.set("Eight", 5);
+RANK_STRENGTHS.set("Nine", 6);
+RANK_STRENGTHS.set("Ten", 7);
+RANK_STRENGTHS.set("Jack", 8);
+RANK_STRENGTHS.set("Queen", 9);
+RANK_STRENGTHS.set("King", 10);
+RANK_STRENGTHS.set("Ace", 11);
+RANK_STRENGTHS.set("Two", 12);
 
 class Rank {
     // COMMENTS: these are the member variables of Rank
@@ -75,8 +75,8 @@ class Rank {
 //USAGE: ranksVector.sort(compareTwoRanks);
 function compareTwoRanks(firstRank: Rank, secondRank: Rank): number {
     // COMMENTS: these strength variables represent the importance of rank
-    const firstRankStrength: number = RANK_STRENGTHS.get(firstRank.getRankName)!;
-    const secondRankStrength: number = RANK_STRENGTHS.get(secondRank.getRankName)!;
+    const firstRankStrength: number = RANK_STRENGTHS.get(firstRank.getRankName);
+    const secondRankStrength: number = RANK_STRENGTHS.get(secondRank.getRankName);
 
     // COMMENTS: go compare
     if (firstRankStrength < secondRankStrength) return -1;

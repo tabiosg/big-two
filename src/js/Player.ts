@@ -19,7 +19,6 @@ class Player {
 
     // REQUIRES: _cardObjectsArray is an array of HTML elements representing the player's card slots
     constructor(_cardObjectsArray: Array<HTMLElement>) {
-        console.log("c");
         this.allCards = [];
         this.cardObjectsArray = _cardObjectsArray;
     }
@@ -108,7 +107,6 @@ class Player {
         for (let i: number = selectedCardIndices.length - 1; i >= 0; --i) {
             // COMMENTS: selectedCardIndices[i] is indexToRemove, this.allCards.splice(...) is playedCard
             let playedCard: Card = this.allCards.splice(selectedCardIndices[i], 1)[0];
-            console.log(playedCard.getName);
             playedHand.addCardToHand(playedCard);
         }
 

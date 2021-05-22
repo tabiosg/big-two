@@ -71,7 +71,7 @@ exports.compareTwoSuits = compareTwoSuits;
 // USAGE: used in getting suit objects
 var SUIT_OBJECT = {
     DIAMONDS: new Suit(SUIT_STRING.DIAMONDS),
-    CLUBS: new Suit(SUIT_STRING.DIAMONDS),
+    CLUBS: new Suit(SUIT_STRING.CLUBS),
     HEARTS: new Suit(SUIT_STRING.HEARTS),
     SPADES: new Suit(SUIT_STRING.SPADES)
 };

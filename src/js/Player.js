@@ -15,7 +15,6 @@ var AllCards_js_1 = require("./AllCards.js");
 var Player = /** @class */ (function () {
     // REQUIRES: _cardObjectsArray is an array of HTML elements representing the player's card slots
     function Player(_cardObjectsArray) {
-        console.log("c");
         this.allCards = [];
         this.cardObjectsArray = _cardObjectsArray;
     }
@@ -92,7 +91,6 @@ var Player = /** @class */ (function () {
         for (var i = selectedCardIndices.length - 1; i >= 0; --i) {
             // COMMENTS: selectedCardIndices[i] is indexToRemove, this.allCards.splice(...) is playedCard
             var playedCard = this.allCards.splice(selectedCardIndices[i], 1)[0];
-            console.log(playedCard.getName);
             playedHand.addCardToHand(playedCard);
         }
         ChangeLayout_js_1.changePlayerCardLayout(this.allCards, this.cardObjectsArray);

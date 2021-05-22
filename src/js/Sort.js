@@ -22,18 +22,14 @@ exports.objectsAreEqual = objectsAreEqual;
 // USAGE: cardsArray.sort(compareCards);
 function compareCards(firstCard, secondCard) {
     // COMMENTS: first rank has priority
-    var copiedFirstRank = Object.assign({}, firstCard.getRank);
-    var copiedSecondRank = Object.assign({}, secondCard.getRank);
-    switch (Rank_js_1.compareTwoRanks(copiedFirstRank, copiedSecondRank)) {
+    switch (Rank_js_1.compareTwoRanks(firstCard.getRank, secondCard.getRank)) {
         case 1:
             return 1;
         case -1:
             return -1;
         case 0:
             // COMMENTS: if ranks are equal, suits have priority
-            var copiedFirstSuit = Object.assign({}, firstCard.getSuit);
-            var copiedSecondSuitk = Object.assign({}, secondCard.getSuit);
-            return Suit_js_1.compareTwoSuits(copiedFirstSuit, copiedSecondSuitk);
+            return Suit_js_1.compareTwoSuits(firstCard.getSuit, secondCard.getSuit);
     }
 }
 exports.compareCards = compareCards;

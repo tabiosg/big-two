@@ -22,7 +22,6 @@ function makeCardSlotEmpty(cardObject: HTMLElement): void {
 // EFFECTS: change and update a single card slot based on the updatedCard
 function updateSingleCardSlot(updatedCard: Card, cardObject: HTMLElement): void {
     // COMMENTS: change the card object based on the updateCard
-    console.log(updatedCard.getName);
     let cardName: string = updatedCard.getName;
     let cssName: string = mapCardNameToCSS.get(cardName);
 

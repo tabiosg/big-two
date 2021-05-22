@@ -23,18 +23,14 @@ function objectsAreEqual(firstObject: Object, secondObject: Object): boolean {
 // USAGE: cardsArray.sort(compareCards);
 function compareCards(firstCard: Card, secondCard: Card): number {
     // COMMENTS: first rank has priority
-    let copiedFirstRank: Rank = Object.assign({}, firstCard.getRank);
-    let copiedSecondRank: Rank = Object.assign({}, secondCard.getRank);
-    switch (compareTwoRanks(copiedFirstRank, copiedSecondRank)) {
+    switch (compareTwoRanks(firstCard.getRank, secondCard.getRank)) {
         case 1:
             return 1;
         case -1:
             return -1;
         case 0:
             // COMMENTS: if ranks are equal, suits have priority
-            let copiedFirstSuit: Suit = Object.assign({}, firstCard.getSuit);
-            let copiedSecondSuitk: Suit = Object.assign({}, secondCard.getSuit);
-            return compareTwoSuits(copiedFirstSuit, copiedSecondSuitk);
+            return compareTwoSuits(firstCard.getSuit, secondCard.getSuit);
     }
 }
 

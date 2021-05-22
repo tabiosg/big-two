@@ -69,7 +69,6 @@ class Game {
             this.dealCardTo(this.allPlayers[2]);
             this.dealCardTo(this.allPlayers[3]);
         }
-        /*
         // COMMENTS: player with three of diamonds starts
         let turnPlayer: number = 0; 
 
@@ -98,6 +97,7 @@ class Game {
             }
             playedHand = this.allPlayers[turnPlayer].playCards(selectedCardsByPlayer);
             changeTableLayout(playedHand, this.cardObjectsArray);
+        /*
 
             // COMMENTS: need to check if player ran out of cards and has won
             if (this.allPlayers[turnPlayer].allCards.length == 0) {

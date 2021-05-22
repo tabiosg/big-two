@@ -55,18 +55,16 @@ var Game = /** @class */ (function () {
             this.dealCardTo(this.allPlayers[2]);
             this.dealCardTo(this.allPlayers[3]);
         }
-        /*
         // COMMENTS: player with three of diamonds starts
-        let turnPlayer: number = 0;
-
-        for (let i = 1; i < 4; ++i) {
+        var turnPlayer = 0;
+        for (var i = 1; i < 4; ++i) {
             if (this.allPlayers[i].hasThreeOfDiamonds()) {
                 turnPlayer = i;
                 break;
             }
         }
-
-        let needToCheckForThreeOfDiamonds: boolean = true;
+        var needToCheckForThreeOfDiamonds = true;
+        /*
 
         // COMMENTS: continue forever. each while loop represents one event
         while (true) {
