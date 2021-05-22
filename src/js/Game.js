@@ -2,8 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Game = void 0;
 var Deck_js_1 = require("./Deck.js");
-var Hand_js_1 = require("./Hand.js");
-var ChangeLayout_js_1 = require("./ChangeLayout.js");
+var Card_js_1 = require("./Card.js");
 /////////////////////////////////
 //
 //
@@ -43,8 +42,7 @@ var Game = /** @class */ (function () {
     // EFFECTS: deals top card from deck to player
     Game.prototype.dealCardTo = function (receivingPlayer) {
         var cardBeingTransferred = this.cardDeck.removeCardFromTop();
-        var copiedCard = Object.assign({}, cardBeingTransferred);
-        receivingPlayer.addCardToPlayer(copiedCard);
+        receivingPlayer.addCardToPlayer(new Card_js_1.Card(cardBeingTransferred.getRank, cardBeingTransferred.getSuit));
     };
     // REQUIRES: addedPlayer is a Player object and cardDeck is reset
     // EFFECTS: adds player to allPlayers
@@ -57,62 +55,82 @@ var Game = /** @class */ (function () {
             this.dealCardTo(this.allPlayers[2]);
             this.dealCardTo(this.allPlayers[3]);
         }
+        /*
         // COMMENTS: player with three of diamonds starts
-        var turnPlayer = 0;
-        for (var i = 1; i < 4; ++i) {
+        let turnPlayer: number = 0;
+
+        for (let i = 1; i < 4; ++i) {
             if (this.allPlayers[i].hasThreeOfDiamonds()) {
                 turnPlayer = i;
                 break;
             }
         }
-        var needToCheckForThreeOfDiamonds = true;
+
+        let needToCheckForThreeOfDiamonds: boolean = true;
+
         // COMMENTS: continue forever. each while loop represents one event
         while (true) {
-            var playedHand = new Hand_js_1.Hand;
-            var selectedCardsByPlayer = void 0;
+
+            let playedHand: Hand = new Hand;
+            let selectedCardsByPlayer: Array<number> = [];
             // COMMENTS: play initial cards to start off the round/event
             if (needToCheckForThreeOfDiamonds) {
                 selectedCardsByPlayer = this.allPlayers[turnPlayer].selectFirstCardIndicesThreeOfDiamonds();
+                
                 needToCheckForThreeOfDiamonds = false;
             }
             else {
                 selectedCardsByPlayer = this.allPlayers[turnPlayer].selectFirstCardIndicesNormal();
             }
             playedHand = this.allPlayers[turnPlayer].playCards(selectedCardsByPlayer);
-            ChangeLayout_js_1.changeTableLayout(playedHand, this.cardObjectsArray);
+            changeTableLayout(playedHand, this.cardObjectsArray);
+
             // COMMENTS: need to check if player ran out of cards and has won
             if (this.allPlayers[turnPlayer].allCards.length == 0) {
                 this.announceWinner(this.allPlayers[turnPlayer]);
                 return;
             }
-            var bestHandPlayedSoFar = playedHand;
-            var mostRecentPlayerWhoPlayed = turnPlayer;
+            
+            let bestHandPlayedSoFar: Hand = playedHand;
+
+            let mostRecentPlayerWhoPlayed: number = turnPlayer;
             // COMMENTS: if not everyone has played yet, move on to the next player normally.
             // COMMENTS: once all the players had their turn, return to the start with the first player
             turnPlayer = (turnPlayer < 3) ? turnPlayer + 1 : 0;
+
             // COMMENTS: this is everything after the initial cards were played
             while (mostRecentPlayerWhoPlayed != turnPlayer) {
-                var followedCards = this.allPlayers[turnPlayer].selectIndicesFollowUp(bestHandPlayedSoFar);
-                var handRequestedToPlay = this.allPlayers[turnPlayer].playCards(followedCards);
+                let followedCards: Array<number> = Object.assign({},
+                    this.allPlayers[turnPlayer].selectIndicesFollowUp(bestHandPlayedSoFar));
+
+
+                let handRequestedToPlay: Hand = this.allPlayers[turnPlayer].playCards(followedCards);
+
                 // COMMENTS: if player requests to play a hand, but it does not beat the current best ...
                 // COMMENTS: then just ignore it and treat it as the player skipping
                 if (followedCards.length != 0) {
+
                     bestHandPlayedSoFar = handRequestedToPlay;
-                    ChangeLayout_js_1.changeTableLayout(bestHandPlayedSoFar, this.cardObjectsArray);
+                    changeTableLayout(bestHandPlayedSoFar, this.cardObjectsArray);
+
                     mostRecentPlayerWhoPlayed =
                         (mostRecentPlayerWhoPlayed < 3) ? mostRecentPlayerWhoPlayed + 1 : 0;
+
                     // COMMENTS: need to check if player ran out of cards and has won
                     if (this.allPlayers[turnPlayer].allCards.length == 0) {
                         this.announceWinner(this.allPlayers[turnPlayer]);
                         return;
                     }
+
                 }
+
                 // COMMENTS: if not everyone has played yet, move on to the next player normally.
                 // COMMENTS: once all the players had their turn, return to the start with the first player
                 turnPlayer = (turnPlayer < 3) ? turnPlayer + 1 : 0;
             }
-            ChangeLayout_js_1.resetTableLayout(this.cardObjectsArray);
+            resetTableLayout(this.cardObjectsArray);
         }
+        */
     };
     // EFFECTS: announces winner
     Game.prototype.announceWinner = function (winner) {

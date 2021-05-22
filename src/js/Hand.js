@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Hand = void 0;
+var Card_js_1 = require("./Card.js");
 var Rank_js_1 = require("./Rank.js");
+var Suit_js_1 = require("./Suit.js");
 var Sort_js_1 = require("./Sort.js");
-var AllCards_js_1 = require("./AllCards.js");
 /////////////////////////////////
 //
 //
@@ -35,8 +36,9 @@ var Hand = /** @class */ (function () {
     });
     // EFFECTS: returns true if hand has three of diamonds
     Hand.prototype.hasThreeOfDiamonds = function () {
+        var cardThreeOfDiamonds = new Card_js_1.Card(Rank_js_1.RANK_OBJECT.THREE, Suit_js_1.SUIT_OBJECT.DIAMONDS);
         for (var i = 0; i < this.numberCardsInHand; ++i) {
-            if (Sort_js_1.objectsAreEqual(this.cardObjectsInHand[i], AllCards_js_1.CARD_OBJECT.get("THREE_OF_DIAMONDS")))
+            if (Sort_js_1.objectsAreEqual(this.cardObjectsInHand[i], cardThreeOfDiamonds))
                 return true;
         }
         return false;

@@ -29,6 +29,5 @@ game.addPlayer(player2);
 game.addPlayer(player3);
 game.addPlayer(player4);
 
-
 // COMMENTS: when the game starts, you'll need to change several things
 game.startGame();

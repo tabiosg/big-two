@@ -1,6 +1,6 @@
 import { Card } from './Card.js';
 import { Hand } from './Hand.js';
-import { mapCardNameToCSS } from './Reference.js';
+import { submit_button, mapCardNameToCSS } from './Reference.js';
 
 /////////////////////////////////
 //
@@ -22,9 +22,8 @@ function makeCardSlotEmpty(cardObject: HTMLElement): void {
 // EFFECTS: change and update a single card slot based on the updatedCard
 function updateSingleCardSlot(updatedCard: Card, cardObject: HTMLElement): void {
     // COMMENTS: change the card object based on the updateCard
-    let copiedCard: Card = Object.assign({}, updatedCard);
-    let cardName: string = copiedCard.getName;
-    console.log(cardName);
+    console.log(updatedCard.getName);
+    let cardName: string = updatedCard.getName;
     let cssName: string = mapCardNameToCSS.get(cardName);
 
     cardObject.className = "card " + cssName;
@@ -35,14 +34,12 @@ function updateSingleCardSlot(updatedCard: Card, cardObject: HTMLElement): void 
 // EFFECTS: change and update a player's card layout (the player being whoever owns the array of cards)
 function changePlayerCardLayout(allCards: Array<Card>, cardObjectsArray: Array<HTMLElement>): void {
     // COMMENTS: first need to make it so that all of player's other cards are empty
-    for (let i = allCards.length; i < 13; ++i) {
+    for (let i = allCards.length; i < allCards.length + 5 && i < 13; ++i) {
         makeCardSlotEmpty(cardObjectsArray[i]);
     }
-
     // COMMENTS: now change each of the cards and update them
     for (let i = 0; i < allCards.length; ++i) {
-        let copiedCard: Card = Object.assign({}, allCards[i]);
-        updateSingleCardSlot(copiedCard, cardObjectsArray[i]);
+        updateSingleCardSlot(allCards[i], cardObjectsArray[i]);
     }
 }
 
@@ -131,6 +128,15 @@ function convertTrackSelection(trackSelection: Array<boolean>): Array<number> {
     return chosenIndices;
 }
 
+// EFFECTS: basic sleep function
+function sleep(milliseconds): void {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+        currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+}
+
 // REQUIRES: current player is selecting cards
 // REQUIRES: cardAmount is a number showing how many cards player has
 // REQUIRES: cardObjectsArray is an array of HTML elements representing the player's card slots
@@ -152,7 +158,7 @@ function letPlayerChooseCards(cardAmount: number, cardObjectsArray: Array<HTMLEl
         false, // 8 
         false, // 9 
         false, // 10 
-        false, // 11
+        false, // 11 
         false, // 12 
     ]
 
@@ -164,11 +170,11 @@ function letPlayerChooseCards(cardAmount: number, cardObjectsArray: Array<HTMLEl
         }
     }
 
-    // COMMENTS: this user should no longer be able to choose the cards
+    // COMMENTS: do something here
+
+    // COMMENTS: this user should no longer be able to choose the cards 
     disableAllButtons(cardObjectsArray);
-
     return convertTrackSelection(trackSelection);
-
 }
 
 export { changeTableLayout, resetTableLayout, changePlayerCardLayout, letPlayerChooseCards }

@@ -1,18 +1,18 @@
 // USAGE: used in ordered ranks
 enum RANK_STRING {
-    THREE = "3",
-    FOUR = "4",
-    FIVE = "5",
-    SIX = "6",
-    SEVEN = "7",
-    EIGHT = "8",
-    NINE = "9",
-    TEN = "10",
-    JACK = "J",
-    QUEEN = "Q",
-    KING = "K",
-    ACE = "A",
-    TWO = "2"
+    THREE = "Three",
+    FOUR = "Four",
+    FIVE = "Five",
+    SIX = "Six",
+    SEVEN = "Seven",
+    EIGHT = "Eight",
+    NINE = "Nine",
+    TEN = "Ten",
+    JACK = "Jack",
+    QUEEN = "Queen",
+    KING = "King",
+    ACE = "Ace",
+    TWO = "Two"
 }
 
 // USAGE: used as a map to get a rank's strength

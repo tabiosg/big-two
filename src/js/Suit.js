@@ -5,18 +5,18 @@ exports.Suit = exports.SUIT_STRING = exports.SUIT_OBJECT = exports.compareTwoSui
 // NOTES: 2662, 2667, 2661, 2664 for black and white, 2666, 2663, 2665, 2660 for color
 var SUIT_STRING;
 (function (SUIT_STRING) {
-    SUIT_STRING["DIAMONDS"] = "\u2666";
-    SUIT_STRING["CLUBS"] = "\u2663";
-    SUIT_STRING["HEARTS"] = "\u2665";
-    SUIT_STRING["SPADES"] = "\u2660";
+    SUIT_STRING["DIAMONDS"] = "Diamonds";
+    SUIT_STRING["CLUBS"] = "Clubs";
+    SUIT_STRING["HEARTS"] = "Hearts";
+    SUIT_STRING["SPADES"] = "Spades";
 })(SUIT_STRING || (SUIT_STRING = {}));
 exports.SUIT_STRING = SUIT_STRING;
 // USAGE: used as a map to get a suit's strength
 var SUIT_STRENGTHS = new Map();
-SUIT_STRENGTHS.set("\u2666", 0);
-SUIT_STRENGTHS.set("\u2663", 1);
-SUIT_STRENGTHS.set("\u2665", 2);
-SUIT_STRENGTHS.set("\u2660", 3);
+SUIT_STRENGTHS.set("Diamonds", 0);
+SUIT_STRENGTHS.set("Clubs", 1);
+SUIT_STRENGTHS.set("Hearts", 2);
+SUIT_STRENGTHS.set("Spades", 3);
 var Suit = /** @class */ (function () {
     // REQUIRES: stringSuit is a string
     // EXAMPLES: stringSuit = "Spades", stringRank2 = SUIT.SPADES

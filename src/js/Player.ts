@@ -2,7 +2,7 @@ import { Card } from './Card.js';
 import { objectsAreEqual, compareCards } from './Sort.js';
 import { letPlayerChooseCards, changePlayerCardLayout } from './ChangeLayout.js';
 import { Hand } from './Hand.js';
-import { CARD_OBJECT } from './AllCards.js';
+import { ThreeD } from './AllCards.js';
 
 /////////////////////////////////
 //
@@ -19,6 +19,7 @@ class Player {
 
     // REQUIRES: _cardObjectsArray is an array of HTML elements representing the player's card slots
     constructor(_cardObjectsArray: Array<HTMLElement>) {
+        console.log("c");
         this.allCards = [];
         this.cardObjectsArray = _cardObjectsArray;
     }
@@ -26,21 +27,19 @@ class Player {
     // REQUIRES: addedCard is a Card object
     // EFFECTS: adds addedCard to allCards
     addCardToPlayer(addedCard: Card): void {
-        let copiedCard: Card = Object.assign({}, addedCard);
-        this.allCards.push(copiedCard);
+        this.allCards.push(addedCard);
 
         // FUTURE: addCardToPlayer currently sorts this.allCards, but this may change in future
         this.allCards.sort(compareCards);
 
-        let copiedCardArray: Array<Card> = Object.assign({}, this.allCards);
-        let copiedCardObjects: Array<HTMLElement> = Object.assign({}, this.cardObjectsArray);
-        changePlayerCardLayout(copiedCardArray, copiedCardObjects);
+        changePlayerCardLayout(this.allCards, this.cardObjectsArray);
     }
 
     // REQUIRES: allCards are sorted and player has cards (should be 13)
     // EFFECTS: returns true if player has three of diamonds, false otherwise
     hasThreeOfDiamonds(): boolean {
-        return objectsAreEqual(this.allCards[0], CARD_OBJECT.get("THREE_OF_DIAMONDS")!);
+        let cardThreeOfDiamonds = ThreeD();
+        return objectsAreEqual(this.allCards[0], cardThreeOfDiamonds);
     }
 
     // REQUIRES: player is first person to make move
@@ -106,14 +105,14 @@ class Player {
     // EFFECTS: returns a Hand object showing what player wants to play
     playCards(selectedCardIndices: Array<number>): Hand {
         let playedHand: Hand = new Hand();
-        for (let i: number = selectedCardIndices.length; i >= 0; --i) {
+        for (let i: number = selectedCardIndices.length - 1; i >= 0; --i) {
             // COMMENTS: selectedCardIndices[i] is indexToRemove, this.allCards.splice(...) is playedCard
-            playedHand.addCardToHand(this.allCards.splice(selectedCardIndices[i], 1)[0]);
+            let playedCard: Card = this.allCards.splice(selectedCardIndices[i], 1)[0];
+            console.log(playedCard.getName);
+            playedHand.addCardToHand(playedCard);
         }
 
-        let copiedCardArray: Array<Card> = Object.assign({}, this.allCards);
-        let copiedCardObjects: Array<HTMLElement> = Object.assign({}, this.cardObjectsArray);
-        changePlayerCardLayout(copiedCardArray, copiedCardObjects);
+        changePlayerCardLayout(this.allCards, this.cardObjectsArray);
         return playedHand;
     }
 }

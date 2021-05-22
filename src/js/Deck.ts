@@ -1,6 +1,21 @@
 import { Card } from './Card.js';
 import { RANK_OBJECT } from './Rank.js';
 import { SUIT_OBJECT } from './Suit.js';
+import {
+    ThreeD, ThreeC, ThreeH, ThreeS,
+    FourD, FourC, FourH, FourS,
+    FiveD, FiveC, FiveH, FiveS,
+    SixD, SixC, SixH, SixS,
+    SevenD, SevenC, SevenH, SevenS,
+    EightD, EightC, EightH, EightS,
+    NineD, NineC, NineH, NineS,
+    TenD, TenC, TenH, TenS,
+    JackD, JackC, JackH, JackS,
+    QueenD, QueenC, QueenH, QueenS,
+    KingD, KingC, KingH, KingS,
+    AceD, AceC, AceH, AceS,
+    TwoD, TwoC, TwoH, TwoS
+} from './AllCards.js';
 
 /////////////////////////////////
 //
@@ -47,8 +62,7 @@ class Deck {
     // REQUIRES: addedCard is a Card object
     // EFFECTS: addsCardToDeck
     addCardToDeck(addedCard: Card): void {
-        let copiedCard: Card = Object.assign({}, addedCard);
-        this.allCards.push(copiedCard);
+        this.allCards.push(addedCard);
     }
     
 
@@ -56,71 +70,70 @@ class Deck {
     resetDeck(): void {
         this.allCards = [];
 
-        this.addCardToDeck(new Card(RANK_OBJECT.THREE, SUIT_OBJECT.DIAMONDS));
-        this.addCardToDeck(new Card(RANK_OBJECT.THREE, SUIT_OBJECT.CLUBS));
-        this.addCardToDeck(new Card(RANK_OBJECT.THREE, SUIT_OBJECT.HEARTS));
-        this.addCardToDeck(new Card(RANK_OBJECT.THREE, SUIT_OBJECT.SPADES));
+        this.addCardToDeck(ThreeD());
+        this.addCardToDeck(ThreeC());
+        this.addCardToDeck(ThreeH());
+        this.addCardToDeck(ThreeS());
 
-        this.addCardToDeck(new Card(RANK_OBJECT.FOUR, SUIT_OBJECT.DIAMONDS));
-        this.addCardToDeck(new Card(RANK_OBJECT.FOUR, SUIT_OBJECT.CLUBS));
-        this.addCardToDeck(new Card(RANK_OBJECT.FOUR, SUIT_OBJECT.HEARTS));
-        this.addCardToDeck(new Card(RANK_OBJECT.FOUR, SUIT_OBJECT.SPADES));
+        this.addCardToDeck(FourD());
+        this.addCardToDeck(FourC());
+        this.addCardToDeck(FourH());
+        this.addCardToDeck(FourS());
 
-        this.addCardToDeck(new Card(RANK_OBJECT.FIVE, SUIT_OBJECT.DIAMONDS));
-        this.addCardToDeck(new Card(RANK_OBJECT.FIVE, SUIT_OBJECT.CLUBS));
-        this.addCardToDeck(new Card(RANK_OBJECT.FIVE, SUIT_OBJECT.HEARTS));
-        this.addCardToDeck(new Card(RANK_OBJECT.FIVE, SUIT_OBJECT.SPADES));
+        this.addCardToDeck(FiveD());
+        this.addCardToDeck(FiveC());
+        this.addCardToDeck(FiveH());
+        this.addCardToDeck(FiveS());
 
-        this.addCardToDeck(new Card(RANK_OBJECT.SIX, SUIT_OBJECT.DIAMONDS));
-        this.addCardToDeck(new Card(RANK_OBJECT.SIX, SUIT_OBJECT.CLUBS));
-        this.addCardToDeck(new Card(RANK_OBJECT.SIX, SUIT_OBJECT.HEARTS));
-        this.addCardToDeck(new Card(RANK_OBJECT.SIX, SUIT_OBJECT.SPADES));
+        this.addCardToDeck(SixD());
+        this.addCardToDeck(SixC());
+        this.addCardToDeck(SixH());
+        this.addCardToDeck(SixS());
 
-        this.addCardToDeck(new Card(RANK_OBJECT.SEVEN, SUIT_OBJECT.DIAMONDS));
-        this.addCardToDeck(new Card(RANK_OBJECT.SEVEN, SUIT_OBJECT.CLUBS));
-        this.addCardToDeck(new Card(RANK_OBJECT.SEVEN, SUIT_OBJECT.HEARTS));
-        this.addCardToDeck(new Card(RANK_OBJECT.SEVEN, SUIT_OBJECT.SPADES));
+        this.addCardToDeck(SevenD());
+        this.addCardToDeck(SevenC());
+        this.addCardToDeck(SevenH());
+        this.addCardToDeck(SevenS());
 
-        this.addCardToDeck(new Card(RANK_OBJECT.EIGHT, SUIT_OBJECT.DIAMONDS));
-        this.addCardToDeck(new Card(RANK_OBJECT.EIGHT, SUIT_OBJECT.CLUBS));
-        this.addCardToDeck(new Card(RANK_OBJECT.EIGHT, SUIT_OBJECT.HEARTS));
-        this.addCardToDeck(new Card(RANK_OBJECT.EIGHT, SUIT_OBJECT.SPADES));
+        this.addCardToDeck(EightD());
+        this.addCardToDeck(EightC());
+        this.addCardToDeck(EightH());
+        this.addCardToDeck(EightS());
 
-        this.addCardToDeck(new Card(RANK_OBJECT.NINE, SUIT_OBJECT.DIAMONDS));
-        this.addCardToDeck(new Card(RANK_OBJECT.NINE, SUIT_OBJECT.CLUBS));
-        this.addCardToDeck(new Card(RANK_OBJECT.NINE, SUIT_OBJECT.HEARTS));
-        this.addCardToDeck(new Card(RANK_OBJECT.NINE, SUIT_OBJECT.SPADES));
+        this.addCardToDeck(NineD());
+        this.addCardToDeck(NineC());
+        this.addCardToDeck(NineH());
+        this.addCardToDeck(NineS());
 
-        this.addCardToDeck(new Card(RANK_OBJECT.TEN, SUIT_OBJECT.DIAMONDS));
-        this.addCardToDeck(new Card(RANK_OBJECT.TEN, SUIT_OBJECT.CLUBS));
-        this.addCardToDeck(new Card(RANK_OBJECT.TEN, SUIT_OBJECT.HEARTS));
-        this.addCardToDeck(new Card(RANK_OBJECT.TEN, SUIT_OBJECT.SPADES));
+        this.addCardToDeck(TenD());
+        this.addCardToDeck(TenC());
+        this.addCardToDeck(TenH());
+        this.addCardToDeck(TenS());
 
-        this.addCardToDeck(new Card(RANK_OBJECT.JACK, SUIT_OBJECT.DIAMONDS));
-        this.addCardToDeck(new Card(RANK_OBJECT.JACK, SUIT_OBJECT.CLUBS));
-        this.addCardToDeck(new Card(RANK_OBJECT.JACK, SUIT_OBJECT.HEARTS));
-        this.addCardToDeck(new Card(RANK_OBJECT.JACK, SUIT_OBJECT.SPADES));
+        this.addCardToDeck(JackD());
+        this.addCardToDeck(JackC());
+        this.addCardToDeck(JackH());
+        this.addCardToDeck(JackS());
 
-        this.addCardToDeck(new Card(RANK_OBJECT.QUEEN, SUIT_OBJECT.DIAMONDS));
-        this.addCardToDeck(new Card(RANK_OBJECT.QUEEN, SUIT_OBJECT.CLUBS));
-        this.addCardToDeck(new Card(RANK_OBJECT.QUEEN, SUIT_OBJECT.HEARTS));
-        this.addCardToDeck(new Card(RANK_OBJECT.QUEEN, SUIT_OBJECT.SPADES));
+        this.addCardToDeck(QueenD());
+        this.addCardToDeck(QueenC());
+        this.addCardToDeck(QueenH());
+        this.addCardToDeck(QueenS());
 
-        this.addCardToDeck(new Card(RANK_OBJECT.KING, SUIT_OBJECT.DIAMONDS));
-        this.addCardToDeck(new Card(RANK_OBJECT.KING, SUIT_OBJECT.CLUBS));
-        this.addCardToDeck(new Card(RANK_OBJECT.KING, SUIT_OBJECT.HEARTS));
-        this.addCardToDeck(new Card(RANK_OBJECT.KING, SUIT_OBJECT.SPADES));
+        this.addCardToDeck(KingD());
+        this.addCardToDeck(KingC());
+        this.addCardToDeck(KingH());
+        this.addCardToDeck(KingS());
 
-        this.addCardToDeck(new Card(RANK_OBJECT.ACE, SUIT_OBJECT.DIAMONDS));
-        this.addCardToDeck(new Card(RANK_OBJECT.ACE, SUIT_OBJECT.CLUBS));
-        this.addCardToDeck(new Card(RANK_OBJECT.ACE, SUIT_OBJECT.HEARTS));
-        this.addCardToDeck(new Card(RANK_OBJECT.ACE, SUIT_OBJECT.SPADES));
+        this.addCardToDeck(AceD());
+        this.addCardToDeck(AceC());
+        this.addCardToDeck(AceH());
+        this.addCardToDeck(AceS());
 
-        this.addCardToDeck(new Card(RANK_OBJECT.TWO, SUIT_OBJECT.DIAMONDS));
-        this.addCardToDeck(new Card(RANK_OBJECT.TWO, SUIT_OBJECT.CLUBS));
-        this.addCardToDeck(new Card(RANK_OBJECT.TWO, SUIT_OBJECT.HEARTS));
-        this.addCardToDeck(new Card(RANK_OBJECT.TWO, SUIT_OBJECT.SPADES));
-
+        this.addCardToDeck(TwoD());
+        this.addCardToDeck(TwoC());
+        this.addCardToDeck(TwoH());
+        this.addCardToDeck(TwoS());
     }
 }
 

@@ -4,19 +4,19 @@ exports.Rank = exports.RANK_STRENGTHS = exports.RANK_STRING = exports.RANK_OBJEC
 // USAGE: used in ordered ranks
 var RANK_STRING;
 (function (RANK_STRING) {
-    RANK_STRING["THREE"] = "3";
-    RANK_STRING["FOUR"] = "4";
-    RANK_STRING["FIVE"] = "5";
-    RANK_STRING["SIX"] = "6";
-    RANK_STRING["SEVEN"] = "7";
-    RANK_STRING["EIGHT"] = "8";
-    RANK_STRING["NINE"] = "9";
-    RANK_STRING["TEN"] = "10";
-    RANK_STRING["JACK"] = "J";
-    RANK_STRING["QUEEN"] = "Q";
-    RANK_STRING["KING"] = "K";
-    RANK_STRING["ACE"] = "A";
-    RANK_STRING["TWO"] = "2";
+    RANK_STRING["THREE"] = "Three";
+    RANK_STRING["FOUR"] = "Four";
+    RANK_STRING["FIVE"] = "Five";
+    RANK_STRING["SIX"] = "Six";
+    RANK_STRING["SEVEN"] = "Seven";
+    RANK_STRING["EIGHT"] = "Eight";
+    RANK_STRING["NINE"] = "Nine";
+    RANK_STRING["TEN"] = "Ten";
+    RANK_STRING["JACK"] = "Jack";
+    RANK_STRING["QUEEN"] = "Queen";
+    RANK_STRING["KING"] = "King";
+    RANK_STRING["ACE"] = "Ace";
+    RANK_STRING["TWO"] = "Two";
 })(RANK_STRING || (RANK_STRING = {}));
 exports.RANK_STRING = RANK_STRING;
 // USAGE: used as a map to get a rank's strength

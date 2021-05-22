@@ -15,24 +15,23 @@ var AllCards_js_1 = require("./AllCards.js");
 var Player = /** @class */ (function () {
     // REQUIRES: _cardObjectsArray is an array of HTML elements representing the player's card slots
     function Player(_cardObjectsArray) {
+        console.log("c");
         this.allCards = [];
         this.cardObjectsArray = _cardObjectsArray;
     }
     // REQUIRES: addedCard is a Card object
     // EFFECTS: adds addedCard to allCards
     Player.prototype.addCardToPlayer = function (addedCard) {
-        var copiedCard = Object.assign({}, addedCard);
-        this.allCards.push(copiedCard);
+        this.allCards.push(addedCard);
         // FUTURE: addCardToPlayer currently sorts this.allCards, but this may change in future
         this.allCards.sort(Sort_js_1.compareCards);
-        var copiedCardArray = Object.assign({}, this.allCards);
-        var copiedCardObjects = Object.assign({}, this.cardObjectsArray);
-        ChangeLayout_js_1.changePlayerCardLayout(copiedCardArray, copiedCardObjects);
+        ChangeLayout_js_1.changePlayerCardLayout(this.allCards, this.cardObjectsArray);
     };
     // REQUIRES: allCards are sorted and player has cards (should be 13)
     // EFFECTS: returns true if player has three of diamonds, false otherwise
     Player.prototype.hasThreeOfDiamonds = function () {
-        return Sort_js_1.objectsAreEqual(this.allCards[0], AllCards_js_1.CARD_OBJECT.get("THREE_OF_DIAMONDS"));
+        var cardThreeOfDiamonds = AllCards_js_1.ThreeD();
+        return Sort_js_1.objectsAreEqual(this.allCards[0], cardThreeOfDiamonds);
     };
     // REQUIRES: player is first person to make move
     // EFFECTS: returns an array of numbers showing Card objects which player wants to play, returns [] if skip
@@ -90,13 +89,13 @@ var Player = /** @class */ (function () {
     // EFFECTS: returns a Hand object showing what player wants to play
     Player.prototype.playCards = function (selectedCardIndices) {
         var playedHand = new Hand_js_1.Hand();
-        for (var i = selectedCardIndices.length; i >= 0; --i) {
+        for (var i = selectedCardIndices.length - 1; i >= 0; --i) {
             // COMMENTS: selectedCardIndices[i] is indexToRemove, this.allCards.splice(...) is playedCard
-            playedHand.addCardToHand(this.allCards.splice(selectedCardIndices[i], 1)[0]);
+            var playedCard = this.allCards.splice(selectedCardIndices[i], 1)[0];
+            console.log(playedCard.getName);
+            playedHand.addCardToHand(playedCard);
         }
-        var copiedCardArray = Object.assign({}, this.allCards);
-        var copiedCardObjects = Object.assign({}, this.cardObjectsArray);
-        ChangeLayout_js_1.changePlayerCardLayout(copiedCardArray, copiedCardObjects);
+        ChangeLayout_js_1.changePlayerCardLayout(this.allCards, this.cardObjectsArray);
         return playedHand;
     };
     return Player;

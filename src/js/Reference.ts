@@ -6,6 +6,10 @@
 //
 /////////////////////////////////
 
+// COMMENTS: submit button HTML element
+
+var submit_button: HTMLElement = document.getElementById("submit-answer")!;
+
 
 // COMMENTS: these are HTML elements showing the main table card slots
 var mc0: HTMLElement = document.getElementById("main-card-0")!;
@@ -253,6 +257,6 @@ mapCardNameToCSS.set("Two of Hearts", "card-2H");
 mapCardNameToCSS.set("Two of Spades", "card-2S");
 
 export {
-    mapCardNameToCSS, disableEverySingleButton, mainCardsHTML,
+    submit_button, mapCardNameToCSS, disableEverySingleButton, mainCardsHTML,
     player0CardsHTML, player1CardsHTML, player2CardsHTML, player3CardsHTML
 }

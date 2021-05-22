@@ -20,9 +20,8 @@ function makeCardSlotEmpty(cardObject) {
 // EFFECTS: change and update a single card slot based on the updatedCard
 function updateSingleCardSlot(updatedCard, cardObject) {
     // COMMENTS: change the card object based on the updateCard
-    var copiedCard = Object.assign({}, updatedCard);
-    var cardName = copiedCard.getName;
-    console.log(cardName);
+    console.log(updatedCard.getName);
+    var cardName = updatedCard.getName;
     var cssName = Reference_js_1.mapCardNameToCSS.get(cardName);
     cardObject.className = "card " + cssName;
 }
@@ -31,13 +30,12 @@ function updateSingleCardSlot(updatedCard, cardObject) {
 // EFFECTS: change and update a player's card layout (the player being whoever owns the array of cards)
 function changePlayerCardLayout(allCards, cardObjectsArray) {
     // COMMENTS: first need to make it so that all of player's other cards are empty
-    for (var i = allCards.length; i < 13; ++i) {
+    for (var i = allCards.length; i < allCards.length + 5 && i < 13; ++i) {
         makeCardSlotEmpty(cardObjectsArray[i]);
     }
     // COMMENTS: now change each of the cards and update them
     for (var i = 0; i < allCards.length; ++i) {
-        var copiedCard = Object.assign({}, allCards[i]);
-        updateSingleCardSlot(copiedCard, cardObjectsArray[i]);
+        updateSingleCardSlot(allCards[i], cardObjectsArray[i]);
     }
 }
 exports.changePlayerCardLayout = changePlayerCardLayout;
@@ -120,6 +118,14 @@ function convertTrackSelection(trackSelection) {
     }
     return chosenIndices;
 }
+// EFFECTS: basic sleep function
+function sleep(milliseconds) {
+    var date = Date.now();
+    var currentDate = null;
+    do {
+        currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+}
 // REQUIRES: current player is selecting cards
 // REQUIRES: cardAmount is a number showing how many cards player has
 // REQUIRES: cardObjectsArray is an array of HTML elements representing the player's card slots
@@ -153,7 +159,8 @@ function letPlayerChooseCards(cardAmount, cardObjectsArray) {
     for (var i = 0; i < cardAmount; ++i) {
         _loop_1(i);
     }
-    // COMMENTS: this user should no longer be able to choose the cards
+    // COMMENTS: do something here
+    // COMMENTS: this user should no longer be able to choose the cards 
     disableAllButtons(cardObjectsArray);
     return convertTrackSelection(trackSelection);
 }

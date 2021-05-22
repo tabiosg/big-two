@@ -54,14 +54,12 @@ class Game {
     // EFFECTS: deals top card from deck to player
     dealCardTo(receivingPlayer: Player): void {
         let cardBeingTransferred: Card = this.cardDeck.removeCardFromTop();
-        let copiedCard: Card = Object.assign({}, cardBeingTransferred);
-        receivingPlayer.addCardToPlayer(copiedCard);
+        receivingPlayer.addCardToPlayer(new Card(cardBeingTransferred.getRank, cardBeingTransferred.getSuit));
     }
 
     // REQUIRES: addedPlayer is a Player object and cardDeck is reset
     // EFFECTS: adds player to allPlayers
     startGame(): void {
-
         // COMMENTS: enter dealing phase
         this.cardDeck.shuffleDeck();
 
@@ -71,7 +69,7 @@ class Game {
             this.dealCardTo(this.allPlayers[2]);
             this.dealCardTo(this.allPlayers[3]);
         }
-
+        /*
         // COMMENTS: player with three of diamonds starts
         let turnPlayer: number = 0; 
 
@@ -88,7 +86,7 @@ class Game {
         while (true) {
 
             let playedHand: Hand = new Hand;
-            let selectedCardsByPlayer: Array<number>;
+            let selectedCardsByPlayer: Array<number> = [];
             // COMMENTS: play initial cards to start off the round/event
             if (needToCheckForThreeOfDiamonds) {
                 selectedCardsByPlayer = this.allPlayers[turnPlayer].selectFirstCardIndicesThreeOfDiamonds();
@@ -116,8 +114,10 @@ class Game {
 
             // COMMENTS: this is everything after the initial cards were played
             while (mostRecentPlayerWhoPlayed != turnPlayer) {
-                let followedCards: Array<number> =
-                    this.allPlayers[turnPlayer].selectIndicesFollowUp(bestHandPlayedSoFar);
+                let followedCards: Array<number> = Object.assign({},
+                    this.allPlayers[turnPlayer].selectIndicesFollowUp(bestHandPlayedSoFar));
+
+
                 let handRequestedToPlay: Hand = this.allPlayers[turnPlayer].playCards(followedCards);
 
                 // COMMENTS: if player requests to play a hand, but it does not beat the current best ...
@@ -144,6 +144,7 @@ class Game {
             }
             resetTableLayout(this.cardObjectsArray);
         }
+        */
     }
     // EFFECTS: announces winner
     announceWinner(winner: Player): void {

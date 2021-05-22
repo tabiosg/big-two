@@ -1,19 +1,19 @@
 // USAGE: used in ordered ranks
 // NOTES: 2662, 2667, 2661, 2664 for black and white, 2666, 2663, 2665, 2660 for color
 enum SUIT_STRING {
-    DIAMONDS = "\u2666",
-    CLUBS = "\u2663",
-    HEARTS = "\u2665",
-    SPADES = "\u2660",
+    DIAMONDS = "Diamonds",
+    CLUBS = "Clubs",
+    HEARTS = "Hearts",
+    SPADES = "Spades",
 }
 
 // USAGE: used as a map to get a suit's strength
 let SUIT_STRENGTHS = new Map<string, number>();
 
-SUIT_STRENGTHS.set("\u2666", 0);
-SUIT_STRENGTHS.set("\u2663", 1);
-SUIT_STRENGTHS.set("\u2665", 2);
-SUIT_STRENGTHS.set("\u2660", 3);
+SUIT_STRENGTHS.set("Diamonds", 0);
+SUIT_STRENGTHS.set("Clubs", 1);
+SUIT_STRENGTHS.set("Hearts", 2);
+SUIT_STRENGTHS.set("Spades", 3);
 
 class Suit {
     // COMMENTS: these are the member variables of Suit
