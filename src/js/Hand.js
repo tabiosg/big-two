@@ -78,6 +78,9 @@ var Hand = /** @class */ (function () {
     // REQUIRES: this.cardObjectsInHand is size 5
     // EFFECTS: returns true if cardHand is a four of a kind, false otherwise
     Hand.prototype.isFourOfAKind = function () {
+        // COMMENTS: check if played cards is proper length
+        if (this.numberCardsInHand != 4)
+            return false;
         // COMMENTS: check if middle three cards are same rank (this works since it's a sorted hand)
         if (!this.cardObjectsInHand[1].hasSameRankAs(this.cardObjectsInHand[2]))
             return false;

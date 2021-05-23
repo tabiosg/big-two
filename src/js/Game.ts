@@ -197,39 +197,31 @@ class Game {
     doNextAction(): void {
         switch (this.gameState) {
             case GAME_STATE.LOAD_GAME:
-                console.log("Load");
                 this.loadGameState();
                 return;
             case GAME_STATE.REQUEST_THREE_OF_DIAMONDS_PLAYER_TURN:
-                console.log("req3");
                 this.requestThreeOfDiamondsPlayerTurnState();
                 return;
             case GAME_STATE.REQUEST_CARDS_INITIAL_PLAYER_TURN:
-                console.log("reqNormal");
                 this.requestCardsInitialPlayerTurnState();
                 return;
             case GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN:
-                console.log("reqFollow");
                 this.requestCardsFollowUpPlayerTurnState();
                 return;
             case GAME_STATE.PLAY_CARDS_THREE_OF_DIAMONDS:
-                console.log("play3");
                 let selectedCardsByPlayer: Array<number> =
                     this.allPlayers[this.turnPlayer].turnTrackToArrayRegularStart(this.trackSelection);
                 this.playCardsStart(selectedCardsByPlayer);
                 return;
             case GAME_STATE.PLAY_CARDS_START_PLAYER_TURN:
-                console.log("playNormal");
                 selectedCardsByPlayer =
                     this.allPlayers[this.turnPlayer].turnTrackToArrayRegularStart(this.trackSelection);
                 this.playCardsStart(selectedCardsByPlayer);
                 return;
             case GAME_STATE.PLAY_CARDS_FOLLOW_PLAYER_TURN:
-                console.log("playFollow");
                 this.playCardsFollow();
                 return;
             case GAME_STATE.ANNOUNCE_WINNER:
-                console.log("announce");
                 this.announceWinnerState();
                 return;
         }
