@@ -17,7 +17,7 @@ The website keeps track of the current state of the Big Two game.
 In order to move onto the next state, one must press the "Go Next" button.
 The button can be seen in the following image.
 
-![Starting screen with "Go Next" button highlighted](src/images/demo/go_next.png)
+![Starting screen with "Go Next" button highlighted](src/images/demo/starting_screen.png)
 Picture 1: Starting screen with "Go Next" button highlighted
 
 The next screen that one should see is all 52 cards. This means that the cards have been dealt.
