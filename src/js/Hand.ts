@@ -28,8 +28,7 @@ class Hand {
 
     //EFFECTS: returns array of cards
     get getCardObjectsInHand(): Array<Card> {
-        let returnCardObjectsInHand: Array<Card> = Object.assign({}, this.cardObjectsInHand);
-        return returnCardObjectsInHand;
+        return this.cardObjectsInHand;
     }
 
     // EFFECTS: returns true if hand has three of diamonds
@@ -45,8 +44,7 @@ class Hand {
     // REQUIRES: addedCard is a Card object
     // EFFECTS: adds addedCard to cardObjectsInHand
     addCardToHand(addedCard: Card): void {
-        let copyCard: Card = Object.assign({}, addedCard);
-        this.cardObjectsInHand.push(copyCard);
+        this.cardObjectsInHand.push(addedCard);
         ++this.numberCardsInHand;
 
         // FUTURE: addCardToPlayer currently sorts this.allCards, but this may change in future
@@ -102,13 +100,13 @@ class Hand {
         if (this.numberCardsInHand != 5) return false;
 
         // COMMENTS: if cards are not consecutive, then it is false
-        if (RANK_STRENGTHS.get(this.cardObjectsInHand[0].getRankName)! + 1
+        if (RANK_STRENGTHS.get(this.cardObjectsInHand[0].getRankName) + 1
             != RANK_STRENGTHS.get(this.cardObjectsInHand[1].getRankName)) return false;
-        if (RANK_STRENGTHS.get(this.cardObjectsInHand[1].getRankName)! + 1
+        if (RANK_STRENGTHS.get(this.cardObjectsInHand[1].getRankName) + 1
             != RANK_STRENGTHS.get(this.cardObjectsInHand[2].getRankName)) return false;
-        if (RANK_STRENGTHS.get(this.cardObjectsInHand[2].getRankName)! + 1
+        if (RANK_STRENGTHS.get(this.cardObjectsInHand[2].getRankName) + 1
             != RANK_STRENGTHS.get(this.cardObjectsInHand[3].getRankName)) return false;
-        if (RANK_STRENGTHS.get(this.cardObjectsInHand[3].getRankName)! + 1
+        if (RANK_STRENGTHS.get(this.cardObjectsInHand[3].getRankName) + 1
             != RANK_STRENGTHS.get(this.cardObjectsInHand[4].getRankName)) return false;
 
         // COMMENTS: if all cards are consecutive, then it is true

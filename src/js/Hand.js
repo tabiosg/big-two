@@ -28,8 +28,7 @@ var Hand = /** @class */ (function () {
     Object.defineProperty(Hand.prototype, "getCardObjectsInHand", {
         //EFFECTS: returns array of cards
         get: function () {
-            var returnCardObjectsInHand = Object.assign({}, this.cardObjectsInHand);
-            return returnCardObjectsInHand;
+            return this.cardObjectsInHand;
         },
         enumerable: false,
         configurable: true
@@ -46,8 +45,7 @@ var Hand = /** @class */ (function () {
     // REQUIRES: addedCard is a Card object
     // EFFECTS: adds addedCard to cardObjectsInHand
     Hand.prototype.addCardToHand = function (addedCard) {
-        var copyCard = Object.assign({}, addedCard);
-        this.cardObjectsInHand.push(copyCard);
+        this.cardObjectsInHand.push(addedCard);
         ++this.numberCardsInHand;
         // FUTURE: addCardToPlayer currently sorts this.allCards, but this may change in future
         this.cardObjectsInHand.sort(Sort_js_1.compareCards);

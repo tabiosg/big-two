@@ -8,71 +8,56 @@ The goal of the game is to play all of one's cards before the other players.
 
 This project allows one to play Big Two on a website. The website is not live.
 
-## Instructions
+## How to Play
 
-Four players are dealt thirteen cards each (joker cards are not included in the deck). 
-Cards are dealt counterclockwise and the game also proceeds counterclockwise.
+For debugging purpose, a red card represents the back of the card.
+A blue card represents an empty slot. A yellow card represents the starting screen.
 
-NOTE: *"hand" is defined as the set of cards played by a player.*
+The website keeps track of the current state of the Big Two game.
+In order to move onto the next state, one must press the "Go Next" button.
+The button can be seen in the following image.
 
-There are several rules for players to follow:
+![Starting screen with "Go Next" button highlighted](src/images/demo/go_next.png)
+Picture 1: Starting screen with "Go Next" button highlighted
 
-1. The lowest card is the 3♦, and the highest card is 2♠\
-   Ex: 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2\
-       3♦, 3♣, 3♥, 3♠, 4♦, ... , A♠, 2♦, 2♣, 2♥, 2♠
-2. The player with the 3♦ plays first. They must play the 3♦ in a single, double,
-   triple, or combo.
-3. Singles, doubles, triples:
-   *Doubles and triples DO NOT have to be consecutive cards*
-    1. Singles: One card. Can only be played if:
-       * The table is empty.
-       * The last played hand was a single. In this case, the next single played
-         must be higher than the previous single played.\
-         Ex: 10♣ is on the table. You can play 10♥ , J♦, etc.
-    2. Doubles: Two cards with the same rank. Can only be played if:
-       * The table is empty.
-       * The last played hand was a double. In this case, the next double played
-         must be higher than the previous double played.
-         If you have a double of the same rank as the previously played double, you
-         can play it if it is greater than or equal to the previous double.\
-         Ex: ♦ + ♣ < ♥ + ♠\
-             ♦ + ♥ < ♣ + ♠\
-             ♦ + ♠ = ♣ + ♥\
-             10♣ + 10♥ is on the table. You can play 10♦ + 10♠, or Q♦ + Q♣, etc.
-    3. Triples: Three cards with the same rank. Can only be played if:
-       * The table is empty.
-       * The last played hand was a triple. In this case, the next triple played
-         must be higher than the previous triple played.\
-         Ex: 5♦ + 5♥ + 5♠ is beaten by 9♣ + 9♦ + 9♥
-4. There is a combo hierarchy:
-   **Straight < Flush < House < Bomb < Straight Flush**
-    1. Straight: 5 consecutive cards by rank. Suit does not matter.\
-       When comparing straights, the one with the highest card wins.\
-       Cannot loop higher and lower cards.\
-       DO: 4♥ 5♦ 6♥ 7♠ 8♠\
-       DO NOT: A♠ 2♥ 3♥ 4♥ 5♦ (loops from 2 back to 3)
-    2. Flush: 5 cards with the same suit. Rank does not matter.\
-       If the previous hand was a flush, the next flush must be greater in terms\
-       of suit. If two flushes have the same suit, the one with the highest rank\
-       beats the other.\
-       Ex: 3♠ 6♠ 8♠ J♠ A♠ < 5♠ 7♠ 9♠ 10♠ 2♠ because A♠ < 2♠
-    3. House: 5 cards consisting of one double and one triple.\
-       The triples are used for comparisons with other houses.\
-       Ex: 3♣ 3♦ 10♠ 10♥ 10♦ > 2♠ 2♦ 9♠ 9♥ 9♦ (10 > 9)
-    4. Bomb: 4 cards of the same rank and one waste card (any card).\
-       Ex: 8♦ 8♣ 8♥ 8♠ J♥, where J♥ is the waste card
-    5. Straight Flush: 5 consecutive cards with the same suit.
-       When comparing straight flushes, the one with the highest card wins.\
-       A straight flush with J, Q, K, A, and 2 is called a "royal flush".\
-       Ex: 5♦ 6♦ 7♦ 8♦ 9♦ (regular straight flush)\
-       Ex: J♣ Q♣ K♣ A♣ 2♣ (a royal flush)
-5. Players must play cards higher than the last played hand on the table. If a player does not\
-   have a hand higher than the hand on the table, or if they do not want to play a hand this turn,\
-   they can pass.\
-   \
-   If all players pass, the table is reset and last person who put down a hand gets to go again.\
-   They can play any card they want.
+The next screen that one should see is all 52 cards. This means that the cards have been dealt.
+Each row represents each player and each of their cards. The following image
+shows the basic layout screen.
+
+![Basic layout screen](src/images/demo/basic_layout.png)
+
+Picture 2: Basic layout screen, with each row representing a player's cards
+
+The player whose turn it is can then select their cards. When ready, they can click the "Go Next" button.
+If the selected cards do not form a valid hand, then the program will choose the action for them.
+In this case, if the player is the first one placing cards on the table, then the program will make the
+player play the lowest card. Otherwise, it will skip their turn.
+The following image shows the screen when the player selects their cards.
+
+![Selecting cards screen](src/images/demo/selecting_cards.png)
+
+Picture 3: Selecting cards screen
+
+Now, the table will display the best cards/hand played so far.
+As seen in the following image, the best hand played so far will be shown on the top.
+
+![Best hand played so far is shown on the top of the screen](src/images/demo/follow_up.png)
+
+Picture 4: Best hand played so far being shown at the top of the screen
+
+The game continues until there is a winner. Once there is a winner,
+an alert will pop up on the user's window as shown in the following image.
+
+![Winner pop up on the window screen](src/images/demo/winner.png)
+
+Picture 5: Winner alert pop up on the window screen
+
+## How To Update the Project
+
+If one wants to update the project, they can start by updating the .ts files.
+Then, one can run ``` npm run build ``` on the terminal. Now, they can check
+out the website by opening the index.html file.
 
 ## Work
 
-Most of the work done for this project can be found in the src/js file and in index.php.
+Most of the work done for this project can be found in the src/js file and in index.html.

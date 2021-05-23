@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.letPlayerChooseCards = exports.changePlayerCardLayout = exports.resetTableLayout = exports.changeTableLayout = void 0;
+exports.disableAllButtons = exports.letPlayerChooseCards = exports.changePlayerCardLayout = exports.resetTableLayout = exports.changeTableLayout = void 0;
 var Reference_js_1 = require("./Reference.js");
 /////////////////////////////////
 //
@@ -48,24 +48,20 @@ exports.changePlayerCardLayout = changePlayerCardLayout;
 // REQUIRES: allCards is an array of Card objects showing best cards played so far
 // REQUIRES: cardObjectsArray is an array of HTML elements representing the table's card slots
 // EFFECTS: change and update the table's card layout
-function changeTableLayout(bestHandSoFar, cardObjectsArray) {
+function changeTableLayout(bestHandSoFar) {
     var bestCardsSoFar = bestHandSoFar.getCardObjectsInHand;
-    // COMMENTS: first need to make it so that all of table's other cards are empty
-    for (var i = bestCardsSoFar.length; i < 5; ++i) {
-        makeCardSlotEmpty(cardObjectsArray[i]);
-    }
     // COMMENTS: now change each of the cards and update them
     for (var i = 0; i < bestCardsSoFar.length; ++i) {
-        updateSingleCardSlot(bestCardsSoFar[i], cardObjectsArray[i]);
+        updateSingleCardSlot(bestCardsSoFar[i], Reference_js_1.mainCardsHTML[i]);
     }
 }
 exports.changeTableLayout = changeTableLayout;
 // REQUIRES: cardObjectsArray is an array of HTML elements representing the table's card slots
 // EFFECTS: reset the table's card layout
-function resetTableLayout(cardObjectsArray) {
+function resetTableLayout() {
     // COMMENTS: make all cards empty
     for (var i = 0; i < 5; ++i) {
-        makeCardSlotEmpty(cardObjectsArray[i]);
+        makeCardSlotEmpty(Reference_js_1.mainCardsHTML[i]);
     }
 }
 exports.resetTableLayout = resetTableLayout;
@@ -92,9 +88,14 @@ function activateButtons(cardAmount, cardObjectsArray) {
 function disableAllButtons(cardObjectsArray) {
     // COMMENTS: change the card object based on the updateCard
     for (var i = 0; i < 13; ++i) {
-        cardObjectsArray[i].disabled = true;
+        var specificCardObject = cardObjectsArray[i];
+        specificCardObject.disabled = true;
+        if (specificCardObject.classList.contains("card-highlighted")) {
+            specificCardObject.classList.remove("card-highlighted");
+        }
     }
 }
+exports.disableAllButtons = disableAllButtons;
 // EFFECTS: change card display of a cardObject
 function highlightSelectedCard(cardObject) {
     if (cardObject.classList.contains("card-highlighted")) {
@@ -103,19 +104,6 @@ function highlightSelectedCard(cardObject) {
     else {
         cardObject.classList.add("card-highlighted");
     }
-}
-// REQUIRES: time is up and trackSelection represents all cards selected by players
-// EFFECTS: returns an array of numbers showing indices which are desired to be taken out
-function convertTrackSelection(trackSelection) {
-    var chosenIndices = [];
-    for (var i = 0; i < 13; ++i) {
-        if (trackSelection[i]) {
-            chosenIndices.push(i);
-        }
-        if (chosenIndices.length >= 5)
-            return chosenIndices;
-    }
-    return chosenIndices;
 }
 // EFFECTS: basic sleep function
 function sleep(milliseconds) {
@@ -129,25 +117,9 @@ function sleep(milliseconds) {
 // REQUIRES: cardAmount is a number showing how many cards player has
 // REQUIRES: cardObjectsArray is an array of HTML elements representing the player's card slots
 // EFFECTS: let player choose cards
-function letPlayerChooseCards(cardAmount, cardObjectsArray) {
+function letPlayerChooseCards(cardAmount, cardObjectsArray, trackSelection) {
     // COMMENTS: allow user to choose cards
     activateButtons(cardAmount, cardObjectsArray);
-    // COMMENTS: this array is used to see user input
-    var trackSelection = [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-    ];
     var _loop_1 = function (i) {
         cardObjectsArray[i].onclick = function () {
             trackSelection[i] = !trackSelection[i];
@@ -158,10 +130,6 @@ function letPlayerChooseCards(cardAmount, cardObjectsArray) {
     for (var i = 0; i < cardAmount; ++i) {
         _loop_1(i);
     }
-    // COMMENTS: do something here
-    // COMMENTS: this user should no longer be able to choose the cards 
-    disableAllButtons(cardObjectsArray);
-    return convertTrackSelection(trackSelection);
 }
 exports.letPlayerChooseCards = letPlayerChooseCards;
 //# sourceMappingURL=ChangeLayout.js.map

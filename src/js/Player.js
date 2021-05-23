@@ -32,14 +32,33 @@ var Player = /** @class */ (function () {
         var cardThreeOfDiamonds = AllCards_js_1.ThreeD();
         return Sort_js_1.objectsAreEqual(this.allCards[0], cardThreeOfDiamonds);
     };
-    // REQUIRES: player is first person to make move
-    // EFFECTS: returns an array of numbers showing Card objects which player wants to play, returns [] if skip
-    Player.prototype.selectFirstCardIndicesNormal = function () {
-        var selectedCards = [];
-        // TODO: On button click, cards should be added or removed from the array
-        // TODO: Wait a few seconds
-        selectedCards = ChangeLayout_js_1.letPlayerChooseCards(this.allCards.length, this.cardObjectsArray);
-        // COMMENTS: check if created hand would be valid
+    //EFFECTS: converts card indices into actual hand, empty if not valid
+    Player.prototype.turnTrackToArrayThreeOfDiamondsStart = function (trackSelection) {
+        var selectedCards = new Array();
+        for (var i = 0, j = 0; i < 13 && j < 5; ++i) {
+            if (trackSelection[i]) {
+                ++j;
+                selectedCards.push(i);
+            }
+        }
+        var createdHand = new Hand_js_1.Hand();
+        for (var i = 0; i < selectedCards.length; ++i) {
+            createdHand.addCardToHand(this.allCards[selectedCards[i]]);
+        }
+        // COMMENTS: if created hand is valid, then return hand. otherwise, play lowest card.
+        if (createdHand.isValidStart() && createdHand.hasThreeOfDiamonds())
+            return selectedCards;
+        return [0];
+    };
+    //EFFECTS: converts card indices into actual hand, empty if not valid
+    Player.prototype.turnTrackToArrayRegularStart = function (trackSelection) {
+        var selectedCards = new Array();
+        for (var i = 0, j = 0; i < 13 && j < 5; ++i) {
+            if (trackSelection[i]) {
+                ++j;
+                selectedCards.push(i);
+            }
+        }
         var createdHand = new Hand_js_1.Hand();
         for (var i = 0; i < selectedCards.length; ++i) {
             createdHand.addCardToHand(this.allCards[selectedCards[i]]);
@@ -49,40 +68,33 @@ var Player = /** @class */ (function () {
             return selectedCards;
         return [0];
     };
-    // REQUIRES: player has three of diamonds and must make move
-    // EFFECTS: returns an array of numbers showing Card objects which player wants to play, returns [] if skip
-    Player.prototype.selectFirstCardIndicesThreeOfDiamonds = function () {
-        var selectedCards = [];
-        // TODO: On button click, cards should be added or removed from the array
-        // TODO: Wait a few seconds
-        selectedCards = ChangeLayout_js_1.letPlayerChooseCards(this.allCards.length, this.cardObjectsArray);
-        // COMMENTS: check if created hand would be valid
+    //EFFECTS: converts card indices into actual hand, empty if not valid
+    Player.prototype.turnTrackToArrayFollowUp = function (bestHandPlayedSoFar, trackSelection) {
+        var selectedCards = new Array();
+        for (var i = 0, j = 0; i < 13 && j < 5; ++i) {
+            if (trackSelection[i]) {
+                ++j;
+                selectedCards.push(i);
+            }
+        }
         var createdHand = new Hand_js_1.Hand();
         for (var i = 0; i < selectedCards.length; ++i) {
             createdHand.addCardToHand(this.allCards[selectedCards[i]]);
         }
-        // COMMENTS: if created hand is valid, then return hand. otherwise, play three of diamonds
-        if (createdHand.isValidStart() && createdHand.hasThreeOfDiamonds())
-            return selectedCards;
-        return [0];
+        // COMMENTS: if created hand is valid, then return hand. otherwise, play lowest card.
+        if (!bestHandPlayedSoFar.isBeatenBy(createdHand)) {
+            selectedCards = new Array();
+        }
+        return selectedCards;
     };
-    // REQUIRES: player is following up after other people to play hand
-    // REQUIRES: currentBestHand must be valid hand already played
-    // EFFECTS: returns an array of numbers showing Card objects which player wants to play, returns [] if skip
-    Player.prototype.selectIndicesFollowUp = function (currentBestHand) {
-        var selectedCards = [];
-        // TODO: On button click, cards should be added or removed from the array
-        // TODO: Wait a few seconds
-        selectedCards = ChangeLayout_js_1.letPlayerChooseCards(this.allCards.length, this.cardObjectsArray);
-        // COMMENTS: check if created hand would be valid
-        var createdHand = new Hand_js_1.Hand();
-        for (var i = 0; i < selectedCards.length; ++i) {
-            createdHand.addCardToHand(this.allCards[selectedCards[i]]);
-        }
-        // COMMENTS: if created hand is valid, then return hand. otherwise, play three of diamonds
-        if (createdHand.isValidStart() && currentBestHand.isBeatenBy(createdHand))
-            return selectedCards;
-        return [];
+    // REQUIRES: player is first person to make move
+    // EFFECTS: allows player to select cards
+    Player.prototype.allowSelectCardIndices = function (trackSelection) {
+        ChangeLayout_js_1.letPlayerChooseCards(this.allCards.length, this.cardObjectsArray, trackSelection);
+    };
+    // EFFECTS: stop player from choosing cards
+    Player.prototype.stopPlayerFromChoosingCards = function () {
+        ChangeLayout_js_1.disableAllButtons(this.cardObjectsArray);
     };
     // REQUIRES: selectedCardIndices is a sorted array where 0 <= selectedCardIndices.length <= 5;
     // EFFECTS: returns a Hand object showing what player wants to play

@@ -1,7 +1,7 @@
 import { Game } from './Game.js';
 import { Player } from './Player.js';
 import {
-    disableEverySingleButton, mainCardsHTML, player0CardsHTML,
+    nextButton, disableEverySingleButton, mainCardsHTML, player0CardsHTML,
     player1CardsHTML, player2CardsHTML, player3CardsHTML
 } from './Reference.js';
 
@@ -30,4 +30,6 @@ game.addPlayer(player3);
 game.addPlayer(player4);
 
 // COMMENTS: when the game starts, you'll need to change several things
-game.startGame();
+nextButton.onclick = function () {
+    game.doNextAction();
+}

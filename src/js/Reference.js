@@ -7,10 +7,10 @@
 //
 /////////////////////////////////
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.player3CardsHTML = exports.player2CardsHTML = exports.player1CardsHTML = exports.player0CardsHTML = exports.mainCardsHTML = exports.disableEverySingleButton = exports.mapCardNameToCSS = exports.submit_button = void 0;
-// COMMENTS: submit button HTML element
-var submit_button = document.getElementById("submit-answer");
-exports.submit_button = submit_button;
+exports.player3CardsHTML = exports.player2CardsHTML = exports.player1CardsHTML = exports.player0CardsHTML = exports.mainCardsHTML = exports.disableEverySingleButton = exports.mapCardNameToCSS = exports.nextButton = void 0;
+// COMMENTS: next HTML element
+var nextButton = document.getElementById("next-button");
+exports.nextButton = nextButton;
 // COMMENTS: these are HTML elements showing the main table card slots
 var mc0 = document.getElementById("main-card-0");
 var mc1 = document.getElementById("main-card-1");

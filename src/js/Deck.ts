@@ -56,7 +56,7 @@ class Deck {
     // REQUIRES: deck is not empty
     // EFFECTS: removes and returns top Card from deck
     removeCardFromTop(): Card {
-        return this.allCards.pop()!;
+        return this.allCards.pop();
     }
 
     // REQUIRES: addedCard is a Card object

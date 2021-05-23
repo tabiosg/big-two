@@ -12,17 +12,37 @@ import { changeTableLayout, resetTableLayout } from './ChangeLayout.js';
 //
 /////////////////////////////////
 
+enum GAME_STATE {
+    LOAD_GAME,
+    REQUEST_THREE_OF_DIAMONDS_PLAYER_TURN,
+    REQUEST_CARDS_INITIAL_PLAYER_TURN,
+    REQUEST_CARDS_FOLLOW_PLAYER_TURN,
+    PLAY_CARDS_THREE_OF_DIAMONDS,
+    PLAY_CARDS_START_PLAYER_TURN,
+    PLAY_CARDS_FOLLOW_PLAYER_TURN,
+    ANNOUNCE_WINNER
+}
+
 class Game {
     // COMMENTS: these are the member variables of Game
     private allPlayers: Array<Player>;
     private cardDeck: Deck;
     private cardObjectsArray: Array<HTMLElement>;
+    private turnPlayer: number;
+    private mostRecentPlayerWhoPlayed: number;
+    private gameState: GAME_STATE;
+    private bestHandPlayedSoFar: Hand;
+    private trackSelection: Array<boolean>;
+
 
     // REQUIRES: _handOnTable represents an array of HTML elements representing the card slots on the table
     constructor(_cardObjectsArray: Array<HTMLElement>) {
-        this.allPlayers = [];
-        this.cardDeck = new Deck;
+        this.allPlayers = new Array<Player>();
+        this.cardDeck = new Deck();
         this.cardObjectsArray = _cardObjectsArray;
+        this.gameState = GAME_STATE.LOAD_GAME;
+        this.trackSelection = new Array<boolean>();
+        for (let i: number = 0; i < 13; ++i) this.trackSelection.push(false);
     }
 
     // REQUIRES: addedPlayer is a Player object
@@ -57,98 +77,162 @@ class Game {
         receivingPlayer.addCardToPlayer(new Card(cardBeingTransferred.getRank, cardBeingTransferred.getSuit));
     }
 
-    // REQUIRES: addedPlayer is a Player object and cardDeck is reset
-    // EFFECTS: adds player to allPlayers
-    startGame(): void {
+    // REQUIRES: time is up and trackSelection represents all cards selected by players
+    // EFFECTS: returns an array of numbers showing indices which are desired to be taken out
+    convertTrackSelection(trackSelection: Array<boolean>): Array<number> {
+        let chosenIndices: Array<number> = [];
+        for (let i: number = 0; i < 13; ++i) {
+            if (trackSelection[i]) {
+                chosenIndices.push(i);
+            }
+            if (chosenIndices.length >= 5) return chosenIndices;
+        }
+        return chosenIndices;
+    }
+
+
+    loadGameState(): void {
         // COMMENTS: enter dealing phase
         this.cardDeck.shuffleDeck();
 
-        for (let i = 0; i < 13; ++i) {
+        for (let i: number = 0; i < 13; ++i) {
             this.dealCardTo(this.allPlayers[0]);
             this.dealCardTo(this.allPlayers[1]);
             this.dealCardTo(this.allPlayers[2]);
             this.dealCardTo(this.allPlayers[3]);
         }
-        // COMMENTS: player with three of diamonds starts
-        let turnPlayer: number = 0; 
-
-        for (let i = 1; i < 4; ++i) {
-            if (this.allPlayers[i].hasThreeOfDiamonds()) {
-                turnPlayer = i;
-                break;
-            }
-        }
-
-        let needToCheckForThreeOfDiamonds: boolean = true;
-
-        // COMMENTS: continue forever. each while loop represents one event
-        while (true) {
-
-            let playedHand: Hand = new Hand;
-            let selectedCardsByPlayer: Array<number> = [];
-            // COMMENTS: play initial cards to start off the round/event
-            if (needToCheckForThreeOfDiamonds) {
-                selectedCardsByPlayer = this.allPlayers[turnPlayer].selectFirstCardIndicesThreeOfDiamonds();
-                
-                needToCheckForThreeOfDiamonds = false;
-            }
-            else {
-                selectedCardsByPlayer = this.allPlayers[turnPlayer].selectFirstCardIndicesNormal();
-            }
-            playedHand = this.allPlayers[turnPlayer].playCards(selectedCardsByPlayer);
-            changeTableLayout(playedHand, this.cardObjectsArray);
-        /*
-
-            // COMMENTS: need to check if player ran out of cards and has won
-            if (this.allPlayers[turnPlayer].allCards.length == 0) {
-                this.announceWinner(this.allPlayers[turnPlayer]);
-                return;
-            }
-            
-            let bestHandPlayedSoFar: Hand = playedHand;
-
-            let mostRecentPlayerWhoPlayed: number = turnPlayer;
-            // COMMENTS: if not everyone has played yet, move on to the next player normally.
-            // COMMENTS: once all the players had their turn, return to the start with the first player
-            turnPlayer = (turnPlayer < 3) ? turnPlayer + 1 : 0;
-
-            // COMMENTS: this is everything after the initial cards were played
-            while (mostRecentPlayerWhoPlayed != turnPlayer) {
-                let followedCards: Array<number> = Object.assign({},
-                    this.allPlayers[turnPlayer].selectIndicesFollowUp(bestHandPlayedSoFar));
-
-
-                let handRequestedToPlay: Hand = this.allPlayers[turnPlayer].playCards(followedCards);
-
-                // COMMENTS: if player requests to play a hand, but it does not beat the current best ...
-                // COMMENTS: then just ignore it and treat it as the player skipping
-                if (followedCards.length != 0) {
-
-                    bestHandPlayedSoFar = handRequestedToPlay;
-                    changeTableLayout(bestHandPlayedSoFar, this.cardObjectsArray);
-
-                    mostRecentPlayerWhoPlayed =
-                        (mostRecentPlayerWhoPlayed < 3) ? mostRecentPlayerWhoPlayed + 1 : 0;
-
-                    // COMMENTS: need to check if player ran out of cards and has won
-                    if (this.allPlayers[turnPlayer].allCards.length == 0) {
-                        this.announceWinner(this.allPlayers[turnPlayer]);
-                        return;
-                    }
-
-                }
-
-                // COMMENTS: if not everyone has played yet, move on to the next player normally.
-                // COMMENTS: once all the players had their turn, return to the start with the first player
-                turnPlayer = (turnPlayer < 3) ? turnPlayer + 1 : 0;
-            }
-            resetTableLayout(this.cardObjectsArray);
-        }
-        */
+        this.gameState = GAME_STATE.REQUEST_THREE_OF_DIAMONDS_PLAYER_TURN;
     }
-    // EFFECTS: announces winner
-    announceWinner(winner: Player): void {
+
+    // EFFECTS: change turn player
+    requestThreeOfDiamondsPlayerTurnState(): void {
+
+        // COMMENTS: player with three of diamonds starts
+        for (let i: number = 0; i < 4; ++i) {
+            if (this.allPlayers[i].hasThreeOfDiamonds()) {
+                this.turnPlayer = i;
+            }
+        }
+
+        this.allPlayers[this.turnPlayer].allowSelectCardIndices(this.trackSelection);
+        this.gameState = GAME_STATE.PLAY_CARDS_THREE_OF_DIAMONDS;
+
+    }
+
+    requestCardsInitialPlayerTurnState(): void {
+        this.allPlayers[this.turnPlayer].allowSelectCardIndices(this.trackSelection);
+        this.gameState = GAME_STATE.PLAY_CARDS_START_PLAYER_TURN;
+    }
+
+    requestCardsFollowUpPlayerTurnState(): void {
+        if (this.mostRecentPlayerWhoPlayed == this.turnPlayer) {
+            resetTableLayout();
+            this.gameState = GAME_STATE.REQUEST_CARDS_INITIAL_PLAYER_TURN;
+            return;
+        }
+
+        this.allPlayers[this.turnPlayer].allowSelectCardIndices(this.trackSelection);
+        this.gameState = GAME_STATE.PLAY_CARDS_FOLLOW_PLAYER_TURN;
+
+    }
+
+    playCardsStart(selectedCardsByPlayer: Array<number>): void {
+        this.allPlayers[this.turnPlayer].stopPlayerFromChoosingCards();
+
+        if (selectedCardsByPlayer.length == 0) {
+            this.gameState = GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN;
+            this.turnPlayer = (this.turnPlayer < 3) ? this.turnPlayer + 1 : 0;
+            return;
+        }
+
+        this.bestHandPlayedSoFar = this.allPlayers[this.turnPlayer].playCards(selectedCardsByPlayer);
+        changeTableLayout(this.bestHandPlayedSoFar);
+
+        // COMMENTS: need to check if player ran out of cards and has won
+        if (this.allPlayers[this.turnPlayer].allCards.length == 0) {
+            this.gameState = GAME_STATE.ANNOUNCE_WINNER;
+            return;
+        }
+
+        this.mostRecentPlayerWhoPlayed = this.turnPlayer;
+        this.turnPlayer = (this.turnPlayer < 3) ? this.turnPlayer + 1 : 0;
+
+        for (let i: number = 0; i < 13; ++i) this.trackSelection[i] = false;
+        this.gameState = GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN;
+    }
+
+    playCardsFollow(): void {
+        this.allPlayers[this.turnPlayer].stopPlayerFromChoosingCards();
+
+        let selectedCardsByPlayer: Array<number> =
+            this.allPlayers[this.turnPlayer].turnTrackToArrayFollowUp(this.bestHandPlayedSoFar, this.trackSelection);
+
+        if (selectedCardsByPlayer.length == 0) {
+            this.gameState = GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN;
+            this.turnPlayer = (this.turnPlayer < 3) ? this.turnPlayer + 1 : 0;
+            return;
+        }
+
+        this.bestHandPlayedSoFar = this.allPlayers[this.turnPlayer].playCards(selectedCardsByPlayer);
+        changeTableLayout(this.bestHandPlayedSoFar);
+
+        // COMMENTS: need to check if player ran out of cards and has won
+        if (this.allPlayers[this.turnPlayer].allCards.length == 0) {
+            this.gameState = GAME_STATE.ANNOUNCE_WINNER;
+            return;
+        }
+
+        this.mostRecentPlayerWhoPlayed = this.turnPlayer;
+        this.turnPlayer = (this.turnPlayer < 3) ? this.turnPlayer + 1 : 0;
+
+        for (let i: number = 0; i < 13; ++i) this.trackSelection[i] = false;
+        this.gameState = GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN;
+    }
+
+    announceWinnerState(): void {
         alert(`Somebody is the winner!`);
+    }
+
+    // EFFECTS: does next action for game to continue
+    doNextAction(): void {
+        switch (this.gameState) {
+            case GAME_STATE.LOAD_GAME:
+                console.log("Load");
+                this.loadGameState();
+                return;
+            case GAME_STATE.REQUEST_THREE_OF_DIAMONDS_PLAYER_TURN:
+                console.log("req3");
+                this.requestThreeOfDiamondsPlayerTurnState();
+                return;
+            case GAME_STATE.REQUEST_CARDS_INITIAL_PLAYER_TURN:
+                console.log("reqNormal");
+                this.requestCardsInitialPlayerTurnState();
+                return;
+            case GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN:
+                console.log("reqFollow");
+                this.requestCardsFollowUpPlayerTurnState();
+                return;
+            case GAME_STATE.PLAY_CARDS_THREE_OF_DIAMONDS:
+                console.log("play3");
+                let selectedCardsByPlayer: Array<number> =
+                    this.allPlayers[this.turnPlayer].turnTrackToArrayRegularStart(this.trackSelection);
+                this.playCardsStart(selectedCardsByPlayer);
+                return;
+            case GAME_STATE.PLAY_CARDS_START_PLAYER_TURN:
+                console.log("playNormal");
+                selectedCardsByPlayer =
+                    this.allPlayers[this.turnPlayer].turnTrackToArrayRegularStart(this.trackSelection);
+                this.playCardsStart(selectedCardsByPlayer);
+                return;
+            case GAME_STATE.PLAY_CARDS_FOLLOW_PLAYER_TURN:
+                console.log("playFollow");
+                this.playCardsFollow();
+                return;
+            case GAME_STATE.ANNOUNCE_WINNER:
+                console.log("announce");
+                this.announceWinnerState();
+                return;
+        }
     }
 }
 
