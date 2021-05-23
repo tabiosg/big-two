@@ -24,7 +24,7 @@ var Player = /** @class */ (function () {
         this.allCards.push(addedCard);
         // FUTURE: addCardToPlayer currently sorts this.allCards, but this may change in future
         this.allCards.sort(Sort_js_1.compareCards);
-        ChangeLayout_js_1.changePlayerCardLayout(this.allCards, this.cardObjectsArray);
+        ChangeLayout_js_1.hidePlayerCardLayout(this.allCards, this.cardObjectsArray);
     };
     // REQUIRES: allCards are sorted and player has cards (should be 13)
     // EFFECTS: returns true if player has three of diamonds, false otherwise
@@ -90,10 +90,12 @@ var Player = /** @class */ (function () {
     // REQUIRES: player is first person to make move
     // EFFECTS: allows player to select cards
     Player.prototype.allowSelectCardIndices = function (trackSelection) {
+        ChangeLayout_js_1.revealPlayerCardLayout(this.allCards, this.cardObjectsArray);
         ChangeLayout_js_1.letPlayerChooseCards(this.allCards.length, this.cardObjectsArray, trackSelection);
     };
     // EFFECTS: stop player from choosing cards
     Player.prototype.stopPlayerFromChoosingCards = function () {
+        ChangeLayout_js_1.hidePlayerCardLayout(this.allCards, this.cardObjectsArray);
         ChangeLayout_js_1.disableAllButtons(this.cardObjectsArray);
     };
     // REQUIRES: selectedCardIndices is a sorted array where 0 <= selectedCardIndices.length <= 5;
@@ -105,7 +107,7 @@ var Player = /** @class */ (function () {
             var playedCard = this.allCards.splice(selectedCardIndices[i], 1)[0];
             playedHand.addCardToHand(playedCard);
         }
-        ChangeLayout_js_1.changePlayerCardLayout(this.allCards, this.cardObjectsArray);
+        ChangeLayout_js_1.hidePlayerCardLayout(this.allCards, this.cardObjectsArray);
         return playedHand;
     };
     return Player;

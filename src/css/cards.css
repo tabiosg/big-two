@@ -200,11 +200,13 @@
 }
 
 .card-empty {
-    background-image: url('../images/cards/Blue_back.jpg');
+    background-image: none;
+    background-color: transparent;
 }
 
 .card-start {
-    background-image: url('../images/cards/Yellow_back.jpg');
+    background-image: none;
+    background-color: transparent;
 }
 
 .card-highlighted {

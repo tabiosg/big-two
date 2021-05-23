@@ -51,14 +51,12 @@ class Hand {
         this.cardObjectsInHand.sort(compareCards);
     }
 
-    // REQUIRES: this.cardObjectsInHand is size 1
     // EFFECTS: returns true if cardHand is a single card, false otherwise
     isSingleCard(): boolean {
         // COMMENTS: check if played cards is proper length
         return this.numberCardsInHand == 1;
     }
 
-    // REQUIRES: this.cardObjectsInHand is size 2
     // EFFECTS: returns true if cardHand is a pair of cards, false otherwise
     isPair(): boolean {
         // COMMENTS: check if played cards is proper length
@@ -68,7 +66,6 @@ class Hand {
         return this.cardObjectsInHand[0].hasSameRankAs(this.cardObjectsInHand[1]);
     }
 
-    // REQUIRES: this.cardObjectsInHand is size 3
     // EFFECTS: returns true if cardHand is three of a kind, false otherwise
     isThreeOfAKind(): boolean {
         // COMMENTS: check if played cards is proper length
@@ -79,11 +76,10 @@ class Hand {
             && this.cardObjectsInHand[0].hasSameRankAs(this.cardObjectsInHand[2]);
     }
 
-    // REQUIRES: this.cardObjectsInHand is size 5
     // EFFECTS: returns true if cardHand is a four of a kind, false otherwise
     isFourOfAKind(): boolean {
         // COMMENTS: check if played cards is proper length
-        if (this.numberCardsInHand != 4) return false;
+        if (this.numberCardsInHand != 5) return false;
 
         // COMMENTS: check if middle three cards are same rank (this works since it's a sorted hand)
         if (!this.cardObjectsInHand[1].hasSameRankAs(this.cardObjectsInHand[2])) return false;
@@ -94,10 +90,8 @@ class Hand {
             || this.cardObjectsInHand[2].hasSameRankAs(this.cardObjectsInHand[4]);
     }
 
-    // REQUIRES: this.cardObjectsInHand is size 5
     // EFFECTS: returns true if cardHand is a straight, false otherwise
     isStraight(): boolean {
-
         // COMMENTS: check if played cards is proper length
         if (this.numberCardsInHand != 5) return false;
 
@@ -116,9 +110,10 @@ class Hand {
 
     }
 
-    // REQUIRES: this.cardObjectsInHand is size 5
     // EFFECTS: returns true if cardHand is a flush, false otherwise
     isFlush(): boolean {
+        // COMMENTS: check if played cards is proper length
+        if (this.numberCardsInHand != 5) return false;
 
         // COMMENTS: if cards do not have same suit, then it is false
         if (this.cardObjectsInHand[0].getSuitName != this.cardObjectsInHand[1].getSuitName) return false;
@@ -131,9 +126,10 @@ class Hand {
 
     }
 
-    // REQUIRES: this.cardObjectsInHand is size 5
     // EFFECTS: returns true if cardHand is a house, false otherwise
     isHouse(): boolean {
+        // COMMENTS: check if played cards is proper length
+        if (this.numberCardsInHand != 5) return false;
 
         // COMMENTS: check if first two are same rank and last two are same rank
         if (this.cardObjectsInHand[0].getRankName != this.cardObjectsInHand[1].getRankName) return false;
@@ -145,9 +141,11 @@ class Hand {
 
     }
 
-    // REQUIRES: this.cardObjectsInHand is size 5
     // EFFECTS: returns true if cardHand is a straight flush, false otherwise
     isStraightFlush(): boolean {
+        // COMMENTS: check if played cards is proper length
+        if (this.numberCardsInHand != 5) return false;
+
         return this.isFlush() && this.isStraight();
     }
 
@@ -177,15 +175,19 @@ class Hand {
 
         switch (this.numberCardsInHand) {
             case 1:
+                if (otherHand.numberCardsInHand != 1) return false;
                 if (!otherHand.isSingleCard()) return false;
                 return compareCards(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
             case 2:
+                if (otherHand.numberCardsInHand != 2) return false;
                 if (!otherHand.isPair()) return false;
                 return compareCards(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
             case 3:
+                if (otherHand.numberCardsInHand != 3) return false;
                 if (!otherHand.isThreeOfAKind()) return false;
                 return compareCards(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
             case 5:
+                if (otherHand.numberCardsInHand != 5) return false;
                 if (this.isStraight()) {
                     if (otherHand.isFlush() || otherHand.isHouse() || otherHand.isFourOfAKind()) return true;
                     else if (!otherHand.isStraight) return false;

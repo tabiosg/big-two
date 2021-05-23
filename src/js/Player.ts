@@ -1,6 +1,9 @@
 import { Card } from './Card.js';
 import { objectsAreEqual, compareCards } from './Sort.js';
-import { letPlayerChooseCards, changePlayerCardLayout, disableAllButtons } from './ChangeLayout.js';
+import {
+    letPlayerChooseCards, revealPlayerCardLayout, hidePlayerCardLayout,
+    disableAllButtons
+} from './ChangeLayout.js';
 import { Hand } from './Hand.js';
 import { ThreeD } from './AllCards.js';
 
@@ -31,7 +34,7 @@ class Player {
         // FUTURE: addCardToPlayer currently sorts this.allCards, but this may change in future
         this.allCards.sort(compareCards);
 
-        changePlayerCardLayout(this.allCards, this.cardObjectsArray);
+        hidePlayerCardLayout(this.allCards, this.cardObjectsArray);
     }
 
     // REQUIRES: allCards are sorted and player has cards (should be 13)
@@ -103,11 +106,13 @@ class Player {
     // REQUIRES: player is first person to make move
     // EFFECTS: allows player to select cards
     allowSelectCardIndices(trackSelection: Array<boolean>): void {
+        revealPlayerCardLayout(this.allCards, this.cardObjectsArray);
         letPlayerChooseCards(this.allCards.length, this.cardObjectsArray, trackSelection);
     }
 
     // EFFECTS: stop player from choosing cards
     stopPlayerFromChoosingCards(): void {
+        hidePlayerCardLayout(this.allCards, this.cardObjectsArray);
         disableAllButtons(this.cardObjectsArray);
     }
 
@@ -121,7 +126,7 @@ class Player {
             playedHand.addCardToHand(playedCard);
         }
 
-        changePlayerCardLayout(this.allCards, this.cardObjectsArray);
+        hidePlayerCardLayout(this.allCards, this.cardObjectsArray);
         return playedHand;
     }
 }

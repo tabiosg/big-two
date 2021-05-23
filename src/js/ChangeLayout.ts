@@ -20,7 +20,7 @@ function makeCardSlotEmpty(cardObject: HTMLElement): void {
 // REQUIRES: updatedCard is a Card object that is providing the information
 // REQUIRES: cardObject is a HTML element representing the card slot to be updated
 // EFFECTS: change and update a single card slot based on the updatedCard
-function updateSingleCardSlot(updatedCard: Card, cardObject: HTMLElement): void {
+function revealSingleCardSlot(updatedCard: Card, cardObject: HTMLElement): void {
     // COMMENTS: change the card object based on the updateCard
     let cardName: string = updatedCard.getName;
     let cssName: string = mapCardNameToCSS.get(cardName);
@@ -31,14 +31,34 @@ function updateSingleCardSlot(updatedCard: Card, cardObject: HTMLElement): void 
 // REQUIRES: allCards is an array of Card objects showing all of player's current cards
 // REQUIRES: cardObjectsArray is an array of HTML elements representing the player's card slots
 // EFFECTS: change and update a player's card layout (the player being whoever owns the array of cards)
-function changePlayerCardLayout(allCards: Array<Card>, cardObjectsArray: Array<HTMLElement>): void {
+function revealPlayerCardLayout(allCards: Array<Card>, cardObjectsArray: Array<HTMLElement>): void {
     // COMMENTS: first need to make it so that all of player's other cards are empty
     for (let i: number = allCards.length; i < allCards.length + 5 && i < 13; ++i) {
         makeCardSlotEmpty(cardObjectsArray[i]);
     }
     // COMMENTS: now change each of the cards and update them
     for (let i: number = 0; i < allCards.length; ++i) {
-        updateSingleCardSlot(allCards[i], cardObjectsArray[i]);
+        revealSingleCardSlot(allCards[i], cardObjectsArray[i]);
+    }
+}
+
+// REQUIRES: cardObject is a HTML element representing the card slot to be updated
+// EFFECTS: hide card slot
+function hideSingleCardSlot(cardObject: HTMLElement): void {
+    cardObject.className = "card " + "card-back";
+}
+
+// REQUIRES: allCards is an array of Card objects showing all of player's current cards
+// REQUIRES: cardObjectsArray is an array of HTML elements representing the player's card slots
+// EFFECTS: change and update a player's card layout (the player being whoever owns the array of cards)
+function hidePlayerCardLayout(allCards: Array<Card>, cardObjectsArray: Array<HTMLElement>): void {
+    // COMMENTS: first need to make it so that all of player's other cards are empty
+    for (let i: number = allCards.length; i < allCards.length + 5 && i < 13; ++i) {
+        makeCardSlotEmpty(cardObjectsArray[i]);
+    }
+    // COMMENTS: now change each of the cards and update them
+    for (let i: number = 0; i < allCards.length; ++i) {
+        hideSingleCardSlot(cardObjectsArray[i]);
     }
 }
 
@@ -58,7 +78,7 @@ function changeTableLayout(bestHandSoFar: Hand): void {
 
     // COMMENTS: now change each of the cards and update them
     for (let i: number = 0; i < bestCardsSoFar.length; ++i) {
-        updateSingleCardSlot(bestCardsSoFar[i], mainCardsHTML[i]);
+        revealSingleCardSlot(bestCardsSoFar[i], mainCardsHTML[i]);
     }
 }
 
@@ -142,4 +162,7 @@ function letPlayerChooseCards(cardAmount: number, cardObjectsArray: Array<HTMLEl
 }
 
 
-export { changeTableLayout, resetTableLayout, changePlayerCardLayout, letPlayerChooseCards, disableAllButtons }
+export {
+    changeTableLayout, resetTableLayout, revealPlayerCardLayout, hidePlayerCardLayout,
+    letPlayerChooseCards, disableAllButtons
+}

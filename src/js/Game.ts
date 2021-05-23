@@ -3,6 +3,7 @@ import { Deck } from './Deck.js';
 import { Hand } from './Hand.js';
 import { Card } from './Card.js';
 import { changeTableLayout, resetTableLayout } from './ChangeLayout.js';
+import { nextButton } from './Reference.js';
 
 /////////////////////////////////
 //
@@ -101,6 +102,7 @@ class Game {
             this.dealCardTo(this.allPlayers[2]);
             this.dealCardTo(this.allPlayers[3]);
         }
+        nextButton.innerText = "Let player choose hand to start off the round (Three of Diamonds required)."
         this.gameState = GAME_STATE.REQUEST_THREE_OF_DIAMONDS_PLAYER_TURN;
     }
 
@@ -115,23 +117,27 @@ class Game {
         }
 
         this.allPlayers[this.turnPlayer].allowSelectCardIndices(this.trackSelection);
+        nextButton.innerText = "Play selected cards (Three of Diamonds required)."
         this.gameState = GAME_STATE.PLAY_CARDS_THREE_OF_DIAMONDS;
 
     }
 
     requestCardsInitialPlayerTurnState(): void {
         this.allPlayers[this.turnPlayer].allowSelectCardIndices(this.trackSelection);
+        nextButton.innerText = "Play selected cards."
         this.gameState = GAME_STATE.PLAY_CARDS_START_PLAYER_TURN;
     }
 
     requestCardsFollowUpPlayerTurnState(): void {
         if (this.mostRecentPlayerWhoPlayed == this.turnPlayer) {
             resetTableLayout();
+            nextButton.innerText = "No one beat this person! Let player choose hand to start off the round."
             this.gameState = GAME_STATE.REQUEST_CARDS_INITIAL_PLAYER_TURN;
             return;
         }
 
         this.allPlayers[this.turnPlayer].allowSelectCardIndices(this.trackSelection);
+        nextButton.innerText = "Play selected cards."
         this.gameState = GAME_STATE.PLAY_CARDS_FOLLOW_PLAYER_TURN;
 
     }
@@ -140,6 +146,7 @@ class Game {
         this.allPlayers[this.turnPlayer].stopPlayerFromChoosingCards();
 
         if (selectedCardsByPlayer.length == 0) {
+            nextButton.innerText = "Let player choose hand to follow."
             this.gameState = GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN;
             this.turnPlayer = (this.turnPlayer < 3) ? this.turnPlayer + 1 : 0;
             return;
@@ -150,6 +157,7 @@ class Game {
 
         // COMMENTS: need to check if player ran out of cards and has won
         if (this.allPlayers[this.turnPlayer].allCards.length == 0) {
+            nextButton.innerText = "Announce the winner!"
             this.gameState = GAME_STATE.ANNOUNCE_WINNER;
             return;
         }
@@ -158,6 +166,7 @@ class Game {
         this.turnPlayer = (this.turnPlayer < 3) ? this.turnPlayer + 1 : 0;
 
         for (let i: number = 0; i < 13; ++i) this.trackSelection[i] = false;
+        nextButton.innerText = "Let player choose hand to follow."
         this.gameState = GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN;
     }
 
@@ -168,6 +177,7 @@ class Game {
             this.allPlayers[this.turnPlayer].turnTrackToArrayFollowUp(this.bestHandPlayedSoFar, this.trackSelection);
 
         if (selectedCardsByPlayer.length == 0) {
+            nextButton.innerText = "Let player choose hand to follow."
             this.gameState = GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN;
             this.turnPlayer = (this.turnPlayer < 3) ? this.turnPlayer + 1 : 0;
             return;
@@ -178,6 +188,7 @@ class Game {
 
         // COMMENTS: need to check if player ran out of cards and has won
         if (this.allPlayers[this.turnPlayer].allCards.length == 0) {
+            nextButton.innerText = "Announce the winner!"
             this.gameState = GAME_STATE.ANNOUNCE_WINNER;
             return;
         }
@@ -186,6 +197,7 @@ class Game {
         this.turnPlayer = (this.turnPlayer < 3) ? this.turnPlayer + 1 : 0;
 
         for (let i: number = 0; i < 13; ++i) this.trackSelection[i] = false;
+        nextButton.innerText = "Let player choose hand to follow."
         this.gameState = GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN;
     }
 

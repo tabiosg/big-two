@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.disableAllButtons = exports.letPlayerChooseCards = exports.changePlayerCardLayout = exports.resetTableLayout = exports.changeTableLayout = void 0;
+exports.disableAllButtons = exports.letPlayerChooseCards = exports.hidePlayerCardLayout = exports.revealPlayerCardLayout = exports.resetTableLayout = exports.changeTableLayout = void 0;
 var Reference_js_1 = require("./Reference.js");
 /////////////////////////////////
 //
@@ -18,7 +18,7 @@ function makeCardSlotEmpty(cardObject) {
 // REQUIRES: updatedCard is a Card object that is providing the information
 // REQUIRES: cardObject is a HTML element representing the card slot to be updated
 // EFFECTS: change and update a single card slot based on the updatedCard
-function updateSingleCardSlot(updatedCard, cardObject) {
+function revealSingleCardSlot(updatedCard, cardObject) {
     // COMMENTS: change the card object based on the updateCard
     var cardName = updatedCard.getName;
     var cssName = Reference_js_1.mapCardNameToCSS.get(cardName);
@@ -27,17 +27,36 @@ function updateSingleCardSlot(updatedCard, cardObject) {
 // REQUIRES: allCards is an array of Card objects showing all of player's current cards
 // REQUIRES: cardObjectsArray is an array of HTML elements representing the player's card slots
 // EFFECTS: change and update a player's card layout (the player being whoever owns the array of cards)
-function changePlayerCardLayout(allCards, cardObjectsArray) {
+function revealPlayerCardLayout(allCards, cardObjectsArray) {
     // COMMENTS: first need to make it so that all of player's other cards are empty
     for (var i = allCards.length; i < allCards.length + 5 && i < 13; ++i) {
         makeCardSlotEmpty(cardObjectsArray[i]);
     }
     // COMMENTS: now change each of the cards and update them
     for (var i = 0; i < allCards.length; ++i) {
-        updateSingleCardSlot(allCards[i], cardObjectsArray[i]);
+        revealSingleCardSlot(allCards[i], cardObjectsArray[i]);
     }
 }
-exports.changePlayerCardLayout = changePlayerCardLayout;
+exports.revealPlayerCardLayout = revealPlayerCardLayout;
+// REQUIRES: cardObject is a HTML element representing the card slot to be updated
+// EFFECTS: hide card slot
+function hideSingleCardSlot(cardObject) {
+    cardObject.className = "card " + "card-back";
+}
+// REQUIRES: allCards is an array of Card objects showing all of player's current cards
+// REQUIRES: cardObjectsArray is an array of HTML elements representing the player's card slots
+// EFFECTS: change and update a player's card layout (the player being whoever owns the array of cards)
+function hidePlayerCardLayout(allCards, cardObjectsArray) {
+    // COMMENTS: first need to make it so that all of player's other cards are empty
+    for (var i = allCards.length; i < allCards.length + 5 && i < 13; ++i) {
+        makeCardSlotEmpty(cardObjectsArray[i]);
+    }
+    // COMMENTS: now change each of the cards and update them
+    for (var i = 0; i < allCards.length; ++i) {
+        hideSingleCardSlot(cardObjectsArray[i]);
+    }
+}
+exports.hidePlayerCardLayout = hidePlayerCardLayout;
 /////////////////////////////////
 //
 //
@@ -52,7 +71,7 @@ function changeTableLayout(bestHandSoFar) {
     var bestCardsSoFar = bestHandSoFar.getCardObjectsInHand;
     // COMMENTS: now change each of the cards and update them
     for (var i = 0; i < bestCardsSoFar.length; ++i) {
-        updateSingleCardSlot(bestCardsSoFar[i], Reference_js_1.mainCardsHTML[i]);
+        revealSingleCardSlot(bestCardsSoFar[i], Reference_js_1.mainCardsHTML[i]);
     }
 }
 exports.changeTableLayout = changeTableLayout;

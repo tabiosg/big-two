@@ -4,6 +4,7 @@ exports.Game = void 0;
 var Deck_js_1 = require("./Deck.js");
 var Card_js_1 = require("./Card.js");
 var ChangeLayout_js_1 = require("./ChangeLayout.js");
+var Reference_js_1 = require("./Reference.js");
 /////////////////////////////////
 //
 //
@@ -82,6 +83,7 @@ var Game = /** @class */ (function () {
             this.dealCardTo(this.allPlayers[2]);
             this.dealCardTo(this.allPlayers[3]);
         }
+        Reference_js_1.nextButton.innerText = "Let player choose hand to start off the round (Three of Diamonds required).";
         this.gameState = GAME_STATE.REQUEST_THREE_OF_DIAMONDS_PLAYER_TURN;
     };
     // EFFECTS: change turn player
@@ -93,24 +95,29 @@ var Game = /** @class */ (function () {
             }
         }
         this.allPlayers[this.turnPlayer].allowSelectCardIndices(this.trackSelection);
+        Reference_js_1.nextButton.innerText = "Play selected cards (Three of Diamonds required).";
         this.gameState = GAME_STATE.PLAY_CARDS_THREE_OF_DIAMONDS;
     };
     Game.prototype.requestCardsInitialPlayerTurnState = function () {
         this.allPlayers[this.turnPlayer].allowSelectCardIndices(this.trackSelection);
+        Reference_js_1.nextButton.innerText = "Play selected cards.";
         this.gameState = GAME_STATE.PLAY_CARDS_START_PLAYER_TURN;
     };
     Game.prototype.requestCardsFollowUpPlayerTurnState = function () {
         if (this.mostRecentPlayerWhoPlayed == this.turnPlayer) {
             ChangeLayout_js_1.resetTableLayout();
+            Reference_js_1.nextButton.innerText = "No one beat this person! Let player choose hand to start off the round.";
             this.gameState = GAME_STATE.REQUEST_CARDS_INITIAL_PLAYER_TURN;
             return;
         }
         this.allPlayers[this.turnPlayer].allowSelectCardIndices(this.trackSelection);
+        Reference_js_1.nextButton.innerText = "Play selected cards.";
         this.gameState = GAME_STATE.PLAY_CARDS_FOLLOW_PLAYER_TURN;
     };
     Game.prototype.playCardsStart = function (selectedCardsByPlayer) {
         this.allPlayers[this.turnPlayer].stopPlayerFromChoosingCards();
         if (selectedCardsByPlayer.length == 0) {
+            Reference_js_1.nextButton.innerText = "Let player choose hand to follow.";
             this.gameState = GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN;
             this.turnPlayer = (this.turnPlayer < 3) ? this.turnPlayer + 1 : 0;
             return;
@@ -119,6 +126,7 @@ var Game = /** @class */ (function () {
         ChangeLayout_js_1.changeTableLayout(this.bestHandPlayedSoFar);
         // COMMENTS: need to check if player ran out of cards and has won
         if (this.allPlayers[this.turnPlayer].allCards.length == 0) {
+            Reference_js_1.nextButton.innerText = "Announce the winner!";
             this.gameState = GAME_STATE.ANNOUNCE_WINNER;
             return;
         }
@@ -126,12 +134,14 @@ var Game = /** @class */ (function () {
         this.turnPlayer = (this.turnPlayer < 3) ? this.turnPlayer + 1 : 0;
         for (var i = 0; i < 13; ++i)
             this.trackSelection[i] = false;
+        Reference_js_1.nextButton.innerText = "Let player choose hand to follow.";
         this.gameState = GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN;
     };
     Game.prototype.playCardsFollow = function () {
         this.allPlayers[this.turnPlayer].stopPlayerFromChoosingCards();
         var selectedCardsByPlayer = this.allPlayers[this.turnPlayer].turnTrackToArrayFollowUp(this.bestHandPlayedSoFar, this.trackSelection);
         if (selectedCardsByPlayer.length == 0) {
+            Reference_js_1.nextButton.innerText = "Let player choose hand to follow.";
             this.gameState = GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN;
             this.turnPlayer = (this.turnPlayer < 3) ? this.turnPlayer + 1 : 0;
             return;
@@ -140,6 +150,7 @@ var Game = /** @class */ (function () {
         ChangeLayout_js_1.changeTableLayout(this.bestHandPlayedSoFar);
         // COMMENTS: need to check if player ran out of cards and has won
         if (this.allPlayers[this.turnPlayer].allCards.length == 0) {
+            Reference_js_1.nextButton.innerText = "Announce the winner!";
             this.gameState = GAME_STATE.ANNOUNCE_WINNER;
             return;
         }
@@ -147,6 +158,7 @@ var Game = /** @class */ (function () {
         this.turnPlayer = (this.turnPlayer < 3) ? this.turnPlayer + 1 : 0;
         for (var i = 0; i < 13; ++i)
             this.trackSelection[i] = false;
+        Reference_js_1.nextButton.innerText = "Let player choose hand to follow.";
         this.gameState = GAME_STATE.REQUEST_CARDS_FOLLOW_PLAYER_TURN;
     };
     Game.prototype.announceWinnerState = function () {
