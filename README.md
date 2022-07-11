@@ -8,7 +8,7 @@ The goal of the game is to play all of one's cards before the other players.
 
 ## This Project
 
-This project allows one to play Big Two on a website.
+This project allows one to play Big Two on [this](tabiosg.github.io/big-two/) website.
 
 ---
 
@@ -67,9 +67,11 @@ out the website by opening the index.html file.
 
 ---
 
-## Rules
+## Documentation
 
-One can view the rules for the game [here](https://github.com/tabiosg/big-two/blob/documentation/rules/README.md).
+One can view the rules for the game [here](https://github.com/tabiosg/big-two/blob/main/rules/README.md).
+
+One can view the source code documentation [here](https://github.com/tabiosg/big-two/tree/main/src/README.md).
 
 ---
 
