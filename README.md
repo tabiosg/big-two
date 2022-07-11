@@ -69,7 +69,7 @@ out the website by opening the index.html file.
 
 ## Documentation
 
-One can view the rules for the game [here](https://github.com/tabiosg/big-two/blob/main/rules/README.md).
+One can view the rules for the game [here](https://github.com/tabiosg/big-two/tree/main/rules/README.md).
 
 One can view the source code documentation [here](https://github.com/tabiosg/big-two/tree/main/src/README.md).
 
