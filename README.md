@@ -18,6 +18,7 @@ In order to move onto the next state, one must press the "Go Next" button.
 The button can be seen in the following image.
 
 ![Starting screen with "Go Next" button highlighted](src/images/demo/starting_screen.png)
+
 Picture 1: Starting screen with "Go Next" button highlighted
 
 The next screen that one should see is all 52 cards. This means that the cards have been dealt.
@@ -57,6 +58,10 @@ Picture 5: Winner alert pop up on the window screen
 If one wants to update the project, they can start by updating the .ts files.
 Then, one can run ``` npm run build ``` on the terminal. Now, they can check
 out the website by opening the index.html file.
+
+## Rules
+
+One can view the rules by looking inside the rules/ directory.
 
 ## Work
 
