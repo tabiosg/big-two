@@ -8,7 +8,7 @@ The goal of the game is to play all of one's cards before the other players.
 
 ## This Project
 
-This project allows one to play Big Two on a website. The website is not live.
+This project allows one to play Big Two on a website.
 
 ---
 
