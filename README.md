@@ -25,7 +25,8 @@ The button can be seen in the following image.
 
 Picture 1: Starting screen with "Go Next" button highlighted
 
-The next screen that one should see is all 52 cards. This means that the cards have been dealt.
+The next screen that one should see displays all 52 cards. This means that the cards have been dealt.
+Every time the website is loaded, the cards will be distributed differently.
 Each row represents each player and each of their cards. The following image
 shows the basic layout screen.
 
@@ -36,7 +37,8 @@ Picture 2: Basic layout screen, with each row representing a player's cards
 The player whose turn it is can then select their cards. When ready, they can click the "Go Next" button.
 If the selected cards do not form a valid hand, then the program will choose the action for them.
 In this case, if the player is the first one placing cards on the table, then the program will make the
-player play the lowest card. Otherwise, it will skip their turn.
+player play the lowest card. Otherwise, it will skip their turn. (Note that this functionality should be removed in the future
+and was primarily only introduced to speed up the debugging process).
 The following image shows the screen when the player selects their cards.
 
 ![Selecting cards screen](src/images/demo/selecting_cards.png)
