@@ -1,12 +1,16 @@
-﻿# Big Two
+# Big Two
 
 Big Two is a playing card game popular in Asia.
 It's called Big 2 because 2 is the highest rank in the game.
 The goal of the game is to play all of one's cards before the other players.
 
+---
+
 ## This Project
 
 This project allows one to play Big Two on a website. The website is not live.
+
+---
 
 ## How to Play
 
@@ -53,15 +57,21 @@ an alert will pop up on the user's window as shown in the following image.
 
 Picture 5: Winner alert pop up on the window screen
 
+---
+
 ## How To Update the Project
 
 If one wants to update the project, they can start by updating the .ts files.
 Then, one can run ``` npm run build ``` on the terminal. Now, they can check
 out the website by opening the index.html file.
 
+---
+
 ## Rules
 
 One can view the rules by looking inside the rules/ directory.
+
+---
 
 ## Work
 
