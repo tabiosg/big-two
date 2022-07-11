@@ -14,7 +14,7 @@ AllCards, Application, Card, ChangeLayout, Deck, Game, Hand, Player, Rank, Refer
 
 Here is a chaotic graph showing which files require which.
 
-![Graph](../images/demo/graph.png)
+![Graph](images/demo/graph.png)
 
 ---
 
