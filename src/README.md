@@ -12,9 +12,13 @@ The files are the following:
 
 AllCards, Application, Card, ChangeLayout, Deck, Game, Hand, Player, Rank, Reference, Sort, and Suit.
 
+Here is a simplified graph showing the general dependencies of all files.
+
+![Simple Graph](images/demo/simple_graph.png)
+
 Here is a chaotic graph showing which files require which.
 
-![Graph](images/demo/graph.png)
+![Chaos Graph](images/demo/chaos_graph.png)
 
 ---
 
