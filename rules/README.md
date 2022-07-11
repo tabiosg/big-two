@@ -1,4 +1,4 @@
-﻿## Rules
+## Rules
 
 Four players are dealt thirteen cards each (joker cards are not included in the deck). 
 Cards are dealt counterclockwise and the game also proceeds counterclockwise.
