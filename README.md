@@ -14,9 +14,6 @@ This project allows one to play Big Two on [this](https://tabiosg.github.io/big-
 
 ## How to Play
 
-For debugging purpose, a red card represents the back of the card.
-A blue card represents an empty slot. A yellow card represents the starting screen.
-
 The website keeps track of the current state of the Big Two game.
 In order to move onto the next state, one must press the "Go Next" button.
 The button can be seen in the following image.
@@ -27,7 +24,7 @@ Picture 1: Starting screen with "Go Next" button highlighted
 
 The next screen that one should see displays all 52 cards. This means that the cards have been dealt.
 Every time the website is loaded, the cards will be distributed differently.
-Each row represents each player and each of their cards. The following image
+Each row represents each player and each of their cards (each player has 13 cards). The following image
 shows the basic layout screen.
 
 ![Basic layout screen](src/images/demo/basic_layout.png)
@@ -52,7 +49,7 @@ As seen in the following image, the best hand played so far will be shown on the
 
 Picture 4: Best hand played so far being shown at the top of the screen
 
-The game continues until there is a winner. Once there is a winner,
+The game continues until someone no longer has any cards, in which case they are declared the winner. Once there is a winner,
 an alert will pop up on the user's window as shown in the following image.
 
 ![Winner pop up on the window screen](src/images/demo/winner.png)
