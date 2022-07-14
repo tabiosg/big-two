@@ -6,7 +6,7 @@ This document explains the code structure of this project.
 
 ## All Files
 
-All the source code is written in TypeScript then converted into Javascript by running ```npm run build``` in the terminal.
+All the source code is written in TypeScript then converted into Javascript and then turned into [```main.js```](dist/main.js) by running ```npm run build``` in the terminal.
 
 The files are the following: 
 
