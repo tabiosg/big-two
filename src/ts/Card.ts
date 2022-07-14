@@ -1,5 +1,5 @@
-import { Rank, RANK_OBJECT } from './Rank.js';
-import { Suit, SUIT_OBJECT } from './Suit.js';
+import { Rank } from './Rank.js';
+import { Suit } from './Suit.js';
 
 /////////////////////////////////
 //
@@ -73,7 +73,7 @@ class Card {
 }
 
 function ThreeD(): Card {
-    return new Card(RANK_OBJECT.THREE, SUIT_OBJECT.DIAMONDS);
+    return new Card(new Rank("Three"), new Suit("Diamonds"));
 }
 
 export { Card, ThreeD }

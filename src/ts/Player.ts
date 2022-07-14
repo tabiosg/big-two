@@ -39,7 +39,7 @@ class Player {
     // REQUIRES: allCards are sorted and player has cards (should be 13)
     // EFFECTS: returns true if player has three of diamonds, false otherwise
     hasThreeOfDiamonds(): boolean {
-        let cardThreeOfDiamonds = new Card(rank, suit);
+        let cardThreeOfDiamonds = ThreeD();
         return objectsAreEqual(this.allCards[0], cardThreeOfDiamonds);
     }
 
