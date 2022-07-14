@@ -58,8 +58,8 @@ class Suit {
 // USAGE: suitsVector.sort(compareTwoSuits);
 function compareTwoSuits(firstSuit: Suit, secondSuit: Suit): number {
     // COMMENTS: these strength variables represent the importance of suits
-    const firstSuitStrength = SUIT_STRENGTHS.get(firstSuit.getSuitName)!;
-    const secondSuitStrength = SUIT_STRENGTHS.get(secondSuit.getSuitName)!;
+    const firstSuitStrength = SUIT_STRENGTHS.get(firstSuit.getSuitName())!;
+    const secondSuitStrength = SUIT_STRENGTHS.get(secondSuit.getSuitName())!;
 
     // COMMENTS: go compare
     if (firstSuitStrength < secondSuitStrength) return -1;

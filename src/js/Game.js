@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.Game = void 0;
 var Deck_js_1 = require("./Deck.js");
 var Card_js_1 = require("./Card.js");
@@ -59,7 +59,7 @@ var Game = /** @class */ (function () {
     // EFFECTS: deals top card from deck to player
     Game.prototype.dealCardTo = function (receivingPlayer) {
         var cardBeingTransferred = this.cardDeck.removeCardFromTop();
-        receivingPlayer.addCardToPlayer(new Card_js_1.Card(cardBeingTransferred.getRank, cardBeingTransferred.getSuit));
+        receivingPlayer.addCardToPlayer(new Card_js_1.Card(cardBeingTransferred.getRank(), cardBeingTransferred.getSuit()));
     };
     // REQUIRES: time is up and trackSelection represents all cards selected by players
     // EFFECTS: returns an array of numbers showing indices which are desired to be taken out
@@ -105,7 +105,7 @@ var Game = /** @class */ (function () {
     };
     Game.prototype.requestCardsFollowUpPlayerTurnState = function () {
         if (this.mostRecentPlayerWhoPlayed == this.turnPlayer) {
-            ChangeLayout_js_1.resetTableLayout();
+            (0, ChangeLayout_js_1.resetTableLayout)();
             Reference_js_1.nextButton.innerText = "No one beat this person! Let player choose hand to start off the round.";
             this.gameState = GAME_STATE.REQUEST_CARDS_INITIAL_PLAYER_TURN;
             return;
@@ -123,7 +123,7 @@ var Game = /** @class */ (function () {
             return;
         }
         this.bestHandPlayedSoFar = this.allPlayers[this.turnPlayer].playCards(selectedCardsByPlayer);
-        ChangeLayout_js_1.changeTableLayout(this.bestHandPlayedSoFar);
+        (0, ChangeLayout_js_1.changeTableLayout)(this.bestHandPlayedSoFar);
         // COMMENTS: need to check if player ran out of cards and has won
         if (this.allPlayers[this.turnPlayer].allCards.length == 0) {
             Reference_js_1.nextButton.innerText = "Announce the winner!";
@@ -147,7 +147,7 @@ var Game = /** @class */ (function () {
             return;
         }
         this.bestHandPlayedSoFar = this.allPlayers[this.turnPlayer].playCards(selectedCardsByPlayer);
-        ChangeLayout_js_1.changeTableLayout(this.bestHandPlayedSoFar);
+        (0, ChangeLayout_js_1.changeTableLayout)(this.bestHandPlayedSoFar);
         // COMMENTS: need to check if player ran out of cards and has won
         if (this.allPlayers[this.turnPlayer].allCards.length == 0) {
             Reference_js_1.nextButton.innerText = "Announce the winner!";
@@ -199,4 +199,3 @@ var Game = /** @class */ (function () {
     return Game;
 }());
 exports.Game = Game;
-//# sourceMappingURL=Game.js.map

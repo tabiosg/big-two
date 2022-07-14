@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.disableAllButtons = exports.letPlayerChooseCards = exports.hidePlayerCardLayout = exports.revealPlayerCardLayout = exports.resetTableLayout = exports.changeTableLayout = void 0;
 var Reference_js_1 = require("./Reference.js");
 /////////////////////////////////
@@ -20,7 +20,7 @@ function makeCardSlotEmpty(cardObject) {
 // EFFECTS: change and update a single card slot based on the updatedCard
 function revealSingleCardSlot(updatedCard, cardObject) {
     // COMMENTS: change the card object based on the updateCard
-    var cardName = updatedCard.getName;
+    var cardName = updatedCard.getName();
     var cssName = Reference_js_1.mapCardNameToCSS.get(cardName);
     cardObject.className = "card " + cssName;
 }
@@ -68,7 +68,7 @@ exports.hidePlayerCardLayout = hidePlayerCardLayout;
 // REQUIRES: cardObjectsArray is an array of HTML elements representing the table's card slots
 // EFFECTS: change and update the table's card layout
 function changeTableLayout(bestHandSoFar) {
-    var bestCardsSoFar = bestHandSoFar.getCardObjectsInHand;
+    var bestCardsSoFar = bestHandSoFar.getCardObjectsInHand();
     // COMMENTS: now change each of the cards and update them
     for (var i = 0; i < bestCardsSoFar.length; ++i) {
         revealSingleCardSlot(bestCardsSoFar[i], Reference_js_1.mainCardsHTML[i]);
@@ -151,4 +151,3 @@ function letPlayerChooseCards(cardAmount, cardObjectsArray, trackSelection) {
     }
 }
 exports.letPlayerChooseCards = letPlayerChooseCards;
-//# sourceMappingURL=ChangeLayout.js.map

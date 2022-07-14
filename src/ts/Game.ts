@@ -75,7 +75,7 @@ class Game {
     // EFFECTS: deals top card from deck to player
     dealCardTo(receivingPlayer: Player): void {
         let cardBeingTransferred: Card = this.cardDeck.removeCardFromTop();
-        receivingPlayer.addCardToPlayer(new Card(cardBeingTransferred.getRank, cardBeingTransferred.getSuit));
+        receivingPlayer.addCardToPlayer(new Card(cardBeingTransferred.getRank(), cardBeingTransferred.getSuit()));
     }
 
     // REQUIRES: time is up and trackSelection represents all cards selected by players
@@ -115,7 +115,6 @@ class Game {
                 this.turnPlayer = i;
             }
         }
-
         this.allPlayers[this.turnPlayer].allowSelectCardIndices(this.trackSelection);
         nextButton.innerText = "Play selected cards (Three of Diamonds required)."
         this.gameState = GAME_STATE.PLAY_CARDS_THREE_OF_DIAMONDS;

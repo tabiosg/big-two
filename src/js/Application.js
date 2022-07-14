@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var Game_js_1 = require("./Game.js");
 var Player_js_1 = require("./Player.js");
 var Reference_js_1 = require("./Reference.js");
@@ -11,7 +11,7 @@ var Reference_js_1 = require("./Reference.js");
 //
 /////////////////////////////////
 // COMMENTS: at the beginning of the game, every single button should be disabled
-Reference_js_1.disableEverySingleButton();
+(0, Reference_js_1.disableEverySingleButton)();
 // COMMENTS: each of the players should be created
 var player1 = new Player_js_1.Player(Reference_js_1.player0CardsHTML);
 var player2 = new Player_js_1.Player(Reference_js_1.player1CardsHTML);
@@ -27,4 +27,3 @@ game.addPlayer(player4);
 Reference_js_1.nextButton.onclick = function () {
     game.doNextAction();
 };
-//# sourceMappingURL=Application.js.map
