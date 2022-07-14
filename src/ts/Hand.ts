@@ -22,12 +22,12 @@ class Hand {
     }
 
     //EFFECTS: returns number of Card objects in hand
-    get getSize(): number {
+    getSize(): number {
         return this.numberCardsInHand;
     }
 
     //EFFECTS: returns array of cards
-    get getCardObjectsInHand(): Array<Card> {
+    getCardObjectsInHand(): Array<Card> {
         return this.cardObjectsInHand;
     }
 

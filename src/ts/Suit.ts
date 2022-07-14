@@ -26,7 +26,7 @@ class Suit {
     }
 
     // EFFECTS: returns a string of this suit
-    get getSuitName(): string {
+    getSuitName(): string {
         return this.name;
     }
 

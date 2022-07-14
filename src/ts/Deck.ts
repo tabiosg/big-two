@@ -1,21 +1,6 @@
 import { Card } from './Card.js';
 import { RANK_OBJECT } from './Rank.js';
 import { SUIT_OBJECT } from './Suit.js';
-import {
-    ThreeD, ThreeC, ThreeH, ThreeS,
-    FourD, FourC, FourH, FourS,
-    FiveD, FiveC, FiveH, FiveS,
-    SixD, SixC, SixH, SixS,
-    SevenD, SevenC, SevenH, SevenS,
-    EightD, EightC, EightH, EightS,
-    NineD, NineC, NineH, NineS,
-    TenD, TenC, TenH, TenS,
-    JackD, JackC, JackH, JackS,
-    QueenD, QueenC, QueenH, QueenS,
-    KingD, KingC, KingH, KingS,
-    AceD, AceC, AceH, AceS,
-    TwoD, TwoC, TwoH, TwoS
-} from './AllCards.js';
 
 /////////////////////////////////
 //
@@ -31,6 +16,7 @@ class Deck {
 
     constructor() {
         this.allCards = [];
+        this.defaultCards = [];
         this.resetDeck();
     }
 
@@ -65,75 +51,15 @@ class Deck {
         this.allCards.push(addedCard);
     }
     
-
     // EFFECTS: resets the Deck to have all cards
     resetDeck(): void {
         this.allCards = [];
 
-        this.addCardToDeck(ThreeD());
-        this.addCardToDeck(ThreeC());
-        this.addCardToDeck(ThreeH());
-        this.addCardToDeck(ThreeS());
-
-        this.addCardToDeck(FourD());
-        this.addCardToDeck(FourC());
-        this.addCardToDeck(FourH());
-        this.addCardToDeck(FourS());
-
-        this.addCardToDeck(FiveD());
-        this.addCardToDeck(FiveC());
-        this.addCardToDeck(FiveH());
-        this.addCardToDeck(FiveS());
-
-        this.addCardToDeck(SixD());
-        this.addCardToDeck(SixC());
-        this.addCardToDeck(SixH());
-        this.addCardToDeck(SixS());
-
-        this.addCardToDeck(SevenD());
-        this.addCardToDeck(SevenC());
-        this.addCardToDeck(SevenH());
-        this.addCardToDeck(SevenS());
-
-        this.addCardToDeck(EightD());
-        this.addCardToDeck(EightC());
-        this.addCardToDeck(EightH());
-        this.addCardToDeck(EightS());
-
-        this.addCardToDeck(NineD());
-        this.addCardToDeck(NineC());
-        this.addCardToDeck(NineH());
-        this.addCardToDeck(NineS());
-
-        this.addCardToDeck(TenD());
-        this.addCardToDeck(TenC());
-        this.addCardToDeck(TenH());
-        this.addCardToDeck(TenS());
-
-        this.addCardToDeck(JackD());
-        this.addCardToDeck(JackC());
-        this.addCardToDeck(JackH());
-        this.addCardToDeck(JackS());
-
-        this.addCardToDeck(QueenD());
-        this.addCardToDeck(QueenC());
-        this.addCardToDeck(QueenH());
-        this.addCardToDeck(QueenS());
-
-        this.addCardToDeck(KingD());
-        this.addCardToDeck(KingC());
-        this.addCardToDeck(KingH());
-        this.addCardToDeck(KingS());
-
-        this.addCardToDeck(AceD());
-        this.addCardToDeck(AceC());
-        this.addCardToDeck(AceH());
-        this.addCardToDeck(AceS());
-
-        this.addCardToDeck(TwoD());
-        this.addCardToDeck(TwoC());
-        this.addCardToDeck(TwoH());
-        this.addCardToDeck(TwoS());
+        for (const rank in RANK_OBJECT) {
+            for (const suit in SUIT_OBJECT) {
+                this.addCardToDeck(new Card(rank, suit));
+            }
+        }
     }
 }
 
