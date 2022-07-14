@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.Suit = exports.SUIT_STRING = exports.SUIT_OBJECT = exports.compareTwoSuits = void 0;
 // USAGE: used in ordered ranks
 // NOTES: 2662, 2667, 2661, 2664 for black and white, 2666, 2663, 2665, 2660 for color
@@ -23,14 +23,10 @@ var Suit = /** @class */ (function () {
     function Suit(stringSuit) {
         this.name = stringSuit;
     }
-    Object.defineProperty(Suit.prototype, "getSuitName", {
-        // EFFECTS: returns a string of this suit
-        get: function () {
-            return this.name;
-        },
-        enumerable: false,
-        configurable: true
-    });
+    // EFFECTS: returns a string of this suit
+    Suit.prototype.getSuitName = function () {
+        return this.name;
+    };
     // REQUIRES: otherSuit is a Suit object
     // EFFECTS: returns true if this object has same suit as otherCard, false otherwise
     Suit.prototype.isSameSuitAs = function (otherSuit) {
@@ -57,8 +53,8 @@ exports.Suit = Suit;
 // USAGE: suitsVector.sort(compareTwoSuits);
 function compareTwoSuits(firstSuit, secondSuit) {
     // COMMENTS: these strength variables represent the importance of suits
-    var firstSuitStrength = SUIT_STRENGTHS.get(firstSuit.getSuitName);
-    var secondSuitStrength = SUIT_STRENGTHS.get(secondSuit.getSuitName);
+    var firstSuitStrength = SUIT_STRENGTHS.get(firstSuit.getSuitName());
+    var secondSuitStrength = SUIT_STRENGTHS.get(secondSuit.getSuitName());
     // COMMENTS: go compare
     if (firstSuitStrength < secondSuitStrength)
         return -1;
@@ -76,4 +72,3 @@ var SUIT_OBJECT = {
     SPADES: new Suit(SUIT_STRING.SPADES)
 };
 exports.SUIT_OBJECT = SUIT_OBJECT;
-//# sourceMappingURL=Suit.js.map

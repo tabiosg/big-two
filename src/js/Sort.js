@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.compareCards = exports.objectsAreEqual = void 0;
 var Rank_js_1 = require("./Rank.js");
 var Suit_js_1 = require("./Suit.js");
@@ -22,15 +22,14 @@ exports.objectsAreEqual = objectsAreEqual;
 // USAGE: cardsArray.sort(compareCards);
 function compareCards(firstCard, secondCard) {
     // COMMENTS: first rank has priority
-    switch (Rank_js_1.compareTwoRanks(firstCard.getRank, secondCard.getRank)) {
+    switch ((0, Rank_js_1.compareTwoRanks)(firstCard.getRank(), secondCard.getRank())) {
         case 1:
             return 1;
         case -1:
             return -1;
         case 0:
             // COMMENTS: if ranks are equal, suits have priority
-            return Suit_js_1.compareTwoSuits(firstCard.getSuit, secondCard.getSuit);
+            return (0, Suit_js_1.compareTwoSuits)(firstCard.getSuit(), secondCard.getSuit());
     }
 }
 exports.compareCards = compareCards;
-//# sourceMappingURL=Sort.js.map

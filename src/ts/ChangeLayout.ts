@@ -22,7 +22,7 @@ function makeCardSlotEmpty(cardObject: HTMLElement): void {
 // EFFECTS: change and update a single card slot based on the updatedCard
 function revealSingleCardSlot(updatedCard: Card, cardObject: HTMLElement): void {
     // COMMENTS: change the card object based on the updateCard
-    let cardName: string = updatedCard.getName;
+    let cardName: string = updatedCard.getName();
     let cssName: string = mapCardNameToCSS.get(cardName);
 
     cardObject.className = "card " + cssName;
@@ -74,7 +74,7 @@ function hidePlayerCardLayout(allCards: Array<Card>, cardObjectsArray: Array<HTM
 // REQUIRES: cardObjectsArray is an array of HTML elements representing the table's card slots
 // EFFECTS: change and update the table's card layout
 function changeTableLayout(bestHandSoFar: Hand): void {
-    let bestCardsSoFar: Array<Card> = bestHandSoFar.getCardObjectsInHand;
+    let bestCardsSoFar: Array<Card> = bestHandSoFar.getCardObjectsInHand();
 
     // COMMENTS: now change each of the cards and update them
     for (let i: number = 0; i < bestCardsSoFar.length; ++i) {

@@ -1,6 +1,6 @@
 import { Card } from './Card.js';
-import { compareTwoRanks, Rank } from './Rank.js';
-import { compareTwoSuits, Suit } from './Suit.js';
+import { compareTwoRanks } from './Rank.js';
+import { compareTwoSuits } from './Suit.js';
 
 // REQUIRES: firstRank and secondRank are rank objects
 // EFFECTS: returns true if key-value pairs are equivalent
@@ -23,14 +23,14 @@ function objectsAreEqual(firstObject: Object, secondObject: Object): boolean {
 // USAGE: cardsArray.sort(compareCards);
 function compareCards(firstCard: Card, secondCard: Card): number {
     // COMMENTS: first rank has priority
-    switch (compareTwoRanks(firstCard.getRank, secondCard.getRank)) {
+    switch (compareTwoRanks(firstCard.getRank(), secondCard.getRank())) {
         case 1:
             return 1;
         case -1:
             return -1;
         case 0:
             // COMMENTS: if ranks are equal, suits have priority
-            return compareTwoSuits(firstCard.getSuit, secondCard.getSuit);
+            return compareTwoSuits(firstCard.getSuit(), secondCard.getSuit());
     }
 }
 

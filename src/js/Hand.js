@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.Hand = void 0;
 var Card_js_1 = require("./Card.js");
 var Rank_js_1 = require("./Rank.js");
@@ -17,27 +17,19 @@ var Hand = /** @class */ (function () {
         this.cardObjectsInHand = [];
         this.numberCardsInHand = 0;
     }
-    Object.defineProperty(Hand.prototype, "getSize", {
-        //EFFECTS: returns number of Card objects in hand
-        get: function () {
-            return this.numberCardsInHand;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Hand.prototype, "getCardObjectsInHand", {
-        //EFFECTS: returns array of cards
-        get: function () {
-            return this.cardObjectsInHand;
-        },
-        enumerable: false,
-        configurable: true
-    });
+    //EFFECTS: returns number of Card objects in hand
+    Hand.prototype.getSize = function () {
+        return this.numberCardsInHand;
+    };
+    //EFFECTS: returns array of cards
+    Hand.prototype.getCardObjectsInHand = function () {
+        return this.cardObjectsInHand;
+    };
     // EFFECTS: returns true if hand has three of diamonds
     Hand.prototype.hasThreeOfDiamonds = function () {
         var cardThreeOfDiamonds = new Card_js_1.Card(Rank_js_1.RANK_OBJECT.THREE, Suit_js_1.SUIT_OBJECT.DIAMONDS);
         for (var i = 0; i < this.numberCardsInHand; ++i) {
-            if (Sort_js_1.objectsAreEqual(this.cardObjectsInHand[i], cardThreeOfDiamonds))
+            if ((0, Sort_js_1.objectsAreEqual)(this.cardObjectsInHand[i], cardThreeOfDiamonds))
                 return true;
         }
         return false;
@@ -92,17 +84,17 @@ var Hand = /** @class */ (function () {
         if (this.numberCardsInHand != 5)
             return false;
         // COMMENTS: if cards are not consecutive, then it is false
-        if (Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[0].getRankName) + 1
-            != Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[1].getRankName))
+        if (Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[0].getRankName()) + 1
+            != Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[1].getRankName()))
             return false;
-        if (Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[1].getRankName) + 1
-            != Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[2].getRankName))
+        if (Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[1].getRankName()) + 1
+            != Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[2].getRankName()))
             return false;
-        if (Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[2].getRankName) + 1
-            != Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[3].getRankName))
+        if (Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[2].getRankName()) + 1
+            != Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[3].getRankName()))
             return false;
-        if (Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[3].getRankName) + 1
-            != Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[4].getRankName))
+        if (Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[3].getRankName()) + 1
+            != Rank_js_1.RANK_STRENGTHS.get(this.cardObjectsInHand[4].getRankName()))
             return false;
         // COMMENTS: if all cards are consecutive, then it is true
         return true;
@@ -113,13 +105,13 @@ var Hand = /** @class */ (function () {
         if (this.numberCardsInHand != 5)
             return false;
         // COMMENTS: if cards do not have same suit, then it is false
-        if (this.cardObjectsInHand[0].getSuitName != this.cardObjectsInHand[1].getSuitName)
+        if (this.cardObjectsInHand[0].getSuitName() != this.cardObjectsInHand[1].getSuitName())
             return false;
-        if (this.cardObjectsInHand[1].getSuitName != this.cardObjectsInHand[2].getSuitName)
+        if (this.cardObjectsInHand[1].getSuitName() != this.cardObjectsInHand[2].getSuitName())
             return false;
-        if (this.cardObjectsInHand[2].getSuitName != this.cardObjectsInHand[3].getSuitName)
+        if (this.cardObjectsInHand[2].getSuitName() != this.cardObjectsInHand[3].getSuitName())
             return false;
-        if (this.cardObjectsInHand[3].getSuitName != this.cardObjectsInHand[4].getSuitName)
+        if (this.cardObjectsInHand[3].getSuitName() != this.cardObjectsInHand[4].getSuitName())
             return false;
         // COMMENTS: if all cards have same suit, then it is true
         return true;
@@ -130,13 +122,13 @@ var Hand = /** @class */ (function () {
         if (this.numberCardsInHand != 5)
             return false;
         // COMMENTS: check if first two are same rank and last two are same rank
-        if (this.cardObjectsInHand[0].getRankName != this.cardObjectsInHand[1].getRankName)
+        if (this.cardObjectsInHand[0].getRankName() != this.cardObjectsInHand[1].getRankName())
             return false;
-        if (this.cardObjectsInHand[3].getRankName != this.cardObjectsInHand[4].getRankName)
+        if (this.cardObjectsInHand[3].getRankName() != this.cardObjectsInHand[4].getRankName())
             return false;
         // COMMENTS: if middle card has same rank as either first or last cards, then return true
-        return (this.cardObjectsInHand[1].getRankName == this.cardObjectsInHand[2].getRankName)
-            || (this.cardObjectsInHand[2].getRankName == this.cardObjectsInHand[3].getRankName);
+        return (this.cardObjectsInHand[1].getRankName() == this.cardObjectsInHand[2].getRankName())
+            || (this.cardObjectsInHand[2].getRankName() == this.cardObjectsInHand[3].getRankName());
     };
     // EFFECTS: returns true if cardHand is a straight flush, false otherwise
     Hand.prototype.isStraightFlush = function () {
@@ -178,19 +170,19 @@ var Hand = /** @class */ (function () {
                     return false;
                 if (!otherHand.isSingleCard())
                     return false;
-                return Sort_js_1.compareCards(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
+                return (0, Sort_js_1.compareCards)(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
             case 2:
                 if (otherHand.numberCardsInHand != 2)
                     return false;
                 if (!otherHand.isPair())
                     return false;
-                return Sort_js_1.compareCards(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
+                return (0, Sort_js_1.compareCards)(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
             case 3:
                 if (otherHand.numberCardsInHand != 3)
                     return false;
                 if (!otherHand.isThreeOfAKind())
                     return false;
-                return Sort_js_1.compareCards(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
+                return (0, Sort_js_1.compareCards)(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
             case 5:
                 if (otherHand.numberCardsInHand != 5)
                     return false;
@@ -200,7 +192,7 @@ var Hand = /** @class */ (function () {
                     else if (!otherHand.isStraight)
                         return false;
                     // COMMENTS: case where both are straight
-                    return Sort_js_1.compareCards(otherHand.cardObjectsInHand[4], this.cardObjectsInHand[4]) == 1;
+                    return (0, Sort_js_1.compareCards)(otherHand.cardObjectsInHand[4], this.cardObjectsInHand[4]) == 1;
                 }
                 if (this.isFlush()) {
                     if (otherHand.isHouse() || otherHand.isFourOfAKind())
@@ -208,7 +200,7 @@ var Hand = /** @class */ (function () {
                     else if (!otherHand.isFlush)
                         return false;
                     // COMMENTS: case where both are flush
-                    return (Sort_js_1.compareCards(otherHand.cardObjectsInHand[4], this.cardObjectsInHand[4]) == 1)
+                    return ((0, Sort_js_1.compareCards)(otherHand.cardObjectsInHand[4], this.cardObjectsInHand[4]) == 1)
                         || otherHand.isStraight();
                 }
                 if (this.isHouse()) {
@@ -217,7 +209,7 @@ var Hand = /** @class */ (function () {
                     else if (!otherHand.isHouse)
                         return false;
                     // COMMENTS: case where both are house
-                    return Sort_js_1.compareCards(otherHand.cardObjectsInHand[2], this.cardObjectsInHand[2]) == 1;
+                    return (0, Sort_js_1.compareCards)(otherHand.cardObjectsInHand[2], this.cardObjectsInHand[2]) == 1;
                 }
                 if (this.isFourOfAKind()) {
                     if (otherHand.isStraightFlush())
@@ -225,13 +217,13 @@ var Hand = /** @class */ (function () {
                     else if (!otherHand.isFourOfAKind)
                         return false;
                     // COMMENTS: case where both are four of a kind
-                    return Sort_js_1.compareCards(otherHand.cardObjectsInHand[2], this.cardObjectsInHand[2]) == 1;
+                    return (0, Sort_js_1.compareCards)(otherHand.cardObjectsInHand[2], this.cardObjectsInHand[2]) == 1;
                 }
                 // COMMENTS: case where it is straight flush
                 if (!otherHand.isStraightFlush())
                     return false;
                 // COMMENTS: case where both are straight flushes
-                return Sort_js_1.compareCards(otherHand.cardObjectsInHand[4], this.cardObjectsInHand[4]) == 1;
+                return (0, Sort_js_1.compareCards)(otherHand.cardObjectsInHand[4], this.cardObjectsInHand[4]) == 1;
             default:
                 return false;
         }
@@ -239,4 +231,3 @@ var Hand = /** @class */ (function () {
     return Hand;
 }());
 exports.Hand = Hand;
-//# sourceMappingURL=Hand.js.map

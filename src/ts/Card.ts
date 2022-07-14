@@ -1,5 +1,5 @@
-import { Rank } from './Rank.js';
-import { Suit } from './Suit.js';
+import { RANK_OBJECT, Rank } from './Rank.js';
+import { SUIT_OBJECT, Suit } from './Suit.js';
 
 /////////////////////////////////
 //
@@ -19,7 +19,7 @@ class Card {
     constructor(rank: Rank, suit: Suit) {
         this.suit = suit;
         this.rank = rank;
-        this.name = `${this.rank.getRankName} of ${this.suit.getSuitName}`;
+        this.name = `${this.rank.getRankName()} of ${this.suit.getSuitName()}`;
     }
 
     //EFFECTS: returns Suit object of card
@@ -29,7 +29,7 @@ class Card {
 
     //EFFECTS: returns Suit string of card
     getSuitName(): string {
-        return this.suit.getSuitName;
+        return this.suit.getSuitName();
     }
 
     //EFFECTS: returns Rank object of card
@@ -39,7 +39,7 @@ class Card {
 
     //EFFECTS: returns Rank string of card
     getRankName(): string {
-        return this.rank.getRankName;
+        return this.rank.getRankName();
     }
 
     //EFFECTS: returns name of card
@@ -50,30 +50,30 @@ class Card {
     //REQUIRES: otherCard is a Card object
     //EFFECTS: returns true if this object has same suit as otherCard, false otherwise
     hasSameSuitAs(otherCard: Card): boolean {
-        return this.suit.isSameSuitAs(otherCard.getSuit);
+        return this.suit.isSameSuitAs(otherCard.getSuit());
     }
 
     //REQUIRES: otherCard is a Card object
     //EFFECTS: returns true if this object has better suit than otherCard, false otherwise
     hasBetterSuitThan(otherCard: Card): boolean {
-        return this.suit.isBetterSuitThan(otherCard.getSuit);
+        return this.suit.isBetterSuitThan(otherCard.getSuit());
     }
 
     //REQUIRES: otherCard is a Card object
     //EFFECTS: returns true if this object has same rank as otherCard, false otherwise
     hasSameRankAs(otherCard: Card): boolean {
-        return this.rank.isSameRankAs(otherCard.getRank);
+        return this.rank.isSameRankAs(otherCard.getRank());
     }
 
     //REQUIRES: otherCard is a Card object
     //EFFECTS: returns true if this object has better rank than otherCard, false otherwise
     hasBetterRankThan(otherCard: Card): boolean {
-        return this.rank.isBetterRankThan(otherCard.getRank);
+        return this.rank.isBetterRankThan(otherCard.getRank());
     }
 }
 
 function ThreeD(): Card {
-    return new Card(new Rank("Three"), new Suit("Diamonds"));
+    return new Card(RANK_OBJECT.THREE, SUIT_OBJECT.DIAMONDS);
 }
 
 export { Card, ThreeD }

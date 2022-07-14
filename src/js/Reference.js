@@ -6,7 +6,7 @@
 //
 //
 /////////////////////////////////
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.player3CardsHTML = exports.player2CardsHTML = exports.player1CardsHTML = exports.player0CardsHTML = exports.mainCardsHTML = exports.disableEverySingleButton = exports.mapCardNameToCSS = exports.nextButton = void 0;
 // COMMENTS: next HTML element
 var nextButton = document.getElementById("next-button");
@@ -240,4 +240,3 @@ mapCardNameToCSS.set("Two of Diamonds", "card-2D");
 mapCardNameToCSS.set("Two of Clubs", "card-2C");
 mapCardNameToCSS.set("Two of Hearts", "card-2H");
 mapCardNameToCSS.set("Two of Spades", "card-2S");
-//# sourceMappingURL=Reference.js.map

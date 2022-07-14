@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.Rank = exports.RANK_STRENGTHS = exports.RANK_STRING = exports.RANK_OBJECT = exports.compareTwoRanks = void 0;
 // USAGE: used in ordered ranks
 var RANK_STRING;
@@ -41,14 +41,10 @@ var Rank = /** @class */ (function () {
     function Rank(stringRank) {
         this.name = stringRank;
     }
-    Object.defineProperty(Rank.prototype, "getRankName", {
-        //EFFECTS: returns a string of this rank
-        get: function () {
-            return this.name;
-        },
-        enumerable: false,
-        configurable: true
-    });
+    //EFFECTS: returns a string of this rank
+    Rank.prototype.getRankName = function () {
+        return this.name;
+    };
     //REQUIRES: otherRank is a Rank object
     //EFFECTS: returns true if this object has same rank as otherCard, false otherwise
     Rank.prototype.isSameRankAs = function (otherRank) {
@@ -75,8 +71,8 @@ exports.Rank = Rank;
 //USAGE: ranksVector.sort(compareTwoRanks);
 function compareTwoRanks(firstRank, secondRank) {
     // COMMENTS: these strength variables represent the importance of rank
-    var firstRankStrength = RANK_STRENGTHS.get(firstRank.getRankName);
-    var secondRankStrength = RANK_STRENGTHS.get(secondRank.getRankName);
+    var firstRankStrength = RANK_STRENGTHS.get(firstRank.getRankName());
+    var secondRankStrength = RANK_STRENGTHS.get(secondRank.getRankName());
     // COMMENTS: go compare
     if (firstRankStrength < secondRankStrength)
         return -1;
@@ -103,4 +99,3 @@ var RANK_OBJECT = {
     TWO: new Rank(RANK_STRING.TWO)
 };
 exports.RANK_OBJECT = RANK_OBJECT;
-//# sourceMappingURL=Rank.js.map

@@ -96,14 +96,14 @@ class Hand {
         if (this.numberCardsInHand != 5) return false;
 
         // COMMENTS: if cards are not consecutive, then it is false
-        if (RANK_STRENGTHS.get(this.cardObjectsInHand[0].getRankName) + 1
-            != RANK_STRENGTHS.get(this.cardObjectsInHand[1].getRankName)) return false;
-        if (RANK_STRENGTHS.get(this.cardObjectsInHand[1].getRankName) + 1
-            != RANK_STRENGTHS.get(this.cardObjectsInHand[2].getRankName)) return false;
-        if (RANK_STRENGTHS.get(this.cardObjectsInHand[2].getRankName) + 1
-            != RANK_STRENGTHS.get(this.cardObjectsInHand[3].getRankName)) return false;
-        if (RANK_STRENGTHS.get(this.cardObjectsInHand[3].getRankName) + 1
-            != RANK_STRENGTHS.get(this.cardObjectsInHand[4].getRankName)) return false;
+        if (RANK_STRENGTHS.get(this.cardObjectsInHand[0].getRankName()) + 1
+            != RANK_STRENGTHS.get(this.cardObjectsInHand[1].getRankName())) return false;
+        if (RANK_STRENGTHS.get(this.cardObjectsInHand[1].getRankName()) + 1
+            != RANK_STRENGTHS.get(this.cardObjectsInHand[2].getRankName())) return false;
+        if (RANK_STRENGTHS.get(this.cardObjectsInHand[2].getRankName()) + 1
+            != RANK_STRENGTHS.get(this.cardObjectsInHand[3].getRankName())) return false;
+        if (RANK_STRENGTHS.get(this.cardObjectsInHand[3].getRankName()) + 1
+            != RANK_STRENGTHS.get(this.cardObjectsInHand[4].getRankName())) return false;
 
         // COMMENTS: if all cards are consecutive, then it is true
         return true;
@@ -116,10 +116,10 @@ class Hand {
         if (this.numberCardsInHand != 5) return false;
 
         // COMMENTS: if cards do not have same suit, then it is false
-        if (this.cardObjectsInHand[0].getSuitName != this.cardObjectsInHand[1].getSuitName) return false;
-        if (this.cardObjectsInHand[1].getSuitName != this.cardObjectsInHand[2].getSuitName) return false;
-        if (this.cardObjectsInHand[2].getSuitName != this.cardObjectsInHand[3].getSuitName) return false;
-        if (this.cardObjectsInHand[3].getSuitName != this.cardObjectsInHand[4].getSuitName) return false;
+        if (this.cardObjectsInHand[0].getSuitName() != this.cardObjectsInHand[1].getSuitName()) return false;
+        if (this.cardObjectsInHand[1].getSuitName() != this.cardObjectsInHand[2].getSuitName()) return false;
+        if (this.cardObjectsInHand[2].getSuitName() != this.cardObjectsInHand[3].getSuitName()) return false;
+        if (this.cardObjectsInHand[3].getSuitName() != this.cardObjectsInHand[4].getSuitName()) return false;
 
         // COMMENTS: if all cards have same suit, then it is true
         return true;
@@ -132,12 +132,12 @@ class Hand {
         if (this.numberCardsInHand != 5) return false;
 
         // COMMENTS: check if first two are same rank and last two are same rank
-        if (this.cardObjectsInHand[0].getRankName != this.cardObjectsInHand[1].getRankName) return false;
-        if (this.cardObjectsInHand[3].getRankName != this.cardObjectsInHand[4].getRankName) return false;
+        if (this.cardObjectsInHand[0].getRankName() != this.cardObjectsInHand[1].getRankName()) return false;
+        if (this.cardObjectsInHand[3].getRankName() != this.cardObjectsInHand[4].getRankName()) return false;
 
         // COMMENTS: if middle card has same rank as either first or last cards, then return true
-        return (this.cardObjectsInHand[1].getRankName == this.cardObjectsInHand[2].getRankName)
-            || (this.cardObjectsInHand[2].getRankName == this.cardObjectsInHand[3].getRankName);
+        return (this.cardObjectsInHand[1].getRankName() == this.cardObjectsInHand[2].getRankName())
+            || (this.cardObjectsInHand[2].getRankName() == this.cardObjectsInHand[3].getRankName());
 
     }
 

@@ -75,8 +75,8 @@ class Rank {
 //USAGE: ranksVector.sort(compareTwoRanks);
 function compareTwoRanks(firstRank: Rank, secondRank: Rank): number {
     // COMMENTS: these strength variables represent the importance of rank
-    const firstRankStrength: number = RANK_STRENGTHS.get(firstRank.getRankName);
-    const secondRankStrength: number = RANK_STRENGTHS.get(secondRank.getRankName);
+    const firstRankStrength: number = RANK_STRENGTHS.get(firstRank.getRankName());
+    const secondRankStrength: number = RANK_STRENGTHS.get(secondRank.getRankName());
 
     // COMMENTS: go compare
     if (firstRankStrength < secondRankStrength) return -1;
