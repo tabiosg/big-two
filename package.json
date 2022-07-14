@@ -7,12 +7,16 @@
     "common-js": "^0.3.8"
   },
   "devDependencies": {
+    "typescript": "^4.7.4",
     "webpack": "^5.36.2",
-    "webpack-cli": "^4.6.0"
+    "webpack-cli": "^4.10.0"
   },
   "scripts": {
+    "compile-typescript": "tsc",
+    "start": "node ./dist/script.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production --entry ./src/js/Application.js --output-path ./dist/"
+    "create-dist": "webpack --mode production --entry ./src/js/Application.js --output-path ./dist/",
+    "build": "tsc && webpack --mode production --entry ./src/js/Application.js --output-path ./dist/"
   },
   "author": "",
   "license": "ISC"

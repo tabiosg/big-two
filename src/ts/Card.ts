@@ -1,5 +1,5 @@
-import { Rank } from './Rank.js';
-import { Suit } from './Suit.js';
+import { Rank, RANK_OBJECT } from './Rank.js';
+import { Suit, SUIT_OBJECT } from './Suit.js';
 
 /////////////////////////////////
 //
@@ -23,27 +23,27 @@ class Card {
     }
 
     //EFFECTS: returns Suit object of card
-    get getSuit(): Suit {
+    getSuit(): Suit {
         return this.suit;
     }
 
     //EFFECTS: returns Suit string of card
-    get getSuitName(): string {
+    getSuitName(): string {
         return this.suit.getSuitName;
     }
 
     //EFFECTS: returns Rank object of card
-    get getRank(): Rank {
+    getRank(): Rank {
         return this.rank;
     }
 
     //EFFECTS: returns Rank string of card
-    get getRankName(): string {
+    getRankName(): string {
         return this.rank.getRankName;
     }
 
     //EFFECTS: returns name of card
-    get getName(): string {
+    getName(): string {
         return this.name;
     }
 
@@ -72,4 +72,8 @@ class Card {
     }
 }
 
-export { Card }
+function ThreeD(): Card {
+    return new Card(RANK_OBJECT.THREE, SUIT_OBJECT.DIAMONDS);
+}
+
+export { Card, ThreeD }

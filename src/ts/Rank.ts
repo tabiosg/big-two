@@ -43,7 +43,7 @@ class Rank {
     }
 
     //EFFECTS: returns a string of this rank
-    get getRankName(): string {
+    getRankName(): string {
         return this.name;
     }
 

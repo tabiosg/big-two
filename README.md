@@ -58,11 +58,16 @@ Picture 5: Winner alert pop up on the window screen
 
 ---
 
-## How To Update the Project
+## How to Develop
 
-If one wants to update the project, they can start by updating the .ts files.
-Then, one can run ``` npm run build ``` on the terminal. Now, they can check
-out the website by opening the index.html file.
+Change the TypeScript code located in [```src/ts/```](src/ts/) in your favorite IDE. Then you can run ```npm run build``` to quickly update both TypeScript files and create the main.js file.
+
+If you would instead like to do each step separately, you can do the following:
+1. To update your TypeScript files into JavaScript, run ```npm run compile-typescript```.
+This puts the compiled JavaScript files in [```src/js/```](src/js/).
+2. To build your entire project, run ```npm run create-dist```. This creates [```main.js```](dist/main.js) which is called by [```index.html```](index.html).
+
+If this is your first time using npm, you may need to run ```sudo apt install npm```, ```npm install typescript```, ```sudo npm install -g webpack```, and ```npm install```.
 
 ---
 
@@ -76,4 +81,4 @@ One can view the source code documentation [here](https://github.com/tabiosg/big
 
 ## Work
 
-Most of the work done for this project can be found in the src/js file and in index.html.
+Most of the work done for this project can be found in the [```src/ts/```](src/ts/) folder and in [```index.html```](index.html).
