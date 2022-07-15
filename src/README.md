@@ -10,9 +10,10 @@ All the source code is written in TypeScript then converted into Javascript and 
 
 The files are the following: 
 
-AllCards, Application, Card, ChangeLayout, Deck, Game, Hand, Player, Rank, Reference, Sort, and Suit.
+AllCards, Application, Card, ChangeLayout, Deck, Game, Hand, Player, Rank, Reference, and Suit.
 
 Here is a simplified graph showing the general dependencies of all files.
+TODO - This image is outdated and should no longer have Sort.
 
 ![Simple Graph](images/demo/simple_graph.png)
 
@@ -56,13 +57,13 @@ Game imports Player, Deck, Hand, Card, ChangeLayout, and Reference. It has the G
 
 ## Hand
 
-Hand imports Card, Rank, Suit, and Sort. It has the Hand class definition and all the functions needed to check if the Hand is valid or stronger than another hand.
+Hand imports Card, Rank, and Suit. It has the Hand class definition and all the functions needed to check if the Hand is valid or stronger than another hand.
 
 ---
 
 ## Player
 
-Player imports Card, Sort, ChangeLayout, Hand, and AllCards. It has the Player class definition and all the functions allowing the player to manage their cards and deal hands.
+Player imports Card, ChangeLayout, Hand, and AllCards. It has the Player class definition and all the functions allowing the player to manage their cards and deal hands.
 
 ---
 
@@ -75,12 +76,6 @@ Rank has the Rank class definition and all the functions needed to create, get, 
 ## Reference
 
 Reference has all the information about the image components of the website and sets them on start.
-
----
-
-## Sort
-
-Sort imports Card, Rank, and Suit. It has the Card comparator functions that are used for sorting.
 
 ---
 
