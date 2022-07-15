@@ -70,6 +70,25 @@ class Card {
     hasBetterRankThan(otherCard: Card): boolean {
         return this.rank.isBetterRankThan(otherCard.getRank());
     }
+
+    // REQUIRES: otherCard is a Card object
+    // EFFECTS: returns true if this card is equal to the other card
+    isEqualTo(otherCard: Card): boolean {
+        return this.suit === otherCard.suit && this.rank === otherCard.rank;
+    }
+
+    static compareCards(firstCard: Card, secondCard: Card): number {
+        // COMMENTS: first rank has priority
+        switch (Rank.compareTwoRanks(firstCard.getRank(), secondCard.getRank())) {
+            case 1:
+                return 1;
+            case -1:
+                return -1;
+            case 0:
+                // COMMENTS: if ranks are equal, suits have priority
+                return Suit.compareTwoSuits(firstCard.getSuit(), secondCard.getSuit());
+        }
+    }
 }
 
 function ThreeD(): Card {

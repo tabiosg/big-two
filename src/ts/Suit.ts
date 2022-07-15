@@ -1,28 +1,18 @@
-// USAGE: used in ordered ranks
-// NOTES: 2662, 2667, 2661, 2664 for black and white, 2666, 2663, 2665, 2660 for color
-enum SUIT_STRING {
-    DIAMONDS = "Diamonds",
-    CLUBS = "Clubs",
-    HEARTS = "Hearts",
-    SPADES = "Spades",
-}
-
-// USAGE: used as a map to get a suit's strength
-let SUIT_STRENGTHS = new Map<string, number>();
-
-SUIT_STRENGTHS.set("Diamonds", 0);
-SUIT_STRENGTHS.set("Clubs", 1);
-SUIT_STRENGTHS.set("Hearts", 2);
-SUIT_STRENGTHS.set("Spades", 3);
-
 class Suit {
     // COMMENTS: these are the member variables of Suit
     private name: string;
+    private suitStrengths: Map<string, number>;
 
     // REQUIRES: stringSuit is a string
     // EXAMPLES: stringSuit = "Spades", stringRank2 = SUIT.SPADES
     constructor(stringSuit: string) {
         this.name = stringSuit;
+        this.suitStrengths = {
+            "Diamonds": 0,
+            "Clubs": 1,
+            "Hearts": 2,
+            "Spades": 3,
+        };
     }
 
     // EFFECTS: returns a string of this suit
@@ -40,8 +30,8 @@ class Suit {
     // EFFECTS: returns true if this object has better suit than otherCard, false otherwise
     isBetterSuitThan(otherSuit: Suit): boolean {
         // COMMENTS: these strength variables represent the importance of suits
-        const first_suit_strength = SUIT_STRENGTHS.get(this.name)!;
-        const second_suit_strength = SUIT_STRENGTHS.get(otherSuit.name)!;
+        const first_suit_strength = this.suitStrengths.get(this.name)!;
+        const second_suit_strength = this.suitStrengths.get(otherSuit.name)!;
 
         return first_suit_strength > second_suit_strength;
     }
@@ -49,32 +39,32 @@ class Suit {
     // REQUIRES: otherSuit is a Suit object
     // EFFECTS: if this < other_suit, return -1. if this > other_suit, return 1. return 0 otherwise
     compareToTheSuit(otherSuit: Suit): number {
-        return compareTwoSuits(this, otherSuit);
+        return Suit.compareTwoSuits(this, otherSuit);
     }
-}
 
-// REQUIRES: firstSuit and secondSuit are Suit objects
-// EFFECTS: if firstSuit < secondSuit, return -1. if firstSuit > secondSuit, return 1. return 0 otherwise
-// USAGE: suitsVector.sort(compareTwoSuits);
-function compareTwoSuits(firstSuit: Suit, secondSuit: Suit): number {
-    // COMMENTS: these strength variables represent the importance of suits
-    const firstSuitStrength = SUIT_STRENGTHS.get(firstSuit.getSuitName())!;
-    const secondSuitStrength = SUIT_STRENGTHS.get(secondSuit.getSuitName())!;
+    // REQUIRES: firstSuit and secondSuit are Suit objects
+    // EFFECTS: if firstSuit < secondSuit, return -1. if firstSuit > secondSuit, return 1. return 0 otherwise
+    // USAGE: suitsVector.sort(Suit.compareTwoSuits);
+    static compareTwoSuits(firstSuit: Suit, secondSuit: Suit): number {
+        // COMMENTS: these strength variables represent the importance of suits
+        const firstSuitStrength = this.suitStrengths.get(firstSuit.getSuitName())!;
+        const secondSuitStrength = this.suitStrengths.get(secondSuit.getSuitName())!;
 
-    // COMMENTS: go compare
-    if (firstSuitStrength < secondSuitStrength) return -1;
-    else if (firstSuitStrength == secondSuitStrength) {
-        return 0;
+        // COMMENTS: go compare
+        if (firstSuitStrength < secondSuitStrength) return -1;
+        else if (firstSuitStrength == secondSuitStrength) {
+            return 0;
+        }
+        return 1;
     }
-    return 1;
 }
 
 // USAGE: used in getting suit objects
 var SUIT_OBJECT = {
-    DIAMONDS: new Suit(SUIT_STRING.DIAMONDS),
-    CLUBS: new Suit(SUIT_STRING.CLUBS),
-    HEARTS: new Suit(SUIT_STRING.HEARTS),
-    SPADES: new Suit(SUIT_STRING.SPADES)
+    DIAMONDS: new Suit("Diamonds"),
+    CLUBS: new Suit("Clubs"),
+    HEARTS: new Suit("Hearts"),
+    SPADES: new Suit("Spades")
 }
 
-export {compareTwoSuits, SUIT_OBJECT, SUIT_STRING, Suit}
+export {SUIT_OBJECT, Suit}

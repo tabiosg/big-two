@@ -1,16 +1,16 @@
 "use strict";
 exports.__esModule = true;
-exports.Suit = exports.SUIT_STRING = exports.SUIT_OBJECT = exports.compareTwoSuits = void 0;
+exports.Suit = exports.Suit.suitString = exports.SUIT_OBJECT = exports.Suit.compareTwoSuits = void 0;
 // USAGE: used in ordered ranks
 // NOTES: 2662, 2667, 2661, 2664 for black and white, 2666, 2663, 2665, 2660 for color
-var SUIT_STRING;
-(function (SUIT_STRING) {
-    SUIT_STRING["DIAMONDS"] = "Diamonds";
-    SUIT_STRING["CLUBS"] = "Clubs";
-    SUIT_STRING["HEARTS"] = "Hearts";
-    SUIT_STRING["SPADES"] = "Spades";
-})(SUIT_STRING || (SUIT_STRING = {}));
-exports.SUIT_STRING = SUIT_STRING;
+var Suit.suitString;
+(function (Suit.suitString) {
+    Suit.suitString["DIAMONDS"] = "Diamonds";
+    Suit.suitString["CLUBS"] = "Clubs";
+    Suit.suitString["HEARTS"] = "Hearts";
+    Suit.suitString["SPADES"] = "Spades";
+})(Suit.suitString || (Suit.suitString = {}));
+exports.Suit.suitString = Suit.suitString;
 // USAGE: used as a map to get a suit's strength
 var SUIT_STRENGTHS = new Map();
 SUIT_STRENGTHS.set("Diamonds", 0);
@@ -43,15 +43,15 @@ var Suit = /** @class */ (function () {
     // REQUIRES: otherSuit is a Suit object
     // EFFECTS: if this < other_suit, return -1. if this > other_suit, return 1. return 0 otherwise
     Suit.prototype.compareToTheSuit = function (otherSuit) {
-        return compareTwoSuits(this, otherSuit);
+        return Suit.compareTwoSuits(this, otherSuit);
     };
     return Suit;
 }());
 exports.Suit = Suit;
 // REQUIRES: firstSuit and secondSuit are Suit objects
 // EFFECTS: if firstSuit < secondSuit, return -1. if firstSuit > secondSuit, return 1. return 0 otherwise
-// USAGE: suitsVector.sort(compareTwoSuits);
-function compareTwoSuits(firstSuit, secondSuit) {
+// USAGE: suitsVector.sort(Suit.compareTwoSuits);
+function Suit.compareTwoSuits(firstSuit, secondSuit) {
     // COMMENTS: these strength variables represent the importance of suits
     var firstSuitStrength = SUIT_STRENGTHS.get(firstSuit.getSuitName());
     var secondSuitStrength = SUIT_STRENGTHS.get(secondSuit.getSuitName());
@@ -63,12 +63,12 @@ function compareTwoSuits(firstSuit, secondSuit) {
     }
     return 1;
 }
-exports.compareTwoSuits = compareTwoSuits;
+exports.Suit.compareTwoSuits = Suit.compareTwoSuits;
 // USAGE: used in getting suit objects
 var SUIT_OBJECT = {
-    DIAMONDS: new Suit(SUIT_STRING.DIAMONDS),
-    CLUBS: new Suit(SUIT_STRING.CLUBS),
-    HEARTS: new Suit(SUIT_STRING.HEARTS),
-    SPADES: new Suit(SUIT_STRING.SPADES)
+    DIAMONDS: new Suit(Suit.suitString.DIAMONDS),
+    CLUBS: new Suit(Suit.suitString.CLUBS),
+    HEARTS: new Suit(Suit.suitString.HEARTS),
+    SPADES: new Suit(Suit.suitString.SPADES)
 };
 exports.SUIT_OBJECT = SUIT_OBJECT;

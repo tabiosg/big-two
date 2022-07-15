@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.Rank = exports.RANK_STRENGTHS = exports.RANK_STRING = exports.RANK_OBJECT = exports.compareTwoRanks = void 0;
+exports.Rank = exports.Rank.rankStrengths = exports.RANK_STRING = exports.RANK_OBJECT = exports.Rank.compareTwoRanks = void 0;
 // USAGE: used in ordered ranks
 var RANK_STRING;
 (function (RANK_STRING) {
@@ -20,21 +20,21 @@ var RANK_STRING;
 })(RANK_STRING || (RANK_STRING = {}));
 exports.RANK_STRING = RANK_STRING;
 // USAGE: used as a map to get a rank's strength
-var RANK_STRENGTHS = new Map();
-exports.RANK_STRENGTHS = RANK_STRENGTHS;
-RANK_STRENGTHS.set("Three", 0);
-RANK_STRENGTHS.set("Four", 1);
-RANK_STRENGTHS.set("Five", 2);
-RANK_STRENGTHS.set("Six", 3);
-RANK_STRENGTHS.set("Seven", 4);
-RANK_STRENGTHS.set("Eight", 5);
-RANK_STRENGTHS.set("Nine", 6);
-RANK_STRENGTHS.set("Ten", 7);
-RANK_STRENGTHS.set("Jack", 8);
-RANK_STRENGTHS.set("Queen", 9);
-RANK_STRENGTHS.set("King", 10);
-RANK_STRENGTHS.set("Ace", 11);
-RANK_STRENGTHS.set("Two", 12);
+var Rank.rankStrengths = new Map();
+exports.Rank.rankStrengths = Rank.rankStrengths;
+Rank.rankStrengths.set("Three", 0);
+Rank.rankStrengths.set("Four", 1);
+Rank.rankStrengths.set("Five", 2);
+Rank.rankStrengths.set("Six", 3);
+Rank.rankStrengths.set("Seven", 4);
+Rank.rankStrengths.set("Eight", 5);
+Rank.rankStrengths.set("Nine", 6);
+Rank.rankStrengths.set("Ten", 7);
+Rank.rankStrengths.set("Jack", 8);
+Rank.rankStrengths.set("Queen", 9);
+Rank.rankStrengths.set("King", 10);
+Rank.rankStrengths.set("Ace", 11);
+Rank.rankStrengths.set("Two", 12);
 var Rank = /** @class */ (function () {
     // REQUIRES: stringRank is a string
     // EXAMPLES: stringRank1 = "Ace", stringRank2 = "Eight"
@@ -54,25 +54,25 @@ var Rank = /** @class */ (function () {
     //EFFECTS: returns true if this object has better rank than otherCard, false otherwise
     Rank.prototype.isBetterRankThan = function (otherRank) {
         // COMMENTS: these strength variables represent the importance of ranks
-        var firstRankStrength = RANK_STRENGTHS.get(this.name);
-        var secondRankStrength = RANK_STRENGTHS.get(otherRank.name);
+        var firstRankStrength = Rank.rankStrengths.get(this.name);
+        var secondRankStrength = Rank.rankStrengths.get(otherRank.name);
         return firstRankStrength > secondRankStrength;
     };
     //REQUIRES: otherRank is a Rank object
     //EFFECTS: if this < otherRank, return -1. if this > other_suit, return 1. return 0 otherwise
     Rank.prototype.compareToTheRank = function (otherRank) {
-        return compareTwoRanks(this, otherRank);
+        return Rank.compareTwoRanks(this, otherRank);
     };
     return Rank;
 }());
 exports.Rank = Rank;
 //REQUIRES: firstRank and secondRank are Rank objects
 //EFFECTS: if firstRank < secondRank, return -1. if firstRank > secondRank, return 1. return 0 otherwise
-//USAGE: ranksVector.sort(compareTwoRanks);
-function compareTwoRanks(firstRank, secondRank) {
+//USAGE: ranksVector.sort(Rank.compareTwoRanks);
+function Rank.compareTwoRanks(firstRank, secondRank) {
     // COMMENTS: these strength variables represent the importance of rank
-    var firstRankStrength = RANK_STRENGTHS.get(firstRank.getRankName());
-    var secondRankStrength = RANK_STRENGTHS.get(secondRank.getRankName());
+    var firstRankStrength = Rank.rankStrengths.get(firstRank.getRankName());
+    var secondRankStrength = Rank.rankStrengths.get(secondRank.getRankName());
     // COMMENTS: go compare
     if (firstRankStrength < secondRankStrength)
         return -1;
@@ -81,7 +81,7 @@ function compareTwoRanks(firstRank, secondRank) {
     }
     return 1;
 }
-exports.compareTwoRanks = compareTwoRanks;
+exports.Rank.compareTwoRanks = Rank.compareTwoRanks;
 // USAGE: used in getting rank objects
 var RANK_OBJECT = {
     THREE: new Rank(RANK_STRING.THREE),
