@@ -1,13 +1,13 @@
 "use strict";
 exports.__esModule = true;
-exports.ThreeD = exports.Card = void 0;
+exports.Card = void 0;
 var Rank_js_1 = require("./Rank.js");
 var Suit_js_1 = require("./Suit.js");
 /////////////////////////////////
 //
 //
 /* SECTION BELOW: this is the card class */
-//
+//t
 //
 /////////////////////////////////
 var Card = /** @class */ (function () {
@@ -60,7 +60,7 @@ var Card = /** @class */ (function () {
     // REQUIRES: otherCard is a Card object
     // EFFECTS: returns true if this card is equal to the other card
     Card.prototype.isEqualTo = function (otherCard) {
-        return this.suit === otherCard.suit && this.rank === otherCard.rank;
+        return this.rank === otherCard.rank && this.suit === otherCard.suit;
     };
     Card.compareCards = function (firstCard, secondCard) {
         // COMMENTS: first rank has priority
@@ -74,10 +74,9 @@ var Card = /** @class */ (function () {
                 return Suit_js_1.Suit.compareTwoSuits(firstCard.getSuit(), secondCard.getSuit());
         }
     };
+    Card.prototype.isThreeOfDiamonds = function () {
+        return this.getRankName() === "Three" && this.getSuitName() === "Diamonds";
+    };
     return Card;
 }());
 exports.Card = Card;
-function ThreeD() {
-    return new Card(Rank_js_1.RANK_OBJECT.THREE, Suit_js_1.SUIT_OBJECT.DIAMONDS);
-}
-exports.ThreeD = ThreeD;

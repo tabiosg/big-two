@@ -1,6 +1,5 @@
 import { Card } from './Card.js';
-import { RANK_OBJECT, Rank } from './Rank.js';
-import { SUIT_OBJECT } from './Suit.js';
+import { Rank } from './Rank.js';
 
 /////////////////////////////////
 //
@@ -32,9 +31,8 @@ class Hand {
 
     // EFFECTS: returns true if hand has three of diamonds
     hasThreeOfDiamonds(): boolean {
-        let cardThreeOfDiamonds = new Card(RANK_OBJECT.THREE, SUIT_OBJECT.DIAMONDS);
         for (let i: number = 0; i < this.numberCardsInHand; ++i) {
-            if (this.cardObjectsInHand[i].isEqualTo(cardThreeOfDiamonds)) return true;
+            if (this.cardObjectsInHand[i].isThreeOfDiamonds()) return true;
         }
 
         return false;

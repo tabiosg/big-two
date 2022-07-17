@@ -28,9 +28,8 @@ var Player = /** @class */ (function () {
     // REQUIRES: allCards are sorted and player has cards (should be 13)
     // EFFECTS: returns true if player has three of diamonds, false otherwise
     Player.prototype.hasThreeOfDiamonds = function () {
-        var cardThreeOfDiamonds = (0, Card_js_1.ThreeD)();
         this.allCards.sort(Card_js_1.Card.compareCards);
-        return this.allCards[0].isEqualTo(cardThreeOfDiamonds);
+        return this.allCards[0].isThreeOfDiamonds();
     };
     //EFFECTS: converts card indices into actual hand, empty if not valid
     Player.prototype.turnTrackToArrayThreeOfDiamondsStart = function (trackSelection) {

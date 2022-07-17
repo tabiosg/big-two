@@ -1,17 +1,11 @@
 "use strict";
 exports.__esModule = true;
-exports.Suit = exports.SUIT_OBJECT = void 0;
+exports.Suit = void 0;
 var Suit = /** @class */ (function () {
     // REQUIRES: stringSuit is a string
     // EXAMPLES: stringSuit = "Spades", stringRank2 = SUIT.SPADES
     function Suit(stringSuit) {
         this.name = stringSuit;
-        Suit.suitStrengths = new Map([
-            ["Diamonds", 0],
-            ["Clubs", 1],
-            ["Hearts", 2],
-            ["Spades", 3],
-        ]);
     }
     // EFFECTS: returns a string of this suit
     Suit.prototype.getSuitName = function () {
@@ -50,14 +44,18 @@ var Suit = /** @class */ (function () {
         }
         return 1;
     };
+    Suit.suitStrings = [
+        "Diamonds",
+        "Clubs",
+        "Hearts",
+        "Spades",
+    ];
+    Suit.suitStrengths = new Map([
+        ["Diamonds", 0],
+        ["Clubs", 1],
+        ["Hearts", 2],
+        ["Spades", 3],
+    ]);
     return Suit;
 }());
 exports.Suit = Suit;
-// USAGE: used in getting suit objects
-var SUIT_OBJECT = {
-    DIAMONDS: new Suit("Diamonds"),
-    CLUBS: new Suit("Clubs"),
-    HEARTS: new Suit("Hearts"),
-    SPADES: new Suit("Spades")
-};
-exports.SUIT_OBJECT = SUIT_OBJECT;

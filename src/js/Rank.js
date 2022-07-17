@@ -1,26 +1,11 @@
 "use strict";
 exports.__esModule = true;
-exports.Rank = exports.RANK_OBJECT = void 0;
+exports.Rank = void 0;
 var Rank = /** @class */ (function () {
     // REQUIRES: stringRank is a string
     // EXAMPLES: stringRank1 = "Ace", stringRank2 = "Eight"
     function Rank(stringRank) {
         this.name = stringRank;
-        Rank.rankStrengths = new Map([
-            ["Three", 0],
-            ["Four", 1],
-            ["Five", 2],
-            ["Six", 3],
-            ["Seven", 4],
-            ["Eight", 5],
-            ["Nine", 6],
-            ["Ten", 7],
-            ["Jack", 8],
-            ["Queen", 9],
-            ["King", 10],
-            ["Ace", 11],
-            ["Two", 12],
-        ]);
     }
     //EFFECTS: returns a string of this rank
     Rank.prototype.getRankName = function () {
@@ -59,23 +44,36 @@ var Rank = /** @class */ (function () {
         }
         return 1;
     };
+    Rank.rankStrings = [
+        "Three",
+        "Four",
+        "Five",
+        "Six",
+        "Seven",
+        "Eight",
+        "Nine",
+        "Ten",
+        "Jack",
+        "Queen",
+        "King",
+        "Ace",
+        "Two",
+    ];
+    Rank.rankStrengths = new Map([
+        ["Three", 0],
+        ["Four", 1],
+        ["Five", 2],
+        ["Six", 3],
+        ["Seven", 4],
+        ["Eight", 5],
+        ["Nine", 6],
+        ["Ten", 7],
+        ["Jack", 8],
+        ["Queen", 9],
+        ["King", 10],
+        ["Ace", 11],
+        ["Two", 12],
+    ]);
     return Rank;
 }());
 exports.Rank = Rank;
-// USAGE: used in getting rank objects
-var RANK_OBJECT = {
-    THREE: new Rank("Three"),
-    FOUR: new Rank("Four"),
-    FIVE: new Rank("Five"),
-    SIX: new Rank("Six"),
-    SEVEN: new Rank("Seven"),
-    EIGHT: new Rank("Eight"),
-    NINE: new Rank("Nine"),
-    TEN: new Rank("Ten"),
-    JACK: new Rank("Jack"),
-    QUEEN: new Rank("Queen"),
-    KING: new Rank("King"),
-    ACE: new Rank("Ace"),
-    TWO: new Rank("Two")
-};
-exports.RANK_OBJECT = RANK_OBJECT;

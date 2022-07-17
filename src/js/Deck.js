@@ -44,11 +44,11 @@ var Deck = /** @class */ (function () {
     // EFFECTS: resets the Deck to have all cards
     Deck.prototype.resetDeck = function () {
         this.allCards = [];
-        for (var _i = 0, _a = Object.values(Rank_js_1.RANK_OBJECT); _i < _a.length; _i++) {
-            var rank = _a[_i];
-            for (var _b = 0, _c = Object.values(Suit_js_1.SUIT_OBJECT); _b < _c.length; _b++) {
-                var suit = _c[_b];
-                this.addCardToDeck(new Card_js_1.Card(rank, suit));
+        for (var _i = 0, _a = Object.values(Rank_js_1.Rank.rankStrings); _i < _a.length; _i++) {
+            var rankString = _a[_i];
+            for (var _b = 0, _c = Object.values(Suit_js_1.Suit.suitStrings); _b < _c.length; _b++) {
+                var suitString = _c[_b];
+                this.addCardToDeck(new Card_js_1.Card(new Rank_js_1.Rank(rankString), new Suit_js_1.Suit(suitString)));
             }
         }
     };

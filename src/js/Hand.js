@@ -3,7 +3,6 @@ exports.__esModule = true;
 exports.Hand = void 0;
 var Card_js_1 = require("./Card.js");
 var Rank_js_1 = require("./Rank.js");
-var Suit_js_1 = require("./Suit.js");
 /////////////////////////////////
 //
 //
@@ -26,9 +25,8 @@ var Hand = /** @class */ (function () {
     };
     // EFFECTS: returns true if hand has three of diamonds
     Hand.prototype.hasThreeOfDiamonds = function () {
-        var cardThreeOfDiamonds = new Card_js_1.Card(Rank_js_1.RANK_OBJECT.THREE, Suit_js_1.SUIT_OBJECT.DIAMONDS);
         for (var i = 0; i < this.numberCardsInHand; ++i) {
-            if (this.cardObjectsInHand[i].isEqualTo(cardThreeOfDiamonds))
+            if (this.cardObjectsInHand[i].isThreeOfDiamonds())
                 return true;
         }
         return false;

@@ -1,18 +1,23 @@
 class Suit {
     // COMMENTS: these are the member variables of Suit
     private name: string;
-    static suitStrengths: Map<string, number>;
+    static suitStrings: Array<string> = [
+        "Diamonds",
+        "Clubs",
+        "Hearts",
+        "Spades",
+    ];
+    static suitStrengths: Map<string, number> = new Map([
+        ["Diamonds", 0],
+        ["Clubs", 1],
+        ["Hearts", 2],
+        ["Spades", 3],
+    ]);
 
     // REQUIRES: stringSuit is a string
     // EXAMPLES: stringSuit = "Spades", stringRank2 = SUIT.SPADES
     constructor(stringSuit: string) {
         this.name = stringSuit;
-        Suit.suitStrengths = new Map([
-            ["Diamonds", 0],
-            ["Clubs", 1],
-            ["Hearts", 2],
-            ["Spades", 3],
-        ])
     }
 
     // EFFECTS: returns a string of this suit
@@ -59,12 +64,4 @@ class Suit {
     }
 }
 
-// USAGE: used in getting suit objects
-var SUIT_OBJECT = {
-    DIAMONDS: new Suit("Diamonds"),
-    CLUBS: new Suit("Clubs"),
-    HEARTS: new Suit("Hearts"),
-    SPADES: new Suit("Spades")
-}
-
-export {SUIT_OBJECT, Suit}
+export {Suit}
