@@ -1,7 +1,5 @@
 import { Card } from './Card.js';
-import { RANK_STRENGTHS, RANK_OBJECT } from './Rank.js';
-import { SUIT_OBJECT } from './Suit.js';
-import { objectsAreEqual, compareCards } from './Sort.js';
+import { Rank } from './Rank.js';
 
 /////////////////////////////////
 //
@@ -33,9 +31,8 @@ class Hand {
 
     // EFFECTS: returns true if hand has three of diamonds
     hasThreeOfDiamonds(): boolean {
-        let cardThreeOfDiamonds = new Card(RANK_OBJECT.THREE, SUIT_OBJECT.DIAMONDS);
         for (let i: number = 0; i < this.numberCardsInHand; ++i) {
-            if (objectsAreEqual(this.cardObjectsInHand[i], cardThreeOfDiamonds)) return true;
+            if (this.cardObjectsInHand[i].isThreeOfDiamonds()) return true;
         }
 
         return false;
@@ -48,7 +45,7 @@ class Hand {
         ++this.numberCardsInHand;
 
         // FUTURE: addCardToPlayer currently sorts this.allCards, but this may change in future
-        this.cardObjectsInHand.sort(compareCards);
+        this.cardObjectsInHand.sort(Card.compareCards);
     }
 
     // EFFECTS: returns true if cardHand is a single card, false otherwise
@@ -96,14 +93,14 @@ class Hand {
         if (this.numberCardsInHand != 5) return false;
 
         // COMMENTS: if cards are not consecutive, then it is false
-        if (RANK_STRENGTHS.get(this.cardObjectsInHand[0].getRankName()) + 1
-            != RANK_STRENGTHS.get(this.cardObjectsInHand[1].getRankName())) return false;
-        if (RANK_STRENGTHS.get(this.cardObjectsInHand[1].getRankName()) + 1
-            != RANK_STRENGTHS.get(this.cardObjectsInHand[2].getRankName())) return false;
-        if (RANK_STRENGTHS.get(this.cardObjectsInHand[2].getRankName()) + 1
-            != RANK_STRENGTHS.get(this.cardObjectsInHand[3].getRankName())) return false;
-        if (RANK_STRENGTHS.get(this.cardObjectsInHand[3].getRankName()) + 1
-            != RANK_STRENGTHS.get(this.cardObjectsInHand[4].getRankName())) return false;
+        if (Rank.rankStrengths.get(this.cardObjectsInHand[0].getRankName()) + 1
+            != Rank.rankStrengths.get(this.cardObjectsInHand[1].getRankName())) return false;
+        if (Rank.rankStrengths.get(this.cardObjectsInHand[1].getRankName()) + 1
+            != Rank.rankStrengths.get(this.cardObjectsInHand[2].getRankName())) return false;
+        if (Rank.rankStrengths.get(this.cardObjectsInHand[2].getRankName()) + 1
+            != Rank.rankStrengths.get(this.cardObjectsInHand[3].getRankName())) return false;
+        if (Rank.rankStrengths.get(this.cardObjectsInHand[3].getRankName()) + 1
+            != Rank.rankStrengths.get(this.cardObjectsInHand[4].getRankName())) return false;
 
         // COMMENTS: if all cards are consecutive, then it is true
         return true;
@@ -177,15 +174,15 @@ class Hand {
             case 1:
                 if (otherHand.numberCardsInHand != 1) return false;
                 if (!otherHand.isSingleCard()) return false;
-                return compareCards(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
+                return Card.compareCards(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
             case 2:
                 if (otherHand.numberCardsInHand != 2) return false;
                 if (!otherHand.isPair()) return false;
-                return compareCards(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
+                return Card.compareCards(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
             case 3:
                 if (otherHand.numberCardsInHand != 3) return false;
                 if (!otherHand.isThreeOfAKind()) return false;
-                return compareCards(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
+                return Card.compareCards(otherHand.cardObjectsInHand[0], this.cardObjectsInHand[0]) == 1;
             case 5:
                 if (otherHand.numberCardsInHand != 5) return false;
                 if (this.isStraight()) {
@@ -193,14 +190,14 @@ class Hand {
                     else if (!otherHand.isStraight) return false;
 
                     // COMMENTS: case where both are straight
-                    return compareCards(otherHand.cardObjectsInHand[4], this.cardObjectsInHand[4]) == 1;
+                    return Card.compareCards(otherHand.cardObjectsInHand[4], this.cardObjectsInHand[4]) == 1;
                 }
                 if (this.isFlush()) {
                     if (otherHand.isHouse() || otherHand.isFourOfAKind()) return true;
                     else if (!otherHand.isFlush) return false;
 
                     // COMMENTS: case where both are flush
-                    return (compareCards(otherHand.cardObjectsInHand[4], this.cardObjectsInHand[4]) == 1)
+                    return (Card.compareCards(otherHand.cardObjectsInHand[4], this.cardObjectsInHand[4]) == 1)
                         || otherHand.isStraight();
                 }
                 if (this.isHouse()) {
@@ -208,20 +205,20 @@ class Hand {
                     else if (!otherHand.isHouse) return false;
 
                     // COMMENTS: case where both are house
-                    return compareCards(otherHand.cardObjectsInHand[2], this.cardObjectsInHand[2]) == 1;
+                    return Card.compareCards(otherHand.cardObjectsInHand[2], this.cardObjectsInHand[2]) == 1;
                 }
                 if (this.isFourOfAKind()) {
                     if (otherHand.isStraightFlush()) return true;
                     else if (!otherHand.isFourOfAKind) return false;
 
                     // COMMENTS: case where both are four of a kind
-                    return compareCards(otherHand.cardObjectsInHand[2], this.cardObjectsInHand[2]) == 1;
+                    return Card.compareCards(otherHand.cardObjectsInHand[2], this.cardObjectsInHand[2]) == 1;
                 }
                 // COMMENTS: case where it is straight flush
                 if (!otherHand.isStraightFlush()) return false;
 
                 // COMMENTS: case where both are straight flushes
-                return compareCards(otherHand.cardObjectsInHand[4], this.cardObjectsInHand[4]) == 1;
+                return Card.compareCards(otherHand.cardObjectsInHand[4], this.cardObjectsInHand[4]) == 1;
             default:
                 return false;
         }

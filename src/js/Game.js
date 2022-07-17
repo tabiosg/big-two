@@ -90,6 +90,7 @@ var Game = /** @class */ (function () {
     Game.prototype.requestThreeOfDiamondsPlayerTurnState = function () {
         // COMMENTS: player with three of diamonds starts
         for (var i = 0; i < 4; ++i) {
+            console.log("Checking players");
             if (this.allPlayers[i].hasThreeOfDiamonds()) {
                 this.turnPlayer = i;
             }

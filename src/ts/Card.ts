@@ -1,11 +1,11 @@
-import { RANK_OBJECT, Rank } from './Rank.js';
-import { SUIT_OBJECT, Suit } from './Suit.js';
+import { Rank } from './Rank.js';
+import { Suit } from './Suit.js';
 
 /////////////////////////////////
 //
 //
 /* SECTION BELOW: this is the card class */
-//
+//t
 //
 /////////////////////////////////
 
@@ -70,10 +70,29 @@ class Card {
     hasBetterRankThan(otherCard: Card): boolean {
         return this.rank.isBetterRankThan(otherCard.getRank());
     }
+
+    // REQUIRES: otherCard is a Card object
+    // EFFECTS: returns true if this card is equal to the other card
+    isEqualTo(otherCard: Card): boolean {
+        return this.rank === otherCard.rank && this.suit === otherCard.suit;
+    }
+
+    static compareCards(firstCard: Card, secondCard: Card): number {
+        // COMMENTS: first rank has priority
+        switch (Rank.compareTwoRanks(firstCard.getRank(), secondCard.getRank())) {
+            case 1:
+                return 1;
+            case -1:
+                return -1;
+            case 0:
+                // COMMENTS: if ranks are equal, suits have priority
+                return Suit.compareTwoSuits(firstCard.getSuit(), secondCard.getSuit());
+        }
+    }
+
+    isThreeOfDiamonds(): boolean {
+        return this.getRankName() === "Three" && this.getSuitName() === "Diamonds";
+    }
 }
 
-function ThreeD(): Card {
-    return new Card(RANK_OBJECT.THREE, SUIT_OBJECT.DIAMONDS);
-}
-
-export { Card, ThreeD }
+export { Card }

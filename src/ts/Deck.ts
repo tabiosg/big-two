@@ -1,6 +1,6 @@
 import { Card } from './Card.js';
-import { RANK_OBJECT, Rank } from './Rank.js';
-import { SUIT_OBJECT, Suit } from './Suit.js';
+import { Rank } from './Rank.js';
+import { Suit } from './Suit.js';
 
 /////////////////////////////////
 //
@@ -54,9 +54,9 @@ class Deck {
     resetDeck(): void {
         this.allCards = [];
 
-        for (const rank of Object.values(RANK_OBJECT)) {
-            for (const suit of Object.values(SUIT_OBJECT)) {
-                this.addCardToDeck(new Card(rank, suit));
+        for (const rankString of Object.values(Rank.rankStrings)) {
+            for (const suitString of Object.values(Suit.suitStrings)) {
+                this.addCardToDeck(new Card(new Rank(rankString), new Suit(suitString)));
             }
         }
     }

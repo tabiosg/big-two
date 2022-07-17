@@ -1,5 +1,4 @@
-import { Card, ThreeD } from './Card.js';
-import { objectsAreEqual, compareCards } from './Sort.js';
+import { Card } from './Card.js';
 import {
     letPlayerChooseCards, revealPlayerCardLayout, hidePlayerCardLayout,
     disableAllButtons
@@ -31,7 +30,7 @@ class Player {
         this.allCards.push(addedCard);
 
         // FUTURE: addCardToPlayer currently sorts this.allCards, but this may change in future
-        this.allCards.sort(compareCards);
+        this.allCards.sort(Card.compareCards);
 
         hidePlayerCardLayout(this.allCards, this.cardObjectsArray);
     }
@@ -39,9 +38,8 @@ class Player {
     // REQUIRES: allCards are sorted and player has cards (should be 13)
     // EFFECTS: returns true if player has three of diamonds, false otherwise
     hasThreeOfDiamonds(): boolean {
-        let cardThreeOfDiamonds = ThreeD();
-        this.allCards.sort(compareCards);
-        return objectsAreEqual(this.allCards[0], cardThreeOfDiamonds);
+        this.allCards.sort(Card.compareCards);
+        return this.allCards[0].isThreeOfDiamonds();
     }
 
     //EFFECTS: converts card indices into actual hand, empty if not valid

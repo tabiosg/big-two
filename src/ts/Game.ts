@@ -111,6 +111,7 @@ class Game {
 
         // COMMENTS: player with three of diamonds starts
         for (let i: number = 0; i < 4; ++i) {
+            console.log("Checking players");
             if (this.allPlayers[i].hasThreeOfDiamonds()) {
                 this.turnPlayer = i;
             }
