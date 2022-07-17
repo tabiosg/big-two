@@ -7,21 +7,21 @@ class Rank {
     // EXAMPLES: stringRank1 = "Ace", stringRank2 = "Eight"
     constructor(stringRank: string) {
         this.name = stringRank;
-        this.Rank.rankStrengths = {
-            "Three": 0,
-            "Four": 1,
-            "Five": 2,
-            "Six": 3,
-            "Seven": 4,
-            "Eight": 5,
-            "Nine": 6,
-            "Ten": 7,
-            "Jack": 8,
-            "Queen": 9,
-            "King": 10,
-            "Ace": 11,
-            "Two": 12,
-        }
+        Rank.rankStrengths = new Map([
+            ["Three", 0],
+            ["Four", 1],
+            ["Five", 2],
+            ["Six", 3],
+            ["Seven", 4],
+            ["Eight", 5],
+            ["Nine", 6],
+            ["Ten", 7],
+            ["Jack", 8],
+            ["Queen", 9],
+            ["King", 10],
+            ["Ace", 11],
+            ["Two", 12],
+        ])
     }
 
     //EFFECTS: returns a string of this rank

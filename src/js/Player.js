@@ -2,7 +2,6 @@
 exports.__esModule = true;
 exports.Player = void 0;
 var Card_js_1 = require("./Card.js");
-var Sort_js_1 = require("./Sort.js");
 var ChangeLayout_js_1 = require("./ChangeLayout.js");
 var Hand_js_1 = require("./Hand.js");
 /////////////////////////////////
@@ -23,15 +22,15 @@ var Player = /** @class */ (function () {
     Player.prototype.addCardToPlayer = function (addedCard) {
         this.allCards.push(addedCard);
         // FUTURE: addCardToPlayer currently sorts this.allCards, but this may change in future
-        this.allCards.sort(Sort_js_1.Card.compareCards);
+        this.allCards.sort(Card_js_1.Card.compareCards);
         (0, ChangeLayout_js_1.hidePlayerCardLayout)(this.allCards, this.cardObjectsArray);
     };
     // REQUIRES: allCards are sorted and player has cards (should be 13)
     // EFFECTS: returns true if player has three of diamonds, false otherwise
     Player.prototype.hasThreeOfDiamonds = function () {
         var cardThreeOfDiamonds = (0, Card_js_1.ThreeD)();
-        this.allCards.sort(Sort_js_1.Card.compareCards);
-        return (0, Sort_js_1.objectsAreEqual)(this.allCards[0], cardThreeOfDiamonds);
+        this.allCards.sort(Card_js_1.Card.compareCards);
+        return this.allCards[0].isEqualTo(cardThreeOfDiamonds);
     };
     //EFFECTS: converts card indices into actual hand, empty if not valid
     Player.prototype.turnTrackToArrayThreeOfDiamondsStart = function (trackSelection) {

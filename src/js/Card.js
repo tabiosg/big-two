@@ -57,6 +57,23 @@ var Card = /** @class */ (function () {
     Card.prototype.hasBetterRankThan = function (otherCard) {
         return this.rank.isBetterRankThan(otherCard.getRank());
     };
+    // REQUIRES: otherCard is a Card object
+    // EFFECTS: returns true if this card is equal to the other card
+    Card.prototype.isEqualTo = function (otherCard) {
+        return this.suit === otherCard.suit && this.rank === otherCard.rank;
+    };
+    Card.compareCards = function (firstCard, secondCard) {
+        // COMMENTS: first rank has priority
+        switch (Rank_js_1.Rank.compareTwoRanks(firstCard.getRank(), secondCard.getRank())) {
+            case 1:
+                return 1;
+            case -1:
+                return -1;
+            case 0:
+                // COMMENTS: if ranks are equal, suits have priority
+                return Suit_js_1.Suit.compareTwoSuits(firstCard.getSuit(), secondCard.getSuit());
+        }
+    };
     return Card;
 }());
 exports.Card = Card;

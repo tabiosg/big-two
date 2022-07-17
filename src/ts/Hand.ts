@@ -1,5 +1,5 @@
 import { Card } from './Card.js';
-import { RANK_OBJECT } from './Rank.js';
+import { RANK_OBJECT, Rank } from './Rank.js';
 import { SUIT_OBJECT } from './Suit.js';
 
 /////////////////////////////////

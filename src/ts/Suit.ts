@@ -1,18 +1,18 @@
 class Suit {
     // COMMENTS: these are the member variables of Suit
     private name: string;
-    private suitStrengths: Map<string, number>;
+    static suitStrengths: Map<string, number>;
 
     // REQUIRES: stringSuit is a string
     // EXAMPLES: stringSuit = "Spades", stringRank2 = SUIT.SPADES
     constructor(stringSuit: string) {
         this.name = stringSuit;
-        this.suitStrengths = {
-            "Diamonds": 0,
-            "Clubs": 1,
-            "Hearts": 2,
-            "Spades": 3,
-        };
+        Suit.suitStrengths = new Map([
+            ["Diamonds", 0],
+            ["Clubs", 1],
+            ["Hearts", 2],
+            ["Spades", 3],
+        ])
     }
 
     // EFFECTS: returns a string of this suit
@@ -30,8 +30,8 @@ class Suit {
     // EFFECTS: returns true if this object has better suit than otherCard, false otherwise
     isBetterSuitThan(otherSuit: Suit): boolean {
         // COMMENTS: these strength variables represent the importance of suits
-        const first_suit_strength = this.suitStrengths.get(this.name)!;
-        const second_suit_strength = this.suitStrengths.get(otherSuit.name)!;
+        const first_suit_strength = Suit.suitStrengths.get(this.name)!;
+        const second_suit_strength = Suit.suitStrengths.get(otherSuit.name)!;
 
         return first_suit_strength > second_suit_strength;
     }
@@ -47,8 +47,8 @@ class Suit {
     // USAGE: suitsVector.sort(Suit.compareTwoSuits);
     static compareTwoSuits(firstSuit: Suit, secondSuit: Suit): number {
         // COMMENTS: these strength variables represent the importance of suits
-        const firstSuitStrength = this.suitStrengths.get(firstSuit.getSuitName())!;
-        const secondSuitStrength = this.suitStrengths.get(secondSuit.getSuitName())!;
+        const firstSuitStrength = Suit.suitStrengths.get(firstSuit.getSuitName())!;
+        const secondSuitStrength = Suit.suitStrengths.get(secondSuit.getSuitName())!;
 
         // COMMENTS: go compare
         if (firstSuitStrength < secondSuitStrength) return -1;
